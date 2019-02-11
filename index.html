@@ -15,14 +15,20 @@
 
 var tile = d3.geo.tile()
     .size([width, height]);
+    
+/*Deze variabele stelt de coordinaten in waarop de map zich centreerd*/
+var leuven = [4.7009300,50.8795900];
 
-var projection = d3.geo.mercator();
+/*Hier de scale aanpassen van de map*/
+var projection = d3.geo.mercator()
+        .scale((1 << 22) / 2 / Math.PI)
+        .translate([width / 2, height / 2]);    
+
+var center = projection(leuven);
 
 var zoom = d3.behavior.zoom()
-    .scale(1 << 12)
-    .scaleExtent([1 << 9, 1 << 23])
-    .translate([width / 2, height / 2])
-    .on("zoom", zoomed);
+  .scale(projection.scale() * 2 * Math.PI)
+  .translate([width - center[0], height - center[1]]);
 
 var map = d3.select("body").append("div")
     .attr("class", "map")
