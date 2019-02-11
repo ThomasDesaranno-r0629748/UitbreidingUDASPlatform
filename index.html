@@ -135,10 +135,11 @@
 
             // x,y maps to lng,lat - ref[2]
             data.forEach(function (d) {
-                d.lat = +d.lat;
-                d.lon = +d.lon;
+                d.lat = 50.883333;
+                d.lon = 4.700000;
                 var x = projection([d.lon, d.lat])[0];
                 var y = projection([d.lon, d.lat])[1];
+                console.log(x+"test");
                 points.push([x, y]);
             });
 
