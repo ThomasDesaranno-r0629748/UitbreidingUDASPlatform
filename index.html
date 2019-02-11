@@ -1,40 +1,15 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<style>
-
-body {
-  margin: 0;
-}
-
-.map {
-  position: relative;
-  overflow: hidden;
-}
-
-.layer {
-  position: absolute;
-}
-
-.tile {
-  pointer-events: none;
-  position: absolute;
-  width: 256px;
-  height: 256px;
-}
-
-.info {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-}
-
-</style>
+<head>
+    <link rel="stylesheet" type="text/css" href="Style.css">
+    <title>AstMAPPING</title>
+</head>
 <body>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script src="/d3.geo.tile.min.js"></script>
+<!--Script met alle basic functies van de map-->
 <script>
-
-var width = Math.max(960, window.innerWidth),
+    var width = Math.max(960, window.innerWidth),
     height = Math.max(500, window.innerHeight),
     prefix = prefixMatch(["webkit", "ms", "Moz", "O"]);
 
@@ -109,5 +84,5 @@ function formatLocation(p, k) {
   return (p[1] < 0 ? format(-p[1]) + "°S" : format(p[1]) + "°N") + " "
        + (p[0] < 0 ? format(-p[0]) + "°W" : format(p[0]) + "°E");
 }
-
 </script>
+</body>
