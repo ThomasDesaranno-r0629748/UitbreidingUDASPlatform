@@ -28,7 +28,9 @@ var center = projection(leuven);
 
 var zoom = d3.behavior.zoom()
   .scale(projection.scale() * 2 * Math.PI)
-  .translate([width - center[0], height - center[1]]);
+  .scaleExtent([1 << 9, 1 << 23])
+  .translate([width - center[0], height - center[1]])
+  .on("zoom", zoomed);
 
 var map = d3.select("body").append("div")
     .attr("class", "map")
