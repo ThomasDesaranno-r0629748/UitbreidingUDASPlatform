@@ -113,16 +113,16 @@ function formatLocation(p, k) {
             console.log(data);
            // convert lat/lng to numeric
            data.forEach(function(d) {
-                d.lat = d.lat;
-                d.lon = d.lon;
+                d.lat = +d.lat;
+                d.lon = +d.lon;
            });
 
            points = [];
 
            // x,y maps to lng,lat - ref[2]
            data.forEach(function(d) {
-               d.lat = +data[3];
-               d.lon = +data[4];
+               d.lat = +d.lat;
+               d.lon = +d.lon;
                var x = projection([d.lon, d.lat])[0];
                var y = projection([d.lon, d.lat])[1];
                points.push([x, y]);
