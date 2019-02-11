@@ -1,160 +1,174 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+
 <head>
     <link rel="stylesheet" type="text/css" href="Style.css">
     <title>AstMAPPING</title>
 </head>
+
 <body>
     <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="/d3.geo.tile.min.js" charset="utf-8"></script>
-    <script src = "/hexbin.js" charset="utf-8"></script> 
-    <script src = "/viridis_colors.js" charset="utf-8"></script> 
-<!--Script met alle basic functies van de map-->
-<script>
-    var width = Math.max(960, window.innerWidth),
-    height = Math.max(500, window.innerHeight),
-    prefix = prefixMatch(["webkit", "ms", "Moz", "O"]);
+    <script src="/hexbin.js" charset="utf-8"></script>
+    <script src="/viridis_colors.js" charset="utf-8"></script>
+    <!--Script met alle basic functies van de map-->
+    <script>
+        var width = Math.max(960, window.innerWidth),
+            height = Math.max(500, window.innerHeight),
+            prefix = prefixMatch(["webkit", "ms", "Moz", "O"]);
 
-var tile = d3.geo.tile()
-    .size([width, height]);
-    
-/*Deze variabele stelt de coordinaten in waarop de map zich centreerd*/
-var leuven = [4.7009300,50.8795900];
+        var tile = d3.geo.tile()
+            .size([width, height]);
 
-/*Hier de scale aanpassen van de map*/
-var projection = d3.geo.mercator()
-        .scale((1 << 22) / 2 / Math.PI)
-        .translate([width / 2, height / 2]);    
+        /*Deze variabele stelt de coordinaten in waarop de map zich centreerd*/
+        var leuven = [4.7009300, 50.8795900];
 
-var center = projection(leuven);
+        /*Hier de scale aanpassen van de map*/
+        var projection = d3.geo.mercator()
+            .scale((1 << 22) / 2 / Math.PI)
+            .translate([width / 2, height / 2]);
 
-var zoom = d3.behavior.zoom()
-  .scale(projection.scale() * 2 * Math.PI)
-  .scaleExtent([1 << 9, 1 << 23])
-  .translate([width - center[0], height - center[1]])
-  .on("zoom", zoomed);
+        var center = projection(leuven);
 
-var map = d3.select("body").append("div")
-    .attr("class", "map")
-    .style("width", width + "px")
-    .style("height", height + "px")
-    .call(zoom)
-    .on("mousemove", mousemoved);
+        var zoom = d3.behavior.zoom()
+            .scale(projection.scale() * 2 * Math.PI)
+            .scaleExtent([1 << 9, 1 << 23])
+            .translate([width - center[0], height - center[1]])
+            .on("zoom", zoomed);
 
-var layer = map.append("div")
-    .attr("class", "layer");
+        var map = d3.select("body").append("div")
+            .attr("class", "map")
+            .style("width", width + "px")
+            .style("height", height + "px")
+            .call(zoom)
+            .on("mousemove", mousemoved);
 
-var info = map.append("div")
-    .attr("class", "info");
+        var layer = map.append("div")
+            .attr("class", "layer");
 
-zoomed();
+        var info = map.append("div")
+            .attr("class", "info");
 
-function zoomed() {
-  var tiles = tile
-      .scale(zoom.scale())
-      .translate(zoom.translate())
-      ();
+        zoomed();
 
-  projection
-      .scale(zoom.scale() / 2 / Math.PI)
-      .translate(zoom.translate());
+        function zoomed() {
+            var tiles = tile
+                .scale(zoom.scale())
+                .translate(zoom.translate())
+                ();
 
-  var image = layer
-      .style(prefix + "transform", matrix3d(tiles.scale, tiles.translate))
-    .selectAll(".tile")
-      .data(tiles, function(d) { return d; });
+            projection
+                .scale(zoom.scale() / 2 / Math.PI)
+                .translate(zoom.translate());
 
-  image.exit()
-      .remove();
+            var image = layer
+                .style(prefix + "transform", matrix3d(tiles.scale, tiles.translate))
+                .selectAll(".tile")
+                .data(tiles, function (d) {
+                    return d;
+                });
 
-  image.enter().append("img")
-      .attr("class", "tile")
-      .attr("src", function(d) { return "http://" + ["a", "b", "c"][Math.random() * 3 | 0] + ".tile.openstreetmap.org/" + d[2] + "/" + d[0] + "/" + d[1] + ".png"; })
-      .style("left", function(d) { return (d[0] << 8) + "px"; })
-      .style("top", function(d) { return (d[1] << 8) + "px"; });
-}
+            image.exit()
+                .remove();
 
-function mousemoved() {
-  info.text(formatLocation(projection.invert(d3.mouse(this)), zoom.scale()));
-}
+            image.enter().append("img")
+                .attr("class", "tile")
+                .attr("src", function (d) {
+                    return "http://" + ["a", "b", "c"][Math.random() * 3 | 0] + ".tile.openstreetmap.org/" + d[2] + "/" + d[0] + "/" + d[1] + ".png";
+                })
+                .style("left", function (d) {
+                    return (d[0] << 8) + "px";
+                })
+                .style("top", function (d) {
+                    return (d[1] << 8) + "px";
+                });
+        }
 
-function matrix3d(scale, translate) {
-  var k = scale / 256, r = scale % 1 ? Number : Math.round;
-  return "matrix3d(" + [k, 0, 0, 0, 0, k, 0, 0, 0, 0, k, 0, r(translate[0] * scale), r(translate[1] * scale), 0, 1 ] + ")";
-}
+        function mousemoved() {
+            info.text(formatLocation(projection.invert(d3.mouse(this)), zoom.scale()));
+        }
 
-function prefixMatch(p) {
-  var i = -1, n = p.length, s = document.body.style;
-  while (++i < n) if (p[i] + "Transform" in s) return "-" + p[i].toLowerCase() + "-";
-  return "";
-}
+        function matrix3d(scale, translate) {
+            var k = scale / 256,
+                r = scale % 1 ? Number : Math.round;
+            return "matrix3d(" + [k, 0, 0, 0, 0, k, 0, 0, 0, 0, k, 0, r(translate[0] * scale), r(translate[1] * scale), 0, 1] + ")";
+        }
 
-function formatLocation(p, k) {
-  var format = d3.format("." + Math.floor(Math.log(k) / 2 - 2) + "f");
-  return (p[1] < 0 ? format(-p[1]) + "°S" : format(p[1]) + "°N") + " "
-       + (p[0] < 0 ? format(-p[0]) + "°W" : format(p[0]) + "°E");
-}
-         
-// define hexbins
-       var hexbin = d3.hexbin()
-                      .size([width, height])
-                      .radius(4);
+        function prefixMatch(p) {
+            var i = -1,
+                n = p.length,
+                s = document.body.style;
+            while (++i < n)
+                if (p[i] + "Transform" in s) return "-" + p[i].toLowerCase() + "-";
+            return "";
+        }
 
-       var hex = map.append("g")
-                    .attr("id", "hexbins");
+        function formatLocation(p, k) {
+            var format = d3.format("." + Math.floor(Math.log(k) / 2 - 2) + "f");
+            return (p[1] < 0 ? format(-p[1]) + "°S" : format(p[1]) + "°N") + " " + (p[0] < 0 ? format(-p[0]) + "°W" : format(p[0]) + "°E");
+        }
 
-       // first of two scales for linear hexagon fill - ref[1]
-       var fill_scale1 = d3.scale.linear()
-                           .domain(d3.range(0, 1, 1 / (viridis_colors.length - 1)))
-                           .range(viridis_colors);
+        // define hexbins
+        var hexbin = d3.hexbin()
+            .size([width, height])
+            .radius(4);
 
-       // crash data
-       d3.csv("csvdata/all.csv", function(data) {
+        var hex = map.append("g")
+            .attr("id", "hexbins");
+
+        // first of two scales for linear hexagon fill - ref[1]
+        var fill_scale1 = d3.scale.linear()
+            .domain(d3.range(0, 1, 1 / (viridis_colors.length - 1)))
+            .range(viridis_colors);
+
+        // crash data
+        d3.json("all.json", function (data) {
             console.log(data);
-           // convert lat/lng to numeric
-           data.forEach(function(d) {
+            // convert lat/lng to numeric
+            data.forEach(function (d) {
+                
                 d.lat = +d.lat;
                 d.lon = +d.lon;
-           });
+            });
 
-           points = [];
+            points = [];
 
-           // x,y maps to lng,lat - ref[2]
-           data.forEach(function(d) {
-               d.lat = +d.lat;
-               d.lon = +d.lon;
-               var x = projection([d.lon, d.lat])[0];
-               var y = projection([d.lon, d.lat])[1];
-               points.push([x, y]);
-           });
+            // x,y maps to lng,lat - ref[2]
+            data.forEach(function (d) {
+                d.lat = +d.lat;
+                d.lon = +d.lon;
+                var x = projection([d.lon, d.lat])[0];
+                var y = projection([d.lon, d.lat])[1];
+                points.push([x, y]);
+            });
 
-           // bin coords
-           var bins = hexbin(points);     
-           var bins_n = [];             // points per hexbin
-           bins.forEach(function(d) {
-               bins_n.push(d.length); 
-           });
+            // bin coords
+            var bins = hexbin(points);
+            var bins_n = []; // points per hexbin
+            bins.forEach(function (d) {
+                bins_n.push(d.length);
+            });
 
-           // second of two scales for linear hexagon fill - ref[1]
-           var extent = d3.extent(bins_n);
-           var fill_scale2 = d3.scale.linear()
-                               .domain([extent[0], extent[1]])
-                               .range([0,1]);
+            // second of two scales for linear hexagon fill - ref[1]
+            var extent = d3.extent(bins_n);
+            var fill_scale2 = d3.scale.linear()
+                .domain([extent[0], extent[1]])
+                .range([0, 1]);
 
-           hex.selectAll(".hexagon")
-              .data(hexbin(points)) 
-              .enter()
-              .append("path")
-              .attr("class", function(d) {
-                  return "hexagon bin_" + d.length;
-              })
-              .attr("d", hexbin.hexagon())
-              .attr("transform", function(d) {
-                  return "translate(" + d.x + "," + d.y + ")"; 
-              })
-              .style("fill", function(d) {
-                  return fill_scale1(fill_scale2(d.length));
-              });
-       })
-</script>
+            hex.selectAll(".hexagon")
+                .data(hexbin(points))
+                .enter()
+                .append("path")
+                .attr("class", function (d) {
+                    return "hexagon bin_" + d.length;
+                })
+                .attr("d", hexbin.hexagon())
+                .attr("transform", function (d) {
+                    return "translate(" + d.x + "," + d.y + ")";
+                })
+                .style("fill", function (d) {
+                    return fill_scale1(fill_scale2(d.length));
+                });
+        })
+    </script>
 </body>
