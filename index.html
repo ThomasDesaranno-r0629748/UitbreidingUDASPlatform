@@ -5,8 +5,10 @@
     <title>AstMAPPING</title>
 </head>
 <body>
-<script src="//d3js.org/d3.v3.min.js"></script>
-<script src="/d3.geo.tile.min.js"></script>
+    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="/d3.geo.tile.min.js" charset="utf-8"></script>
+    <script src = "/hexbin.js" charset="utf-8"></script> 
+    <script src = "/viridis_colors.js" charset="utf-8"></script> 
 <!--Script met alle basic functies van de map-->
 <script>
     var width = Math.max(960, window.innerWidth),
@@ -92,5 +94,67 @@ function formatLocation(p, k) {
   return (p[1] < 0 ? format(-p[1]) + "°S" : format(p[1]) + "°N") + " "
        + (p[0] < 0 ? format(-p[0]) + "°W" : format(p[0]) + "°E");
 }
+         
+// define hexbins
+       var hexbin = d3.hexbin()
+                      .size([width, height])
+                      .radius(4);
+
+       var hex = map.append("g")
+                    .attr("id", "hexbins");
+
+       // first of two scales for linear hexagon fill - ref[1]
+       var fill_scale1 = d3.scale.linear()
+                           .domain(d3.range(0, 1, 1 / (viridis_colors.length - 1)))
+                           .range(viridis_colors);
+
+       // crash data
+       d3.csv("csvdata/all.csv", function(data) {
+            console.log(data);
+           // convert lat/lng to numeric
+           data.forEach(function(d) {
+                d.lat = +d.lat;
+                d.lon = +d.lon;
+           });
+
+           points = [];
+
+           // x,y maps to lng,lat - ref[2]
+           data.forEach(function(d) {
+               d.lat = +d.lat;
+               d.lon = +d.lon;
+               var x = projection([d.lon, d.lat])[0];
+               var y = projection([d.lon, d.lat])[1];
+               points.push([x, y]);
+           });
+
+           // bin coords
+           var bins = hexbin(points);     
+           var bins_n = [];             // points per hexbin
+           bins.forEach(function(d) {
+               bins_n.push(d.length); 
+           });
+
+           // second of two scales for linear hexagon fill - ref[1]
+           var extent = d3.extent(bins_n);
+           var fill_scale2 = d3.scale.linear()
+                               .domain([extent[0], extent[1]])
+                               .range([0,1]);
+
+           hex.selectAll(".hexagon")
+              .data(hexbin(points)) 
+              .enter()
+              .append("path")
+              .attr("class", function(d) {
+                  return "hexagon bin_" + d.length;
+              })
+              .attr("d", hexbin.hexagon())
+              .attr("transform", function(d) {
+                  return "translate(" + d.x + "," + d.y + ")"; 
+              })
+              .style("fill", function(d) {
+                  return fill_scale1(fill_scale2(d.length));
+              });
+       })
 </script>
 </body>
