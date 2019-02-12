@@ -25,21 +25,22 @@
 }).addTo(mymap);
       // cirkels aanmaken
       
-    function importData ()
-      {
         d3.json("all.json", function (data)
         {
-                console.log(data);
-        
-                })
-      }
-      importData();
-    var circle = L.circle([50.8798438, 4.7005176], {
+            data.forEach(function (d) {
+                
+                d.lat = +d.lat;
+                d.lon = +d.lon;
+                console.log(d.lat);
+                var circle = L.circle([d.lat, d.lon], {
     color: 'red',
     fillColor: '#f03',
-    fillOpacity: 0.5,
+    fillOpacity: 0.2,
     radius: 200
 }).addTo(mymap);
+            });
+        
+                })
       </script>
   </body>
 </html>
