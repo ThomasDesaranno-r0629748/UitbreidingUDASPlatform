@@ -33,6 +33,12 @@
         }).addTo(mymap);
         // cirkels aanmaken
 
+        function colorPick(temperature){
+            if(temperature<10) return 'blue';
+            if(temperature>=10 && temperature <=12) return 'yellow';
+            if(temperature>12 && temperature <15) return 'orange';
+            if(temperature>15) return 'red';
+        }
 
         d3.json("lastMesuraments.json", function(data) {
             data.forEach(function(d) {
@@ -43,9 +49,9 @@
                 console.log(d.lon);
                 //L.marker([d.lat, d.lon], {icon: greenIcon}).addTo(mymap);
                 var circle = L.circle([d.lat, d.lon], {
-                    color: 'red',
-                    fillColor: 'red',
-                    fillOpacity: d.temperature/30,
+                    color: colorPick(d.temperature),
+                    fillColor: colorPick(d.temperature),
+                    fillOpacity: 0.7,
                     radius: 120,
                     stroke: false
                 }).addTo(mymap);
