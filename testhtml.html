@@ -7,6 +7,7 @@
    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
    crossorigin=""/>
    <link rel="stylesheet" href="map.css"/>
+   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
    crossorigin=""></script>
@@ -14,6 +15,7 @@
   <body>
   <div id="mapid"></div>
   <script>
+      //map aanmaken
       var mymap = L.map('mapid').setView([50.8798438, 4.7005176], 13);
       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -21,13 +23,24 @@
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoicmVtaWRlbGsiLCJhIjoiY2pzMGgycXgxMWVscjQ0bzU2ODZhbWx2MyJ9.mrsTf6726n8btTeLtsn5Sg'
 }).addTo(mymap);
+      // cirkels aanmaken
       
-    var circle = L.circle([50.8798438, 4.7005176], {
+        d3.json("all.json", function (data)
+        {
+            data.forEach(function (d) {
+                
+                d.lat = +d.lat;
+                d.lon = +d.lon;
+                console.log(d.lat);
+                var circle = L.circle([d.lat, d.lon], {
     color: 'red',
     fillColor: '#f03',
-    fillOpacity: 0.5,
-    radius: 500
+    fillOpacity: 0.2,
+    radius: 200
 }).addTo(mymap);
+            });
+        
+                })
       </script>
   </body>
 </html>
