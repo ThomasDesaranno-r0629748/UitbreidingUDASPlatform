@@ -50,10 +50,10 @@ var Wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.
             popup
                 .setLatLng(e.latlng)
                 .setContent("You clicked the map at " + e.latlng.toString())
-                .openOn(mymap);
+                .openOn(map);
         }
 
-        mymap.on('click', onMapClick);
+        map.on('click', onMapClick);
   </script>
 </body>
 </html>

@@ -33,19 +33,21 @@
         }).addTo(mymap);
         // cirkels aanmaken
 
-        d3.json("all.json", function(data) {
-            console.log(data);
-            data.forEach(function(d) {
 
+        d3.json("lastMesuraments.json", function(data) {
+            data.forEach(function(d) {
+                console.log(d.id);
                 d.lat = +d.lat;
                 d.lon = +d.lon;
                 console.log(d.lat);
+                console.log(d.lon);
                 //L.marker([d.lat, d.lon], {icon: greenIcon}).addTo(mymap);
                 var circle = L.circle([d.lat, d.lon], {
                     color: 'red',
-                    fillColor: '#f03',
-                    fillOpacity: 0.2,
-                    radius: 200
+                    fillColor: 'red',
+                    fillOpacity: d.temperature/30,
+                    radius: 120,
+                    stroke: false
                 }).addTo(mymap);
                 circle.bindPopup("temperature:" + d.temperature + "°C");
             });

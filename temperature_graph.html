@@ -28,12 +28,12 @@ var y = d3.scaleLinear().range([height, 0]);
 
 // define the line
 var valueline = d3.line()
-    .x(function(d) { return x(d.Date); })
-    .y(function(d) { return y(d.Imports); });
+    .x(function(d) { return x(d.timestamp); })
+    .y(function(d) { return y(d.temperature); });
 // define the line
 var valueline2 = d3.line()
-    .x(function(d) { return x(d.Date); })
-    .y(function(d) { return y(d.Exports); });
+    .x(function(d) { return x(d.timestamp); })
+    .y(function(d) { return y(d.temperature); });
   
 // append the svg obgect to the body of the page
 // appends a 'group' element to 'svg'
@@ -45,21 +45,22 @@ var svg = d3.select("body").append("svg")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-function draw(data, country) {
+function draw(data) {
   
-  var data = data[country];
+  //var data = data[country];
   
   // format the data
   data.forEach(function(d) {
       //d.timestamp = parseTime(d.timestamp);
+      d.timestamp = +d.timestamp;
       d.temperature = +d.temperature;
       d.lon = +d.lon;
   });
   
   // sort years ascending
-  data.sort(function(a, b){
-    return a["Date"]-b["Date"];
-	})
+//  data.sort(function(a, b){
+//    return a["Date"]-b["Date"];
+//	})
  
   // Scale the range of the data
   x.domain(d3.extent(data, function(d) { return d.timestamp; }));
@@ -90,7 +91,7 @@ d3.json("all.json", function(error, data) {
   if (error) throw error;
   
   // trigger render
-  draw(data, "Afghanistan");
+  draw(data);
 });
 
 </script>

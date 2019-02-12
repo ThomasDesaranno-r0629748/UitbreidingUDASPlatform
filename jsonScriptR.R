@@ -1,25 +1,29 @@
 library('rjson')
 library(dplyr)
 library(jsonlite)
+library(rjson)
+
+#dat = read.csv("csvdata\\2019-01_bme280.csv", header = TRUE, sep=";")
+json_data <- fromJSON('all.json')
+#json_data <- fromJSON("csvjson.json")
 
 
-json_data <- fromJSON(file='all.json')
 
-df <- lapply(json_data, function(play) # Loop through each "play"
-{
-  # Convert each group to a data frame.
-  # This assumes you have 6 elements each time
-  data.frame(matrix(unlist(play), ncol=9, byrow=T))
-})
+#df <- dat
+df <- json_data
+colnames(df) <- c("id", "type", "location", "lat", "lon", "time", "temperature", "humidity", "char")
+#colnames(df) <- c("id", "type", "location", "lat", "lon", "time", "pressure", "altitude", "pressure_sealevel", "temperature", "humidity")
 
-df <- do.call(rbind, df)
-df <- df %>% separate(time, c("date", "time"), sep="T")
-colnames(df) <- c("id", "type", "location", "lat", "lon", "time", "temp", "humidity", "char")
+df <- df %>% separate(time, c("date", "time"), sep="T", fill = 'right')
+df <- df[df$lat<=51, ]
+df <- df[df$lat>=50, ]
+df <- df[df$lon<=5, ]
+df <- df[df$lon>=4, ]
 
 
 uniqueId <- unique(df$id)
 lastTimeMesurementDf <- data.frame()
-for(i in 1:11){
+for(i in 1:NROW(uniqueId)){  #NROW(uniqueId)
   dataset <- df[df$id == uniqueId[i], ]
   dataset <- dataset[order(dataset$date, decreasing = TRUE),]
   dataset <- dataset[order(dataset$time, decreasing = TRUE),]
