@@ -6028,6 +6028,17 @@
     "": ""
   },
   {
+    "sensor_id": "sensor_id",
+    "sensor_type": "sensor_type",
+    "location": "location",
+    "lat": "lat",
+    "lon": "lon",
+    "timestamp": "timestamp",
+    "temperature": "P1",
+    "humidity": "durP1",
+    "": "ratioP2"
+  },
+  {
     "sensor_id": 10741,
     "sensor_type": "SDS011",
     "location": 5422,
@@ -12122,6 +12133,17 @@
     "": ""
   },
   {
+    "sensor_id": "sensor_id",
+    "sensor_type": "sensor_type",
+    "location": "location",
+    "lat": "lat",
+    "lon": "lon",
+    "timestamp": "timestamp",
+    "temperature": "P1",
+    "humidity": "durP1",
+    "": "ratioP2"
+  },
+  {
     "sensor_id": 11529,
     "sensor_type": "SDS011",
     "location": 5821,
@@ -17257,6 +17279,17 @@
     "temperature": 6.63,
     "humidity": "",
     "": ""
+  },
+  {
+    "sensor_id": "sensor_id",
+    "sensor_type": "sensor_type",
+    "location": "location",
+    "lat": "lat",
+    "lon": "lon",
+    "timestamp": "timestamp",
+    "temperature": "P1",
+    "humidity": "durP1",
+    "": "ratioP2"
   },
   {
     "sensor_id": 12554,
@@ -23419,6 +23452,17 @@
     "": ""
   },
   {
+    "sensor_id": "sensor_id",
+    "sensor_type": "sensor_type",
+    "location": "location",
+    "lat": "lat",
+    "lon": "lon",
+    "timestamp": "timestamp",
+    "temperature": "P1",
+    "humidity": "durP1",
+    "": "ratioP2"
+  },
+  {
     "sensor_id": 8765,
     "sensor_type": "SDS011",
     "location": 4419,
@@ -29478,6 +29522,17 @@
     "temperature": 11.13,
     "humidity": "",
     "": ""
+  },
+  {
+    "sensor_id": "sensor_id",
+    "sensor_type": "sensor_type",
+    "location": "location",
+    "lat": "lat",
+    "lon": "lon",
+    "timestamp": "timestamp",
+    "temperature": "P1",
+    "humidity": "durP1",
+    "": "ratioP2"
   },
   {
     "sensor_id": 8769,
@@ -35607,6 +35662,17 @@
     "": ""
   },
   {
+    "sensor_id": "sensor_id",
+    "sensor_type": "sensor_type",
+    "location": "location",
+    "lat": "lat",
+    "lon": "lon",
+    "timestamp": "timestamp",
+    "temperature": "P1",
+    "humidity": "durP1",
+    "": "ratioP2"
+  },
+  {
     "sensor_id": 8837,
     "sensor_type": "SDS011",
     "location": 4455,
@@ -41723,6 +41789,17 @@
     "": ""
   },
   {
+    "sensor_id": "sensor_id",
+    "sensor_type": "sensor_type",
+    "location": "location",
+    "lat": "lat",
+    "lon": "lon",
+    "timestamp": "timestamp",
+    "temperature": "P1",
+    "humidity": "durP1",
+    "": "ratioP2"
+  },
+  {
     "sensor_id": 8993,
     "sensor_type": "SDS011",
     "location": 4532,
@@ -47685,6 +47762,17 @@
     "": ""
   },
   {
+    "sensor_id": "sensor_id",
+    "sensor_type": "sensor_type",
+    "location": "location",
+    "lat": "lat",
+    "lon": "lon",
+    "timestamp": "timestamp",
+    "temperature": "P1",
+    "humidity": "durP1",
+    "": "ratioP2"
+  },
+  {
     "sensor_id": 9585,
     "sensor_type": "SDS011",
     "location": 4831,
@@ -53634,6 +53722,17 @@
     "temperature": 12.6,
     "humidity": "",
     "": ""
+  },
+  {
+    "sensor_id": "sensor_id",
+    "sensor_type": "sensor_type",
+    "location": "location",
+    "lat": "lat",
+    "lon": "lon",
+    "timestamp": "timestamp",
+    "temperature": "P1",
+    "humidity": "durP1",
+    "": "ratioP2"
   },
   {
     "sensor_id": 9605,
@@ -59860,6 +59959,17 @@
     "temperature": 9.73,
     "humidity": "",
     "": ""
+  },
+  {
+    "sensor_id": "sensor_id",
+    "sensor_type": "sensor_type",
+    "location": "location",
+    "lat": "lat",
+    "lon": "lon",
+    "timestamp": "timestamp",
+    "temperature": "P1",
+    "humidity": "durP1",
+    "": "ratioP2"
   },
   {
     "sensor_id": 9637,
