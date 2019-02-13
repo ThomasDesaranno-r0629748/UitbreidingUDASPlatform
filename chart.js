@@ -32,11 +32,11 @@ var svg = d3.select(".linechart").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json("lastMesuraments.json", function(error, data) {
+d3.json("charttestdata.json", function(error, data) {
   if (error) throw error;
 //traverse through the data 
   data.forEach(function(d) {
-    d.location = +(d.location);
+    d.location = +d.location;
     d.temperature = +d.temperature;
     console.log(d.location+"test");
     console.log(d.temperature+"whuuut");
