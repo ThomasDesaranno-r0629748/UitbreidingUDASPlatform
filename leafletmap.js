@@ -21,7 +21,7 @@ var baseMaps = {
 };
 
 //var overlayMaps = {
-//    "Traffic": cities,
+//    "Traffic Flow": cities,
 //    "Weather": weather
 //};
 
