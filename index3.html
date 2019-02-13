@@ -2,19 +2,10 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>AstMAPPING</title>
+    <title>Style circles with a data-driven property</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
-   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-   crossorigin=""/>
-   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
-   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
-   crossorigin=""></script>
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
-    <script src='mapbox-gl-traffic.js'></script>
-    <link href='mapbox-gl-traffic.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -25,52 +16,41 @@
 <div id='map'></div>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w';
+
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/traffic-night-v2',
-    center: [ 4.7005176, 50.8798438],
-    zoom: 13,
-    hash: true
+    style: 'mapbox://styles/mapbox/light-v9',
+    zoom: 12,
+    center: [-122.447303, 37.753574]
 });
-map.addControl(new mapboxgl.NavigationControl());
-map.addControl(new MapboxTraffic());
-    
-          function colorPick(temperature){
-            if(temperature<10) return 'blue';
-            if(temperature>=10 && temperature <=12) return 'yellow';
-            if(temperature>12 && temperature <15) return 'orange';
-            if(temperature>15) return 'red';
+
+map.on('load', function () {
+
+    map.addLayer({
+        'id': 'temperature',
+        'type': 'circle',
+        'source': 'lastMesuraments.json',
+        'source-layer': 'sf2010',
+        'paint': {
+            // make circles larger as the user zooms from z12 to z22
+            'circle-radius': {
+                'base': 1.75,
+                'stops': [[12, 2], [22, 180]]
+            },
+            // color circles by ethnicity, using a match expression
+            // https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+            'circle-color': [
+                'match',
+                ['get', 'ethnicity'],
+                'White', '#fbb03b',
+                'Black', '#223b53',
+                'Hispanic', '#e55e5e',
+                'Asian', '#3bb2d0',
+                /* other */ '#ccc'
+            ]
         }
-
-        d3.json("lastMesuraments.json", function(data) {
-            data.forEach(function(d) {
-                console.log(d.id);
-                d.lat = +d.lat;
-                d.lon = +d.lon;
-                console.log(d.lat);
-                console.log(d.lon);
-                //L.marker([d.lat, d.lon], {icon: greenIcon}).addTo(mymap);
-                var circle = L.circle([d.lat, d.lon], {
-                    color: colorPick(d.temperature),
-                    fillColor: colorPick(d.temperature),
-                    fillOpacity: 0.7,
-                    radius: 120,
-                    stroke: false
-                }).addTo(map);
-                circle.bindPopup("temperature:" + d.temperature + "°C");
-            });
-
-        })
-        var popup = L.popup();
-
-        function onMapClick(e) {
-            popup
-                .setLatLng(e.latlng)
-                .setContent("You clicked the map at " + e.latlng.toString())
-                .openOn(map);
-        }
-
-        map.on('click', onMapClick);
+    });
+});
 </script>
 
 </body>

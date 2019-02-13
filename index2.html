@@ -3,28 +3,18 @@
 <head>
     <title>A Leaflet map!</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="" />
+    <link rel="stylesheet" href="leafletmap.css">
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <style>
-        #map {
-            height: 100%
-        }
         
-        .my-custom-control {
-            background-image: url('images/TempColor.PNG');
-            width: 220px;
-            /* you will likely need to specify image width and height here */
-            height: 68px;
-            background-size: contain;
-            border: 1px solid #dedede;
-            border-radius: 5px;
-        }
     </style>
 </head>
 
 <body>
 
     <div id="map"></div>
+    <button type="button" id="changeSetting">Humidity</button>
 
 </body>
 <script src="leafletmap.js"></script>
