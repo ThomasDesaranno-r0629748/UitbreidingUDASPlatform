@@ -8,6 +8,25 @@ var Wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.
     maxZoom: 19
 }).addTo(map);
 
+var Satelite = L.tileLayer('',{
+    attribution: '',
+    minZoom: 1,
+    maxZoom: 19
+}).addTo(map);
+
+var baseMaps = {
+    "Streets": Wikimedia,
+    "Satelite": Satelite
+};
+
+var overlayMaps = {
+    "Traffic": cities,
+    "Weather": weather
+};
+
+L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+
 function colorPick(temperature) {
     if (temperature < 10) return 'lightblue';
     if (temperature >= 10 && temperature <= 12) return 'yellow';
