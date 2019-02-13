@@ -9,10 +9,13 @@ var Wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.
 }).addTo(map);
 
 function colorPick(temperature) {
-    if (temperature < 10) return 'lightblue';
-    if (temperature >= 10 && temperature <= 12) return 'yellow';
-    if (temperature > 12 && temperature < 15) return 'orange';
-    if (temperature > 15) return 'red';
+    if (temperature < -10) return 'blue';
+    if (temperature >= -10 && temperature < 0) return 'lightblue';
+    if (temperature >= 0 && temperature < 10) return 'lightgreen';
+    if (temperature >= 10 && temperature < 12) return 'green';
+    if (temperature >= 12 && temperature < 15) return 'yellow';
+    if (temperature >= 15 && temperature < 20) return 'orange';
+    if (temperature > 20) return 'red';
 }
 
 //Add data to map and set view
@@ -25,11 +28,11 @@ d3.json("lastMesuraments.json", function (data) {
         d.lon = +d.lon;
         console.log(d.lat);
         console.log(d.lon);
-        
+
         mapLat = mapLat + d.lat;
         mapLon = mapLon + d.lon;
         amountData++;
-        
+
         //L.marker([d.lat, d.lon], {icon: greenIcon}).addTo(mymap);
         var circle = L.circle([d.lat, d.lon], {
             color: colorPick(d.temperature),
@@ -40,7 +43,7 @@ d3.json("lastMesuraments.json", function (data) {
         }).addTo(map);
         circle.bindPopup("temperature:" + d.temperature + "°C");
     });
-    map.setView([mapLat/amountData, mapLon/amountData], 13)
+    map.setView([mapLat / amountData, mapLon / amountData], 13)
 })
 
 //Clickable map popups
@@ -59,16 +62,11 @@ map.on('click', onMapClick);
 //Legend
 var MyControl = L.Control.extend({
     options: {
-      position: 'bottomleft'
+        position: 'bottomleft'
     },
-
     onAdd: function (map) {
-      // create the control container with a particular class name
-      // ** you can add the image to the div as a background image using css
-      var container = L.DomUtil.create('div', 'my-custom-control');
-
-      // ... initialize other DOM elements, add listeners, etc.
-      return container;
+        var container = L.DomUtil.create('div', 'my-custom-control');
+        return container;
     }
 });
 
