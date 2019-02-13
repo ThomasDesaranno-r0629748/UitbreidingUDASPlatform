@@ -67,19 +67,6 @@ function onMapClick(e) {
 
 map.on('click', onMapClick);
 
-//Legend
-var MyControl = L.Control.extend({
-    options: {
-        position: 'bottomleft'
-    },
-    onAdd: function (map) {
-        var container = L.DomUtil.create('div', 'my-custom-control');
-        return container;
-    }
-});
-
-map.addControl(new MyControl());
-
 //Change to humidity
 document.getElementById("changeSetting").onclick = function (){
     if(clicked){
