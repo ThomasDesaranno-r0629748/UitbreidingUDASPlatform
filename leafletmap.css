@@ -66,4 +66,20 @@
     padding: 5px;
     border: 1px solid #dedede;
     visibility: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#chartCollection button {
+    background-color: transparent;
+    width: 22px;
+    height: 22px;
+    padding: 0px;
+    text-decoration: none;
+    align-self: flex-end;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: grey;
+    border: 1px solid #dedede;
+    border-radius: 5px;
 }

@@ -43,11 +43,6 @@ var markersTemp = L.layerGroup();
 var markerHumidity = L.layerGroup();
 var clicked = false;
 
-//Graph popup
-function onCircleClick(){
-    document.getElementById("chartCollection").style.visibility="visible";
-}
-
 //Add data to map and set view
 d3.json("lastMesuraments.json", function (data) {
     var mapLat = 0;
@@ -105,3 +100,12 @@ document.getElementById("changeSetting").onclick = function (){
     }
 }
 
+//Graph popup
+function onCircleClick(){
+    document.getElementById("chartCollection").style.visibility="visible";
+}
+
+//Close chart collection
+document.getElementById("closeChartCollection").onclick = function(){
+    document.getElementById("chartCollection").style.visibility="hidden";
+}
