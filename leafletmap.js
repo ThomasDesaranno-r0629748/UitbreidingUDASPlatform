@@ -43,6 +43,11 @@ var markersTemp = L.layerGroup();
 var markerHumidity = L.layerGroup();
 var clicked = false;
 
+//Graph popup
+function onCircleClick(){
+    document.getElementById("chartCollection").style.visibility="visible";
+}
+
 //Add data to map and set view
 d3.json("lastMesuraments.json", function (data) {
     var mapLat = 0;
@@ -67,6 +72,7 @@ d3.json("lastMesuraments.json", function (data) {
             stroke: false
         });
         circle.bindPopup("temperature:" + d.temperature + "°C");
+        circle.on('click', onCircleClick);
         markersTemp.addLayer(circle);
     });
     markersTemp.addTo(map);
