@@ -25,7 +25,7 @@ var yAxis = d3.svg.axis()
 
 //construct the line using points from data
 var line = d3.svg.line()
-    .x(function(d) { return x(d.time.replace(/\D/g, '')); })
+    .x(function(d) { return x(d.time.replace(/\D/g, '').substring(0,4)); })
     .y(function(d) { return y(d.temperature); });
 
 var svg = d3.select(".linechart").append("svg")
@@ -38,13 +38,13 @@ d3.json("charttestdata.json", function(error, data) {
   if (error) throw error;
 //traverse through the data 
   data.forEach(function(d) {
-    d.tim = +d.time.replace(/\D/g, '');
+    d.tim = +d.time.replace(/\D/g, '').substring(0,4);
     d.temperature = +d.temperature;
-    console.log(d.time.replace(/\D/g, '')+"test");
+    console.log(d.time.replace(/\D/g, '').substring(0,4)+"test");
     console.log(d.temperature+"whuuut");
   });
 //establish the domain for x and y axes
-  x.domain(d3.extent(data, function(d) { return d.time.replace(/\D/g, ''); }));
+  x.domain(d3.extent(data, function(d) { return d.time.replace(/\D/g, '').substring(0,4); }));
   y.domain(d3.extent(data, function(d) { return d.temperature; }));
 
 //add "groups" 
