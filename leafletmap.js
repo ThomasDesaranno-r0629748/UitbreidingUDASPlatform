@@ -106,10 +106,9 @@ document.getElementById("changeSetting").onclick = function (){
 //Graph popup
 function onCircleClick(obj){
     document.getElementById("chartCollection").style.visibility="visible";
-    
     d3.json("lastMesuraments.json", function (data) {
     data.forEach(function (d) {
-        if(d.lat == obj.latlng.lat && d.lon == obj.latlng.lng){
+        if(d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng){
             document.getElementById("sensorName").innerHTML = d.id;
         }
     })
