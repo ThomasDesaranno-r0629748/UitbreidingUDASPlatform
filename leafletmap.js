@@ -93,10 +93,12 @@ document.getElementById("changeSetting").onclick = function (){
         markersTemp.addTo(map);
         clicked = false;
         document.getElementById("changeSetting").innerHTML = "Humidity";
+        document.getElementById("legend").style.backgroundImage = 'url(images/TempColor.PNG)';
     } else {
         map.removeLayer(markersTemp);
         clicked = true;
         document.getElementById("changeSetting").innerHTML = "Temperature";
+        document.getElementById("legend").style.backgroundImage = 'linear-gradient(-90deg, blue, lightblue)';
     }
     document.getElementById("chartCollection").style.visibility="hidden";
 }
