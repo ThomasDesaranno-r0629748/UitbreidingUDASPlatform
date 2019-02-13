@@ -98,6 +98,7 @@ document.getElementById("changeSetting").onclick = function (){
         clicked = true;
         document.getElementById("changeSetting").innerHTML = "Temperature";
     }
+    document.getElementById("chartCollection").style.visibility="hidden";
 }
 
 //Graph popup
