@@ -8,6 +8,7 @@ var Wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.
     maxZoom: 19
 }).addTo(map);
 
+//Pick color
 function colorPick(temperature) {
     if (temperature < -10) return 'blue';
     if (temperature >= -10 && temperature < 0) return 'lightblue';
@@ -17,6 +18,11 @@ function colorPick(temperature) {
     if (temperature >= 15 && temperature < 20) return 'orange';
     if (temperature > 20) return 'red';
 }
+
+//Temperature clustergroup
+var markersTemp = L.layerGroup();
+var markerHumidity = L.layerGroup();
+var clicked = false;
 
 //Add data to map and set view
 d3.json("lastMesuraments.json", function (data) {
@@ -40,9 +46,11 @@ d3.json("lastMesuraments.json", function (data) {
             fillOpacity: 0.8,
             radius: 120,
             stroke: false
-        }).addTo(map);
+        });
         circle.bindPopup("temperature:" + d.temperature + "°C");
+        markersTemp.addLayer(circle);
     });
+    markersTemp.addTo(map);
     map.setView([mapLat / amountData, mapLon / amountData], 13)
 })
 
@@ -71,3 +79,17 @@ var MyControl = L.Control.extend({
 });
 
 map.addControl(new MyControl());
+
+//Change to humidity
+document.getElementById("changeSetting").onclick = function (){
+    if(clicked){
+        markersTemp.addTo(map);
+        clicked = false;
+        document.getElementById("changeSetting").innerHTML = "Humidity";
+    } else {
+        map.removeLayer(markersTemp);
+        clicked = true;
+        document.getElementById("changeSetting").innerHTML = "Temperature";
+    }
+}
+
