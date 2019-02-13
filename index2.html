@@ -7,15 +7,20 @@
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <style>
-        
+
     </style>
 </head>
 
 <body>
-
     <div id="map"></div>
-    <button type="button" id="changeSetting">Humidity</button>
+    <div id="legendCollection">
+        <div id="changeButtons">
+            <h3>Change To:</h3>
+            <button type="button" id="changeSetting">Humidity</button>
+        </div>
+                    <div id="legend"></div>
 
+    </div>
 </body>
 <script src="leafletmap.js"></script>
 

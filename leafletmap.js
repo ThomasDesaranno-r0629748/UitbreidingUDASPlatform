@@ -2,11 +2,30 @@
 var map = L.map('map');
 
 // load a tile layer
+    mapLink ='<a href="http://www.esri.com/">Esri</a>';
+        wholink='i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+       var Satelite = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '&copy; '+mapLink+', '+wholink,
+            maxZoom: 19,
+            })
+
 var Wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
     attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
     minZoom: 1,
     maxZoom: 19
 }).addTo(map);
+
+var baseMaps = {
+    "Streets": Wikimedia,
+    "Satelite": Satelite
+};
+
+//var overlayMaps = {
+//    "Traffic": cities,
+//    "Weather": weather
+//};
+
+L.control.layers(baseMaps).addTo(map);
 
 //Pick color
 function colorPick(temperature) {
@@ -66,19 +85,6 @@ function onMapClick(e) {
 }
 
 map.on('click', onMapClick);
-
-//Legend
-var MyControl = L.Control.extend({
-    options: {
-        position: 'bottomleft'
-    },
-    onAdd: function (map) {
-        var container = L.DomUtil.create('div', 'my-custom-control');
-        return container;
-    }
-});
-
-map.addControl(new MyControl());
 
 //Change to humidity
 document.getElementById("changeSetting").onclick = function (){
