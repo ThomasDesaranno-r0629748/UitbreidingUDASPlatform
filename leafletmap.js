@@ -67,7 +67,7 @@ d3.json("lastMesuraments.json", function (data) {
             stroke: false
         });
         circle.bindPopup("temperature:" + d.temperature + "°C");
-        circle.on('click', onCircleClick);
+        circle.on('click', onCircleClick, d);
         markersTemp.addLayer(circle);
     });
     markersTemp.addTo(map);
@@ -101,11 +101,21 @@ document.getElementById("changeSetting").onclick = function (){
 }
 
 //Graph popup
-function onCircleClick(){
+function onCircleClick(obj){
     document.getElementById("chartCollection").style.visibility="visible";
+    
+    d3.json("lastMesuraments.json", function (data) {
+    data.forEach(function (d) {
+        if(d.lat == obj.latlng.lat && d.lon == obj.latlng.lng){
+            document.getElementById("sensorName").innerHTML = d.id;
+        }
+    })
+})
 }
 
 //Close chart collection
 document.getElementById("closeChartCollection").onclick = function(){
     document.getElementById("chartCollection").style.visibility="hidden";
+    
+    
 }

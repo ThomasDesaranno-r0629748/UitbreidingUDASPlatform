@@ -70,7 +70,7 @@
     flex-direction: column;
 }
 
-#chartCollection button {
+#closeChartCollection {
     background-color: transparent;
     width: 22px;
     height: 22px;
@@ -82,4 +82,26 @@
     color: grey;
     border: 1px solid #dedede;
     border-radius: 5px;
+}
+
+#sensorInfo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#sensorInfo p{
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+    margin-right: 2%;
+}
+
+.sensorInfo {
+    color: #656565;
+    font-family: sans-serif;
+    font-weight: 700;
+}
+
+#sensorName {
+    color: #3e3e3e;
 }
