@@ -13,10 +13,10 @@ d3.json("charttestdata.json", function (data) {
     })
 })
 
-setTimeout(createChart, 1000, chartLabels, chartDataTemp, tempChart, 'Temperature', 'yellow', true);
-setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'Pressure', 'red', false);
+setTimeout(createChart, 1000, chartLabels, chartDataTemp, tempChart, 'Temperature', 'rgba(255, 255, 0, 0.58)', true, '#989800');
+setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'Pressure', 'rgba(255, 0, 0, 0.58)', false, '#980000');
 
-function createChart(chartLabels, chartData, chart, label, backgroundcolor, beginAtZero) {
+function createChart(chartLabels, chartData, chart, label, backgroundcolor, beginAtZero, borderColor) {
     let LineChart = new Chart(chart, {
         type: 'line'
         , data: {
@@ -25,6 +25,8 @@ function createChart(chartLabels, chartData, chart, label, backgroundcolor, begi
                 label: label
                 , data: chartData
                 , backgroundColor: backgroundcolor
+                , pointRadius: 0
+                , borderColor: borderColor
         }]
         }
         , options: {

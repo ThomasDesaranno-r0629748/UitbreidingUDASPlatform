@@ -25,7 +25,9 @@ function createChart(chartLabels, chartData) {
             , datasets: [{
                 label: 'Temperature'
                 , data: chartData
-                , backgroundColor: 'yellow'
+                , backgroundColor: 'rgba(255, 0, 0, 0.58)'
+                , borderColor: '#980000'
+                , pointRadius: 0
         }]
         }
         , options: {
