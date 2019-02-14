@@ -1,3 +1,41 @@
+         //make the icons
+//red
+                var sensorIconRed = L.icon({
+            iconUrl: 'redsensor.png',        
+            iconSize:     [40, 40], // size of the icon
+            iconAnchor:   [20, 20], // point of the icon which will correspond to 
+        });
+//red
+                var sensorIconyellow = L.icon({
+            iconUrl: 'yellowsensor.png',
+            iconSize:     [40, 40], // size of the icon
+            iconAnchor:   [20, 20], // point of the icon which will correspond to 
+        });
+ var sensorIconorange = L.icon({
+            iconUrl: 'orangesensor.png',
+            iconSize:     [40, 40], // size of the icon
+            iconAnchor:   [20, 20], // point of the icon which will correspond to 
+        });
+var sensorIconblue = L.icon({
+            iconUrl: 'bluesensor.png',
+            iconSize:     [40, 40], // size of the icon
+            iconAnchor:   [20, 20], // point of the icon which will correspond to 
+        });
+var sensorIcongreenyellow = L.icon({
+            iconUrl: 'greenyellowsensor.png',
+            iconSize:     [40, 40], // size of the icon
+            iconAnchor:   [20, 20], // point of the icon which will correspond to
+        });
+var sensorIconlightgreen = L.icon({
+            iconUrl: 'lightgreensensor.png',
+            iconSize:     [40, 40], // size of the icon
+            iconAnchor:   [20, 20], // point of the icon which will correspond to
+        });
+var sensorIconlightblue = L.icon({
+            iconUrl: 'lightbluesensor.png',
+            iconSize:     [40, 40], // size of the icon
+            iconAnchor:   [20, 20], // point of the icon which will correspond to
+        });
 // initialize the map
 var map = L.map('map');
 
@@ -50,15 +88,15 @@ var overlayMaps = {
 
 L.control.layers(baseMaps,overlayMaps).addTo(map);
 
-//Pick color
+//Pick icon
 function colorPick(temperature) {
-    if (temperature < -10) return 'blue';
-    if (temperature >= -10 && temperature < 0) return 'lightblue';
-    if (temperature >= 0 && temperature < 10) return 'lightgreen';
-    if (temperature >= 10 && temperature < 12) return 'green';
-    if (temperature >= 12 && temperature < 15) return 'yellow';
-    if (temperature >= 15 && temperature < 20) return 'orange';
-    if (temperature > 20) return 'red';
+    if (temperature < -10) return sensorIconblue;
+    if (temperature >= -10 && temperature < 0) return sensorIconlightblue;
+    if (temperature >= 0 && temperature < 10) return sensorIconlightgreen;
+    if (temperature >= 10 && temperature < 12) return sensorIcongreenyellow;
+    if (temperature >= 12 && temperature < 15) return sensorIconyellow;
+    if (temperature >= 15 && temperature < 20) return sensorIconorange;
+    if (temperature > 20) return sensorIconRed;
 }
 
 //Temperature clustergroup
@@ -80,18 +118,19 @@ d3.json("lastMesuraments.json", function (data) {
         mapLat = mapLat + d.lat;
         mapLon = mapLon + d.lon;
         amountData++;
+        var sensor =  L.marker([d.lat, d.lon], {icon: colorPick(d.temperature)});
 
-        //L.marker([d.lat, d.lon], {icon: greenIcon}).addTo(mymap);
-        var circle = L.circle([d.lat, d.lon], {
-            color: colorPick(d.temperature),
-            fillColor: colorPick(d.temperature),
-            fillOpacity: 0.8,
-            radius: 120,
-            stroke: false
-        });
-        circle.bindPopup("temperature:" + d.temperature + "°C");
-        circle.on('click', onCircleClick, d);
-        markersTemp.addLayer(circle);
+        sensor.addTo(map);
+//        var circle = L.circle([d.lat, d.lon], {
+//            color: colorPick(d.temperature),
+//            fillColor: colorPick(d.temperature),
+//            fillOpacity: 0.8,
+//            radius: 120,
+//            stroke: false
+//        });
+        sensor.bindPopup("temperature:" + d.temperature + "°C");
+        sensor.on('click', onCircleClick, d);
+        markersTemp.addLayer(sensor);
     });
     markersTemp.addTo(map);
     map.setView([mapLat / amountData, mapLon / amountData], 13)
