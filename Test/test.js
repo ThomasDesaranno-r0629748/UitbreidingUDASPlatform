@@ -15,23 +15,31 @@ d3.json("charttestdata.json", function (data) {
 })
 console.log(chartData);
 console.log(chartLabels);
-
 setTimeout(createChart, 1000, chartLabels, chartData);
 
-function createChart(chartLabels, chartData){
+function createChart(chartLabels, chartData) {
     let tempLineChart = new Chart(tempChart, {
-    type:'line',
-    data:{
-        labels: chartLabels,
-        datasets:[{
-            label: 'Temperature',
-            data: chartData,
-            backgroundColor: 'yellow'
+        type: 'line'
+        , data: {
+            labels: chartLabels
+            , datasets: [{
+                label: 'Temperature'
+                , data: chartData
+                , backgroundColor: 'yellow'
         }]
-    }
-})
+        }
+        , options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }
+                ]
+            }
+        }
+    })
 }
-
 
 
 
