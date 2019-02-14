@@ -120,6 +120,7 @@
     width: 140px;
     display: flex;
     flex-direction: column;
+    align-items: center
 }
 
 #sensorDetails h2 {
@@ -133,6 +134,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 5%;
+    width: 70%;
 }
 
 .sensorDet {
