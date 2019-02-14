@@ -15,17 +15,40 @@ var Wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.
     maxZoom: 19
 }).addTo(map);
 
+	var OWM_API_KEY = '3361df6687a5458ad0f9e3556c666018';
+
+	var clouds = L.OWM.clouds({opacity: 0.8, legendImagePath: '/NT2.png', appId: OWM_API_KEY});
+	var cloudscls = L.OWM.cloudsClassic({opacity: 0.5, appId: OWM_API_KEY});
+	var precipitation = L.OWM.precipitation( {opacity: 0.5, appId: OWM_API_KEY} );
+	var precipitationcls = L.OWM.precipitationClassic({opacity: 0.5, appId: OWM_API_KEY});
+	var rain = L.OWM.rain({opacity: 0.5, appId: OWM_API_KEY});
+	var raincls = L.OWM.rainClassic({opacity: 0.5, appId: OWM_API_KEY});
+	var snow = L.OWM.snow({opacity: 0.5, appId: OWM_API_KEY});
+	var pressure = L.OWM.pressure({opacity: 0.4, appId: OWM_API_KEY});
+	var pressurecntr = L.OWM.pressureContour({opacity: 0.5, appId: OWM_API_KEY});
+	var temp = L.OWM.temperature({opacity: 0.5, appId: OWM_API_KEY});
+	var wind = L.OWM.wind({opacity: 0.5, appId: OWM_API_KEY});
+
 var baseMaps = {
     "Streets": Wikimedia,
     "Satelite": Satelite
 };
 
-//var overlayMaps = {
-//    "Traffic Flow": cities,
-//    "Weather": weather
-//};
+var overlayMaps = {
+    "Clouds" : clouds,
+    "Clouds classic" : cloudscls,
+    "Precipitation" : precipitation,
+    "Precipitation classic" : precipitationcls,
+    "Rain" : rain,
+    "Rain Classic": raincls,
+    "Snow" : snow,
+    "Pressure" : pressure,
+    "Pressure contour" : pressurecntr,
+    "Temperature" : temp,
+    "Wind" : wind
+};
 
-L.control.layers(baseMaps).addTo(map);
+L.control.layers(baseMaps,overlayMaps).addTo(map);
 
 //Pick color
 function colorPick(temperature) {
