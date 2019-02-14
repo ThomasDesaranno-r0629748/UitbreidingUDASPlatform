@@ -122,6 +122,10 @@ function onCircleClick(obj){
             document.getElementById("humidityD").innerHTML = d.humidity;
             document.getElementById("temperatureD").innerHTML = d.temperature;
             document.getElementById("pressureD").innerHTML = d.pressure;
+            } else {
+                document.getElementById("humidityD").innerHTML = "N/A";
+            document.getElementById("temperatureD").innerHTML = "N/A";
+            document.getElementById("pressureD").innerHTML = "N/A";
             }
         })
     })
