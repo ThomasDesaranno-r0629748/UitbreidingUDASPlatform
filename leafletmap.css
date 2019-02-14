@@ -119,8 +119,9 @@
 #sensorDetails {
     width: 140px;
     display: flex;
+    align-items: center;
     flex-direction: column;
-    align-items: center
+    margin: 0px;
 }
 
 #sensorDetails h2 {
@@ -128,27 +129,30 @@
     font-size: 20;
     font-weight: 600;
     text-align: center;
+    width: 100%;
+    color: #3e3e3e;
+}
+
+.sensorDetNum {
+    width: 19%; 
+    font-family: sans-serif;
+    font-size: 13;
+    color: #3e3e3e;
 }
 
 #sensorDetails div {
+    width: 100%;
+    margin: 0px;
     display: flex;
-    flex-direction: column;
-    margin-bottom: 5%;
-    width: 70%;
+    flex-direction: row;
+    border-bottom: 1px solid #dedede;
 }
 
 .sensorDet {
+    width: 70%;
+    font-family: sans-serif;
+    font-size: 13;
     color: #656565;
-    font-family: sans-serif;
-    font-size: 14;
-    font-weight: 600;
-    margin-right: 3px;
-}
+    font-weight: 550;
 
-#sensorDetails p {
-    font-family: sans-serif;
-    font-size: 14;
-    font-weight: 600;
-    margin-bottom: 0px;
-    margin-top: 0px;
 }
