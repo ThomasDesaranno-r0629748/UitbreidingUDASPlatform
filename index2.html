@@ -19,13 +19,31 @@
         <div id="legend" class="legendItem"></div>
     </div>
     <div id="chartCollection">
-       <button type="button" id="closeChartCollection">x</button>
-       <div id="sensorInfo">
-           <p class="sensorInfo">Sensor id:</p>
-           <p class="sensorInfo" id="sensorName">test</p>
-       </div>
-        <canvas id="tempChart"></canvas>
+    <button type="button" id="closeChartCollection">x</button>
+    <div id="sensorInfo">
+        <p class="sensorInfo">Sensor id:</p>
+        <p class="sensorInfo" id="sensorName">test</p>
     </div>
+    <div id="sensorDetails">
+       <h2>Details</h2>
+        <div>
+            <p class="sensorDet">Humidity: </p>
+            <p id="humidityD">test</p>
+        </div>
+        <div>
+            <p class="sensorDet">Temperature: </p>
+            <p id="temperatureD">test</p>
+        </div>
+        <div>
+            <p class="sensorDet">Pressure: </p>
+            <p id="pressureD">test</p>
+        </div>
+    </div>
+    <div id="charts">
+        <canvas id="tempChart"></canvas>
+        <canvas id="pressureChart"></canvas>
+    </div>
+</div>
 </body>
 <script src="charts.js"></script>
 <script src="leafletmap.js"></script>

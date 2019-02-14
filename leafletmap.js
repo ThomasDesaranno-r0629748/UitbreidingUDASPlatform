@@ -106,13 +106,25 @@ document.getElementById("changeSetting").onclick = function (){
 //Graph popup
 function onCircleClick(obj){
     document.getElementById("chartCollection").style.visibility="visible";
+    var id = 0;
     d3.json("lastMesuraments.json", function (data) {
     data.forEach(function (d) {
         if(d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng){
             document.getElementById("sensorName").innerHTML = d.id;
+            id = d.id;
         }
     })
-})
+});
+    
+    d3.json("charttestdata.json", function (data){
+        data.forEach(function(d){
+            if(d.id == id){
+            document.getElementById("humidityD").innerHTML = d.humidity;
+            document.getElementById("temperatureD").innerHTML = d.temperature;
+            document.getElementById("pressureD").innerHTML = d.pressure;
+            }
+        })
+    })
 }
 
 //Close chart collection
