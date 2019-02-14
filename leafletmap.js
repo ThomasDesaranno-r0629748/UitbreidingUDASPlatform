@@ -43,11 +43,6 @@ var markersTemp = L.layerGroup();
 var markerHumidity = L.layerGroup();
 var clicked = false;
 
-//Graph popup
-function onCircleClick(){
-    document.getElementById("chartCollection").style.visibility="visible";
-}
-
 //Add data to map and set view
 d3.json("lastMesuraments.json", function (data) {
     var mapLat = 0;
@@ -72,7 +67,7 @@ d3.json("lastMesuraments.json", function (data) {
             stroke: false
         });
         circle.bindPopup("temperature:" + d.temperature + "°C");
-        circle.on('click', onCircleClick);
+        circle.on('click', onCircleClick, d);
         markersTemp.addLayer(circle);
     });
     markersTemp.addTo(map);
@@ -98,10 +93,31 @@ document.getElementById("changeSetting").onclick = function (){
         markersTemp.addTo(map);
         clicked = false;
         document.getElementById("changeSetting").innerHTML = "Humidity";
+        document.getElementById("legend").style.backgroundImage = 'url(images/TempColor.PNG)';
     } else {
         map.removeLayer(markersTemp);
         clicked = true;
         document.getElementById("changeSetting").innerHTML = "Temperature";
+        document.getElementById("legend").style.backgroundImage = 'linear-gradient(-90deg, blue, lightblue)';
     }
+    document.getElementById("chartCollection").style.visibility="hidden";
 }
 
+//Graph popup
+function onCircleClick(obj){
+    document.getElementById("chartCollection").style.visibility="visible";
+    d3.json("lastMesuraments.json", function (data) {
+    data.forEach(function (d) {
+        if(d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng){
+            document.getElementById("sensorName").innerHTML = d.id;
+        }
+    })
+})
+}
+
+//Close chart collection
+document.getElementById("closeChartCollection").onclick = function(){
+    document.getElementById("chartCollection").style.visibility="hidden";
+    
+    
+}
