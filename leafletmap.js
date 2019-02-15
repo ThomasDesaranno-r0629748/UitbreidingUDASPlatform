@@ -124,13 +124,10 @@
 
          //Pick icon
          function colorPick(temperature) {
-             if (temperature < -10) return sensorIconblue;
-             if (temperature >= -10 && temperature < 0) return sensorIconlightblue;
-             if (temperature >= 0 && temperature < 10) return sensorIconlightgreen;
-             if (temperature >= 10 && temperature < 12) return sensorIcongreenyellow;
-             if (temperature >= 12 && temperature < 15) return sensorIconyellow;
-             if (temperature >= 15 && temperature < 20) return sensorIconorange;
-             if (temperature > 20) return sensorIconRed;
+             if (temperature >= 0 && temperature < 50) return sensorIconlightgreen;
+             if (temperature >= 50 && temperature < 100) return sensorIconyellow;
+             if (temperature >= 101 && temperature < 200) return sensorIconorange;
+             if (temperature >= 200) return sensorIconRed;
          }
 
          //Temperature clustergroup
@@ -139,7 +136,7 @@
          var clicked = false;
 
          //Add data to map and set view
-         d3.json("lastMesuraments.json", function (data) {
+         d3.json("SensorLocaties.json", function (data) {
              var mapLat = 0;
              var mapLon = 0;
              var amountData = 0;
@@ -153,7 +150,7 @@
                  mapLon = mapLon + d.lon;
                  amountData++;
                  var sensor = L.marker([d.lat, d.lon], {
-                     icon: colorPick(d.temperature)
+                     icon: colorPick(20)
                  });
 
                  sensor.addTo(map);
@@ -170,7 +167,7 @@
                  });
                  circle.addTo(map);*/
 
-                 sensor.bindPopup("temperature:" + d.temperature + "°C");
+                 sensor.bindPopup("Locatie: " + d.naam);
                  sensor.on('click', onCircleClick, d);
                  markersTemp.addLayer(sensor);
 

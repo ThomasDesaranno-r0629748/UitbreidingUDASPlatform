@@ -1,9 +1,11 @@
 library(DBI)
 library(sparklyr)
-Sys.setenv(JAVA_HOME='C:\\Program Files\\Java\\jre1.8.0_201')
+Sys.setenv(JAVA_HOME='C:\\Program Files\\Java\\jre1.8.0_151')
 library(RJDBC)
 library(tidyr)
+library(jsonlite)
 drv <- JDBC("com.microsoft.sqlserver.jdbc.SQLServerDriver","C:\\Users\\Maarten Van den hof\\Downloads\\Accenture Docs\\Microsoft JDBC Driver 6.2 for SQL Server\\sqljdbc_6.2\\enu\\mssql-jdbc-6.2.2.jre8.jar")
+drv <- JDBC("com.microsoft.sqlserver.jdbc.SQLServerDriver","E:\\Projects\\UitbreidingUDASPlatform\\R Scripts\\sqljdbc_6.2\\enu\\mssql-jdbc-6.2.2.jre8.jar")
 
 conn <- dbConnect(drv, "jdbc:sqlserver://193.190.58.30", "snuffelpaal", "snuffelpaal")
 
