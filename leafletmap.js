@@ -2,39 +2,39 @@
          //red
          var sensorIconRed = L.icon({
              iconUrl: 'redsensor.png',
-             iconSize: [40, 40], // size of the icon
-             iconAnchor: [20, 20], // point of the icon which will correspond to 
+             iconSize: [60, 40], // size of the icon
+             iconAnchor: [30, 20], // point of the icon which will correspond to 
          });
          //red
          var sensorIconyellow = L.icon({
              iconUrl: 'yellowsensor.png',
-             iconSize: [40, 40], // size of the icon
-             iconAnchor: [20, 20], // point of the icon which will correspond to 
+             iconSize: [60, 40], // size of the icon
+             iconAnchor: [30, 20], // point of the icon which will correspond to 
          });
          var sensorIconorange = L.icon({
              iconUrl: 'orangesensor.png',
-             iconSize: [40, 40], // size of the icon
-             iconAnchor: [20, 20], // point of the icon which will correspond to 
+             iconSize: [60, 40], // size of the icon
+             iconAnchor: [30, 20], // point of the icon which will correspond to 
          });
          var sensorIconblue = L.icon({
              iconUrl: 'bluesensor.png',
-             iconSize: [40, 40], // size of the icon
-             iconAnchor: [20, 20], // point of the icon which will correspond to 
+             iconSize: [60, 40], // size of the icon
+             iconAnchor: [30, 20], // point of the icon which will correspond to 
          });
          var sensorIcongreenyellow = L.icon({
              iconUrl: 'greenyellowsensor.png',
-             iconSize: [40, 40], // size of the icon
-             iconAnchor: [20, 20], // point of the icon which will correspond to
+             iconSize: [60, 40], // size of the icon
+             iconAnchor: [30, 20], // point of the icon which will correspond to
          });
          var sensorIconlightgreen = L.icon({
              iconUrl: 'lightgreensensor.png',
-             iconSize: [40, 40], // size of the icon
-             iconAnchor: [20, 20], // point of the icon which will correspond to
+             iconSize: [60, 40], // size of the icon
+             iconAnchor: [30, 20], // point of the icon which will correspond to
          });
          var sensorIconlightblue = L.icon({
              iconUrl: 'lightbluesensor.png',
-             iconSize: [40, 40], // size of the icon
-             iconAnchor: [20, 20], // point of the icon which will correspond to
+             iconSize: [60, 40], // size of the icon
+             iconAnchor: [30, 20], // point of the icon which will correspond to
          });
          // initialize the map
          var map = L.map('map');
