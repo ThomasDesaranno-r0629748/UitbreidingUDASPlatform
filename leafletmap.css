@@ -1,26 +1,23 @@
+body{
+    font-family: 'Roboto Slab', serif;
+}
+
 #map {
     height: 100%;
     z-index: 1;
 }
 
-#legend {
-    background-image: url('images/TempColor.PNG');
-    width: 100%;
-    height: 68px;
-    background-size: contain;
-    border: 1px solid #dedede;
-    border-radius: 5px;
-}
 
 #changeSetting {
     border-radius: 5px;
-    background-color: #bc6966;
+    background-color: #2cd0d0;
     color: #FFF;
     border-style: none;
     font-size: 15;
     width: 80%;
     height: 30px;
     margin: 5%;
+    font-family: 'Roboto Slab', serif;
 }
 #changeButtons {
     width: 220px;
@@ -34,14 +31,14 @@
 }
 
 #changeButtons h3 {
-    color: #bc6966;
-    font-family: sans-serif;
-    margin: 5%
+    color: #2cd0d0;
+    margin: 5%;
+    margin-bottom: 0px;
 }
 
 #legendCollection {
     position: absolute;
-    bottom: 7%;
+    bottom: 5%;
     left: 2%;
     z-index: 2;
     background-color: transparent;
@@ -56,19 +53,23 @@
 }
 
 #chartCollection {
-    width: 500px;
+    width: 350px;
     height: auto;
     position: absolute;
     right: 2%;
     bottom: 5%;
     z-index: 2;
     background: #fff;
-    border-radius: 5px;
-    padding: 10px;
-    border: 1px solid #dedede;
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid rgb(222, 222, 222);
     visibility: hidden;
     display: flex;
-    flex-wrap: wrap
+    flex-direction: column;
+}
+
+#chartCollection *{
+        font-family: 'Roboto Slab', serif;
 }
 
 #closeChartCollection {
@@ -117,20 +118,14 @@
 }
 
 #sensorDetails {
-    width: 140px;
+    width: 100%;
     display: flex;
     align-items: center;
-    flex-direction: column;
     margin: 0px;
-}
-
-#sensorDetails h2 {
-    font-family: sans-serif;
-    font-size: 20;
-    font-weight: 600;
-    text-align: center;
-    width: 100%;
-    color: #3e3e3e;
+    padding-bottom: 7%;
+    border-bottom: 1px solid #b9b9b9;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .sensorDetNum {
@@ -138,9 +133,10 @@
     font-family: sans-serif;
     font-size: 13;
     color: #3e3e3e;
+    font-weight: 600;
 }
 
-#sensorDetails div {
+.sensorDColumn div {
     width: 100%;
     margin: 0px;
     display: flex;
@@ -153,6 +149,53 @@
     font-family: sans-serif;
     font-size: 13;
     color: #656565;
-    font-weight: 550;
+    font-weight: 600;
 
+}
+
+.sensorDColumn {
+    width: 45%;
+    margin: 0 5 0 5;
+}
+
+#tempChart {
+    padding-top: 3%;
+    padding-bottom: 3%;
+    border-bottom: 1px solid #b9b9b9;
+}
+
+#pressureChart {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+#legendContainer {
+    width: 100%;
+    height: 65px;
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #dedede;
+    background-image: linear-gradient(to right, red,orange,yellow, #ffff53,#00c400, lightgreen,lightblue, blue);
+}
+
+#legendNumbers {
+    width: 100.2%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    background-color: #fff;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+#legendNumbers p {
+    width: 25%;
+    height: 70%;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    margin-top: 3%;
 }

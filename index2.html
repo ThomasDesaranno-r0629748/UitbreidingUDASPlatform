@@ -3,50 +3,65 @@
 <head>
     <title>A Leaflet map!</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
     <link rel="stylesheet" href="leafletmap.css">
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
-    	<link rel="stylesheet" type="text/css" href="../leaflet-openweathermap.css" />
-	<script src="/leaflet-openweathermap.js"></script>
-	
+    <link rel="stylesheet" type="text/css" href="../leaflet-openweathermap.css" />
+    <script src="/leaflet-openweathermap.js"></script>
+
 </head>
 
 <body>
     <div id="map"></div>
     <div id="legendCollection">
         <div id="changeButtons" class="legendItem">
-            <h3>Change To:</h3>
+            <h3>Display on map</h3>
             <button type="button" id="changeSetting">Humidity</button>
         </div>
-        <div id="legend" class="legendItem"></div>
+        <div id="legendContainer" class="legendItem">
+            <div id="legendNumbers">
+                <p>+25</p>
+                <p>10</p>
+                <p>0</p>
+                <p>-10</p>
+            </div>
+        </div>
     </div>
     <div id="chartCollection">
-    <button type="button" id="closeChartCollection">x</button>
-    <div id="sensorInfo">
-        <p class="sensorInfo">Sensor id:</p>
-        <p class="sensorInfo" id="sensorName">test</p>
-    </div>
-    <div id="sensorDetails">
-       <h2>Details</h2>
-        <div>
-            <p class="sensorDet">Humidity: </p>
-            <p class="sensorDetNum" id="humidityD">test</p>
+        <button type="button" id="closeChartCollection">x</button>
+        <div id="sensorInfo">
+            <p class="sensorInfo">Sensor id:</p>
+            <p class="sensorInfo" id="sensorName">test</p>
         </div>
-        <div>
-            <p class="sensorDet">Temperature: </p>
-            <p class="sensorDetNum" id="temperatureD">test</p>
+        <div id="sensorDetails">
+            <div class="sensorDColumn">
+                <div>
+                    <p class="sensorDet">Humidity: </p>
+                    <p class="sensorDetNum" id="humidityD">test</p>
+                </div>
+                <div>
+                    <p class="sensorDet">Temperature: </p>
+                    <p class="sensorDetNum" id="temperatureD">test</p>
+                </div>
+            </div>
+            <div class="sensorDColumn">
+                <div>
+                    <p class="sensorDet">Pressure: </p>
+                    <p class="sensorDetNum" id="pressureD">test</p>
+                </div>
+                <div>
+                    <p class="sensorDet">Pressure: </p>
+                    <p class="sensorDetNum" id="pressureD">test</p>
+                </div>
+            </div>
         </div>
-        <div>
-            <p class="sensorDet">Pressure: </p>
-            <p class="sensorDetNum" id="pressureD">test</p>
+        <div id="charts">
+            <canvas id="tempChart"></canvas>
+            <canvas id="pressureChart"></canvas>
         </div>
     </div>
-    <div id="charts">
-        <canvas id="tempChart"></canvas>
-        <canvas id="pressureChart"></canvas>
-    </div>
-</div>
 </body>
 <script src="charts.js"></script>
 <script src="leafletmap.js"></script>
