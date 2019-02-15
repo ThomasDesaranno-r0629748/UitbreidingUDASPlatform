@@ -221,15 +221,20 @@
                      }
                  })
              });
-             d3.json("lastMesuraments.json", function (data) {
+             d3.json("LaatsteMetingen.json", function (data) {
                  data.forEach(function (d) {
-                     if (d.id == id) {
-                         if (d.humidity != "") {
-                             document.getElementById("humidityD").innerHTML = d.humidity;
+                     if (d.Deviceid == 10) { /*Nog te veranderen*/
+                         if (d.s1 != null) {
+                             document.getElementById("SO2").innerHTML = d.s1 + "ug/m3";
                          }
-                         document.getElementById("temperatureD").innerHTML = d.temperature + "°C";
-                         if (d.pressure != "" || d.pressure != undefined){
-                             document.getElementById("pressureD").innerHTML = d.pressure;
+                         if (d.s2 != null) {
+                             document.getElementById("NO2").innerHTML = d.s2 + "ug/m3";
+                         }
+                         if (d.s3 != null) {
+                             document.getElementById("O3").innerHTML = d.s3 + "ug/m3";
+                         }
+                         if (d.s4 != null) {
+                             document.getElementById("PM1").innerHTML = d.s4 + "ug/m3";
                          }
                      }
                  })

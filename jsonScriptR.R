@@ -1,7 +1,5 @@
-library('rjson')
 library(dplyr)
 library(jsonlite)
-library(rjson)
 
 #dat = read.csv("csvdata\\2019-01_bme280.csv", header = TRUE, sep=";")
 json_data <- fromJSON('all.json')

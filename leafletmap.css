@@ -53,19 +53,20 @@ body{
 }
 
 #chartCollection {
-    width: 350px;
-    height: auto;
-    position: absolute;
-    right: 2%;
-    bottom: 5%;
+    width: 360px;
+    height: 80%;
     z-index: 2;
     background: #fff;
     border-radius: 10px;
     padding: 15px;
     border: 1px solid rgb(222, 222, 222);
-    visibility: hidden;
     display: flex;
     flex-direction: column;
+    position: absolute;
+    bottom: 5%;
+    right: 3%;
+    overflow-y: scroll;
+    visibility: hidden;
 }
 
 #chartCollection *{
@@ -123,7 +124,7 @@ body{
     align-items: center;
     margin: 0px;
     padding-bottom: 7%;
-    border-bottom: 1px solid #b9b9b9;
+    margin-top: 5%;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -145,7 +146,7 @@ body{
 }
 
 .sensorDet {
-    width: 70%;
+    width: 60%;
     font-family: sans-serif;
     font-size: 13;
     color: #656565;
@@ -167,6 +168,7 @@ body{
 #pressureChart {
     padding-top: 3%;
     padding-bottom: 3%;
+    border-bottom: 1px solid #b9b9b9;
 }
 
 #legendContainer {
@@ -198,4 +200,26 @@ body{
     padding: 0px;
     text-align: center;
     margin-top: 3%;
+}
+
+#O3Chart {
+    padding-top: 3%;
+    padding-bottom: 3%;
+    border-bottom: 1px solid #b9b9b9;
+}
+
+#PM1Chart {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+#chartScroller {
+    height: 85%;
+    position: absolute;
+    right: 2%;
+    bottom: 5%;
+    z-index: 2;
+    visibility: hidden;
+    overflow-y: scroll;
+    width: 400px;
 }
