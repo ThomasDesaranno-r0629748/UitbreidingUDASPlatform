@@ -24,14 +24,15 @@ body{
     min-height: 10px;
     background-color: #ffffff;
     display: flex;
-    flex-direction: column;
     align-items: center;
     border: 1px solid #dedede;
     border-radius: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #changeButtons h3 {
-    color: #2cd0d0;
+    color: #656565;
     margin: 5%;
     margin-bottom: 0px;
 }
@@ -185,7 +186,7 @@ body{
     display: flex;
     flex-direction: column;
     border: 1px solid #dedede;
-    background-image: linear-gradient(to right, red,orange,yellow, #ffff53,#00c400, lightgreen,lightblue, blue);
+    background-image: linear-gradient(to right, green, yellow, orange, red);
 }
 
 #legendNumbers {
@@ -249,3 +250,17 @@ body{
 	border-radius: 10px;
 	background-color: #b9b9b9;
 }
+
+.changeType {
+    border-radius: 5px;
+    background-color: #2cd0d0;
+    color: #FFF;
+    border-style: none;
+    font-size: 15;
+    width: 40%;
+    height: 30px;
+    margin: 5%;
+    font-family: 'Roboto Slab', serif;
+}
+
+

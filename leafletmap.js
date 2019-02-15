@@ -173,7 +173,7 @@
 
              });
              markersTemp.addTo(map);
-             map.setView([mapLat / amountData, mapLon / amountData], 13)
+             map.setView([mapLat / amountData, mapLon / amountData], 14);
          })
 
          //Clickable map popups
@@ -191,7 +191,7 @@
          map.on('click', onMapClick);
 
          //Change to humidity
-         document.getElementById("changeSetting").onclick = function () {
+         /*document.getElementById("changeSetting").onclick = function () {
              if (clicked) {
                  markersTemp.addTo(map);
                  clicked = false;
@@ -204,7 +204,7 @@
                  document.getElementById("legendContainer").style.backgroundImage = 'linear-gradient(-90deg, blue, lightblue)';
              }
              document.getElementById("chartCollection").style.visibility = "hidden";
-         }
+         }*/
 
          //Graph popup
          function onCircleClick(obj) {
