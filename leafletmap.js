@@ -188,6 +188,7 @@
                  .setLatLng(e.latlng)
                  .setContent("You clicked the map at " + e.latlng.toString())
                  .openOn(map);
+             document.getElementById("chartCollection").style.visibility = "hidden";
          }
 
          map.on('click', onMapClick);
@@ -225,16 +226,16 @@
                  data.forEach(function (d) {
                      if (d.Deviceid == 10) { /*Nog te veranderen*/
                          if (d.s1 != null) {
-                             document.getElementById("SO2").innerHTML = d.s1 + "ug/m3";
+                             document.getElementById("SO2").innerHTML = d.s1 + " ug/m3";
                          }
                          if (d.s2 != null) {
-                             document.getElementById("NO2").innerHTML = d.s2 + "ug/m3";
+                             document.getElementById("NO2").innerHTML = d.s2 + " ug/m3";
                          }
                          if (d.s3 != null) {
-                             document.getElementById("O3").innerHTML = d.s3 + "ug/m3";
+                             document.getElementById("O3").innerHTML = d.s3 + " ug/m3";
                          }
                          if (d.s4 != null) {
-                             document.getElementById("PM1").innerHTML = d.s4 + "ug/m3";
+                             document.getElementById("PM1").innerHTML = d.s4 + " ug/m3";
                          }
                      }
                  })
