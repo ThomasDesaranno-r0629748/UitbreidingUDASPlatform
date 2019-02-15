@@ -1,195 +1,247 @@
          //make the icons
          //red
          var sensorIconRed = L.icon({
-             iconUrl: 'redsensor.png',
-             iconSize: [60, 40], // size of the icon
+             iconUrl: 'redsensor.png'
+             , shadowUrl: 'images/redRadial.png'
+             , shadowAnchor: [90, 99]
+             , shadowSize: [200, 200]
+             , iconSize: [40, 30], // size of the icon
+             iconAnchor: [30, 20], // point of the icon which will correspond to 
+         });
+         var sensorIconRedSmall = L.icon({
+             iconUrl: 'redsensor.png'
+             , shadowUrl: 'images/redRadial.png'
+             , shadowAnchor: [280, 300]
+             , shadowSize: [600, 600]
+             , iconSize: [40, 30], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to 
          });
          //red
          var sensorIconyellow = L.icon({
-             iconUrl: 'yellowsensor.png',
-             iconSize: [60, 40], // size of the icon
+             iconUrl: 'yellowsensor.png'
+             , shadowUrl: 'images/yellowRadial.png'
+             , shadowAnchor: [90, 99]
+             , shadowSize: [200, 200]
+             , iconSize: [60, 40], // size of the icon
+             iconAnchor: [30, 20], // point of the icon which will correspond to 
+         });
+         var sensorIconYellowSmall = L.icon({
+             iconUrl: 'yellowsensor.png'
+             , shadowUrl: 'images/yellowRadial.png'
+             , shadowAnchor: [280, 300]
+             , shadowSize: [600, 600]
+             , iconSize: [40, 30], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to 
          });
          var sensorIconorange = L.icon({
-             iconUrl: 'orangesensor.png',
-             iconSize: [60, 40], // size of the icon
+             iconUrl: 'orangesensor.png'
+             , shadowUrl: 'images/orangeRadial.png'
+             , shadowAnchor: [90, 99]
+             , shadowSize: [200, 200]
+             , iconSize: [60, 40], // size of the icon
+             iconAnchor: [30, 20], // point of the icon which will correspond to 
+         });
+         var sensorIconOrangeSmall = L.icon({
+             iconUrl: 'orangesensor.png'
+             , shadowUrl: 'images/orangeRadial.png'
+             , shadowAnchor: [280, 300]
+             , shadowSize: [600, 600]
+             , iconSize: [40, 30], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to 
          });
          var sensorIconblue = L.icon({
-             iconUrl: 'bluesensor.png',
-             iconSize: [60, 40], // size of the icon
+             iconUrl: 'bluesensor.png'
+             , iconSize: [60, 40], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to 
          });
          var sensorIcongreenyellow = L.icon({
-             iconUrl: 'greenyellowsensor.png',
-             iconSize: [60, 40], // size of the icon
+             iconUrl: 'greenyellowsensor.png'
+             , iconSize: [60, 40], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to
          });
          var sensorIconlightgreen = L.icon({
-             iconUrl: 'lightgreensensor.png',
-             iconSize: [60, 40], // size of the icon
+             iconUrl: 'lightgreensensor.png'
+             , shadowUrl: 'images/greenRadial.png'
+             , shadowAnchor: [90, 99]
+             , shadowSize: [200, 200]
+             , iconSize: [60, 40], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to
          });
+         var sensorIconGreenSmall = L.icon({
+             iconUrl: 'lightgreensensor.png'
+             , shadowUrl: 'images/greenRadial.png'
+             , shadowAnchor: [280, 300]
+             , shadowSize: [600, 600]
+             , iconSize: [40, 30], // size of the icon
+             iconAnchor: [30, 20], // point of the icon which will correspond to 
+         });
          var sensorIconlightblue = L.icon({
-             iconUrl: 'lightbluesensor.png',
-             iconSize: [60, 40], // size of the icon
+             iconUrl: 'lightbluesensor.png'
+             , iconSize: [60, 40], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to
          });
          // initialize the map
          var map = L.map('map');
-
          // load a tile layer
          mapLink = '<a href="http://www.esri.com/">Esri</a>';
          wholink = 'i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
          var Satelite = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-             attribution: '&copy; ' + mapLink + ', ' + wholink,
-             maxZoom: 19,
-         })
-
+             attribution: '&copy; ' + mapLink + ', ' + wholink
+             , maxZoom: 19
+         , })
          var Wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
-             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
-             minZoom: 1,
-             maxZoom: 19
+             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>'
+             , minZoom: 1
+             , maxZoom: 19
          }).addTo(map);
-
          var OWM_API_KEY = '3361df6687a5458ad0f9e3556c666018';
-
          var clouds = L.OWM.clouds({
-             opacity: 0.8,
-             legendImagePath: '/NT2.png',
-             appId: OWM_API_KEY
+             opacity: 0.8
+             , legendImagePath: '/NT2.png'
+             , appId: OWM_API_KEY
          });
          var cloudscls = L.OWM.cloudsClassic({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var precipitation = L.OWM.precipitation({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var precipitationcls = L.OWM.precipitationClassic({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var rain = L.OWM.rain({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var raincls = L.OWM.rainClassic({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var snow = L.OWM.snow({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var pressure = L.OWM.pressure({
-             opacity: 0.4,
-             appId: OWM_API_KEY
+             opacity: 0.4
+             , appId: OWM_API_KEY
          });
          var pressurecntr = L.OWM.pressureContour({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var temp = L.OWM.temperature({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var wind = L.OWM.wind({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
-
          var baseMaps = {
-             "Streets": Wikimedia,
-             "Satelite": Satelite
+             "Streets": Wikimedia
+             , "Satelite": Satelite
          };
-
          var overlayMaps = {
-             "Clouds": clouds,
-             "Clouds classic": cloudscls,
-             "Precipitation": precipitation,
-             "Precipitation classic": precipitationcls,
-             "Rain": rain,
-             "Rain Classic": raincls,
-             "Snow": snow,
-             "Pressure": pressure,
-             "Pressure contour": pressurecntr,
-             "Temperature": temp,
-             "Wind": wind
+             "Clouds": clouds
+             , "Clouds classic": cloudscls
+             , "Precipitation": precipitation
+             , "Precipitation classic": precipitationcls
+             , "Rain": rain
+             , "Rain Classic": raincls
+             , "Snow": snow
+             , "Pressure": pressure
+             , "Pressure contour": pressurecntr
+             , "Temperature": temp
+             , "Wind": wind
          };
-
          L.control.layers(baseMaps, overlayMaps).addTo(map);
-
          //Pick icon
          function colorPick(temperature) {
              if (temperature >= 0 && temperature < 50) return sensorIconlightgreen;
              if (temperature >= 50 && temperature < 100) return sensorIconyellow;
-             if (temperature >= 101 && temperature < 200) return sensorIconorange;
+             if (temperature >= 10 && temperature < 200) return sensorIconorange;
              if (temperature >= 200) return sensorIconRed;
          }
 
+         function colorPickSmall(temperature) {
+             if (temperature >= 0 && temperature < 50) return sensorIconGreenSmall;
+             if (temperature >= 50 && temperature < 100) return sensorIconYellowSmall;
+             if (temperature >= 10 && temperature < 200) return sensorIconOrangeSmall;
+             if (temperature >= 200) return sensorIconRedSmall;
+         }
          //Temperature clustergroup
          var markersTemp = L.layerGroup();
          var markerHumidity = L.layerGroup();
+         var markerRadial = L.layerGroup();
          var clicked = false;
-
          //Add data to map and set view
          d3.json("SensorLocaties.json", function (data) {
-             var mapLat = 0;
-             var mapLon = 0;
-             var amountData = 0;
-             data.forEach(function (d) {
-                 d.lat = +d.lat;
-                 d.lon = +d.lon;
-                 console.log(d.lat);
-                 console.log(d.lon);
-
-                 mapLat = mapLat + d.lat;
-                 mapLon = mapLon + d.lon;
-                 amountData++;
-                 var sensor = L.marker([d.lat, d.lon], {
-                     icon: colorPick(20)
+                 var mapLat = 0;
+                 var mapLon = 0;
+                 var amountData = 0;
+                 data.forEach(function (d) {
+                     d.lat = +d.lat;
+                     d.lon = +d.lon;
+                     console.log(d.lat);
+                     console.log(d.lon);
+                     mapLat = mapLat + d.lat;
+                     mapLon = mapLon + d.lon;
+                     amountData++;
+                     var sensor = L.marker([d.lat, d.lon], {
+                         icon: colorPick(20)
+                     });
+                     /*var circle = L.circle([d.lat, d.lon], {
+                         color: colorPick(d.temperature),
+                         fillColor: "red",
+                         fillOpacity: 0.8,
+                         radius: 220,
+                         stroke: false,
+                         style: {
+                             opacity: 0.1,
+                             fill: 'blue'
+                         }
+                     });
+                     circle.addTo(map);*/
+                     sensor.bindPopup("Locatie: " + d.naam);
+                     sensor.on('click', onCircleClick, d);
+                     markersTemp.addLayer(sensor);
                  });
-
-                 sensor.addTo(map);
-                 /*var circle = L.circle([d.lat, d.lon], {
-                     color: colorPick(d.temperature),
-                     fillColor: "red",
-                     fillOpacity: 0.8,
-                     radius: 220,
-                     stroke: false,
-                     style: {
-                         opacity: 0.1,
-                         fill: 'blue'
-                     }
+                 markerRadial.addTo(map);
+                 markersTemp.addTo(map);
+                 map.setView([mapLat / amountData, mapLon / amountData], 14);
+             })
+         
+         
+             //Adjust icon size on zoom
+         function adjustIcon(icon) {
+             var currenZoom = map.getZoom();
+             console.log(currenZoom);
+             if (currenZoom >= 16) {
+                 markersTemp.eachLayer(function (d) {
+                     d.setIcon(colorPickSmall(20));
                  });
-                 circle.addTo(map);*/
+             }
+             if (currenZoom < 16) {
+                 markersTemp.eachLayer(function (d) {
+                     d.setIcon(colorPick(20));
+                 });
+             }
+         }
+         map.on('zoomend', adjustIcon);
 
-                 sensor.bindPopup("Locatie: " + d.naam);
-                 sensor.on('click', onCircleClick, d);
-                 markersTemp.addLayer(sensor);
-
-             });
-             markersTemp.addTo(map);
-             map.setView([mapLat / amountData, mapLon / amountData], 14);
-         })
 
          //Clickable map popups
          var popup = L.po
          var popup = L.popup();
 
          function onMapClick(e) {
-             popup
-                 .setLatLng(e.latlng)
-                 .setContent("You clicked the map at " + e.latlng.toString())
-                 .openOn(map);
+             popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString()).openOn(map);
              document.getElementById("chartCollection").style.visibility = "hidden";
          }
-
          map.on('click', onMapClick);
-
          //Change to humidity
          /*document.getElementById("changeSetting").onclick = function () {
              if (clicked) {
@@ -205,7 +257,6 @@
              }
              document.getElementById("chartCollection").style.visibility = "hidden";
          }*/
-
          //Graph popup
          function onCircleClick(obj) {
              document.getElementById("chartCollection").style.visibility = "visible";
@@ -238,10 +289,7 @@
                  })
              })
          }
-
          //Close chart collection
          document.getElementById("closeChartCollection").onclick = function () {
              document.getElementById("chartCollection").style.visibility = "hidden";
-
-
          }
