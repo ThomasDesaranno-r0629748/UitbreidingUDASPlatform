@@ -261,7 +261,7 @@
          function onCircleClick(obj) {
              document.getElementById("chartCollection").style.visibility = "visible";
              var id;
-             d3.json("lastMesuraments.json", function (data) {
+             d3.json("LaatsteMetingen.json", function (data) {
                  data.forEach(function (d) {
                      if (d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng) {
                          document.getElementById("sensorName").innerHTML = d.id;
