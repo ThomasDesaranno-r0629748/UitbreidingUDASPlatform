@@ -80,6 +80,23 @@
              , iconSize: [60, 40], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to
          });
+
+/*var sensorIconlightgreen = L.icon({
+             iconUrl: 'images/circleGreen.png'
+             , shadowUrl: 'images/greenRadial.png'
+             , shadowAnchor: [90, 99]
+             , shadowSize: [200, 200]
+             , iconSize: [30, 30], // size of the icon
+             iconAnchor: [15, 15], // point of the icon which will correspond to
+         });
+         var sensorIconGreenSmall = L.icon({
+             iconUrl: 'images/circleGreen.png'
+             , shadowUrl: 'images/greenRadial.png'
+             , shadowAnchor: [280, 300]
+             , shadowSize: [600, 600]
+             , iconSize: [40, 40], // size of the icon
+             iconAnchor: [20, 20], // point of the icon which will correspond to 
+         });*/
          // initialize the map
          var map = L.map('map');
          // load a tile layer
@@ -194,19 +211,19 @@
                          icon: colorPick(20)
                      });
                      /*var circle = L.circle([d.lat, d.lon], {
-                         color: colorPick(d.temperature),
-                         fillColor: "red",
+                         color: 'green',
+                         fillColor: "green",
                          fillOpacity: 0.8,
-                         radius: 220,
-                         stroke: false,
-                         style: {
-                             opacity: 0.1,
-                             fill: 'blue'
-                         }
-                     });
-                     circle.addTo(map);*/
+                         radius: 20,
+                         stroke: true,
+                         className: "test"
+                     });*/
+                     
                      sensor.bindPopup("Locatie: " + d.naam);
                      sensor.on('click', onCircleClick, d);
+                     /*circle.bindPopup("Locatie: " + d.naam);
+                     circle.on('click', onCircleClick, d);
+                    markersTemp.addLayer(circle);*/
                      markersTemp.addLayer(sensor);
                  });
                  markerRadial.addTo(map);
@@ -216,19 +233,22 @@
          
          
              //Adjust icon size on zoom
-         function adjustIcon(icon) {
-             var currenZoom = map.getZoom();
-             console.log(currenZoom);
-             if (currenZoom >= 16) {
+         
+         function adjustIcon() {
+             var currentZoom = map.getZoom();
+             console.log(currentZoom);
+             if (currentZoom >= 16) {
                  markersTemp.eachLayer(function (d) {
                      d.setIcon(colorPickSmall(20));
                  });
              }
-             if (currenZoom < 16) {
+             if (currentZoom < 16) {
                  markersTemp.eachLayer(function (d) {
                      d.setIcon(colorPick(20));
                  });
              }
+            
+            /*myMarker.setRadius(currentZoom);*/
          }
          map.on('zoomend', adjustIcon);
 
@@ -263,10 +283,10 @@
              var id;
              d3.json("LaatsteMetingen.json", function (data) {
                  data.forEach(function (d) {
+                     console.log(d);
                      if (d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng) {
                          document.getElementById("sensorName").innerHTML = d.id;
                          id = d.id;
-                         console.log(id);
                      }
                  })
              });
