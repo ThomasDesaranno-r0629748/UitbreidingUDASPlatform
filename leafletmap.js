@@ -3,7 +3,7 @@
          var sensorIconRed = L.icon({
              iconUrl: 'redsensor.png'
              , shadowUrl: 'images/redRadial.png'
-             , shadowAnchor: [90, 99]
+             , shadowAnchor: [100, 100]
              , shadowSize: [200, 200]
              , iconSize: [40, 30], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to 
@@ -11,7 +11,7 @@
          var sensorIconRedSmall = L.icon({
              iconUrl: 'redsensor.png'
              , shadowUrl: 'images/redRadial.png'
-             , shadowAnchor: [280, 300]
+             , shadowAnchor: [300, 300]
              , shadowSize: [600, 600]
              , iconSize: [40, 30], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to 
@@ -20,7 +20,7 @@
          var sensorIconyellow = L.icon({
              iconUrl: 'yellowsensor.png'
              , shadowUrl: 'images/yellowRadial.png'
-             , shadowAnchor: [90, 99]
+             , shadowAnchor: [100, 100]
              , shadowSize: [200, 200]
              , iconSize: [60, 40], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to 
@@ -28,7 +28,7 @@
          var sensorIconYellowSmall = L.icon({
              iconUrl: 'yellowsensor.png'
              , shadowUrl: 'images/yellowRadial.png'
-             , shadowAnchor: [280, 300]
+             , shadowAnchor: [300, 300]
              , shadowSize: [600, 600]
              , iconSize: [40, 30], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to 
@@ -36,7 +36,7 @@
          var sensorIconorange = L.icon({
              iconUrl: 'orangesensor.png'
              , shadowUrl: 'images/orangeRadial.png'
-             , shadowAnchor: [90, 99]
+             , shadowAnchor: [100, 100]
              , shadowSize: [200, 200]
              , iconSize: [60, 40], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to 
@@ -44,7 +44,7 @@
          var sensorIconOrangeSmall = L.icon({
              iconUrl: 'orangesensor.png'
              , shadowUrl: 'images/orangeRadial.png'
-             , shadowAnchor: [280, 300]
+             , shadowAnchor: [300, 300]
              , shadowSize: [600, 600]
              , iconSize: [40, 30], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to 
@@ -62,7 +62,7 @@
          var sensorIconlightgreen = L.icon({
              iconUrl: 'lightgreensensor.png'
              , shadowUrl: 'images/greenRadial.png'
-             , shadowAnchor: [90, 99]
+             , shadowAnchor: [100, 100]
              , shadowSize: [200, 200]
              , iconSize: [60, 40], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to
@@ -70,7 +70,7 @@
          var sensorIconGreenSmall = L.icon({
              iconUrl: 'lightgreensensor.png'
              , shadowUrl: 'images/greenRadial.png'
-             , shadowAnchor: [280, 300]
+             , shadowAnchor: [300, 300]
              , shadowSize: [600, 600]
              , iconSize: [40, 30], // size of the icon
              iconAnchor: [30, 20], // point of the icon which will correspond to 
@@ -97,6 +97,10 @@
              , iconSize: [40, 40], // size of the icon
              iconAnchor: [20, 20], // point of the icon which will correspond to 
          });*/
+
+
+
+
          // initialize the map
          var map = L.map('map');
          // load a tile layer
@@ -182,8 +186,63 @@
              if (temperature >= 10 && temperature < 200) return sensorIconorange;
              if (temperature >= 200) return sensorIconRed;
          }
+        
 
-         function colorPickSmall(temperature) {
+        //Pick right icon
+         function iconPicker(temperature, zoom) {
+             var iconSize = zoom + 10;
+             var shadowSize = Math.pow((zoom * 10),zoom/15);
+             console.log(shadowSize);
+             if (temperature >= 0 && temperature < 50) {
+                 var icon = L.icon({
+                     iconUrl: 'lightgreensensor.png',
+                     shadowUrl: 'images/greenRadial.png',
+                     shadowAnchor: [shadowSize/2, shadowSize/2],
+                     shadowSize: [shadowSize,shadowSize],
+                     iconSize: [iconSize*1.2, iconSize], // size of the icon
+                     iconAnchor: [iconSize/2, iconSize/2], // point of the icon which will correspond to 
+                 });
+                 return icon;
+             }
+             if (temperature >= 50 && temperature < 100) {
+                 var icon = L.icon({
+                     iconUrl: 'yellowsensor.png',
+                     shadowUrl: 'images/yellowRadial.png',
+                     shadowAnchor: [shadowSize/2, shadowSize/2],
+                     shadowSize: [shadowSize,shadowSize],
+                     iconSize: [iconSize*1.2, iconSize], // size of the icon
+                     iconAnchor: [iconSize/2, iconSize/2], // point of the icon which will correspond to 
+                 });
+                 return icon;
+             } 
+             if (temperature >= 10 && temperature < 200){
+                 var icon = L.icon({
+                     iconUrl: 'orangesensor.png',
+                     shadowUrl: 'images/orangeRadial.png',
+                     shadowAnchor: [shadowSize/2, shadowSize/2],
+                     shadowSize: [shadowSize,shadowSize],
+                     iconSize: [iconSize*1.2, iconSize], // size of the icon
+                     iconAnchor: [iconSize/2, iconSize/2], // point of the icon which will correspond to 
+                 });
+                 return icon;
+             }
+             if (temperature >= 200) {
+                 var icon = L.icon({
+                     iconUrl: 'redsensor.png',
+                     shadowUrl: 'images/redRadial.png',
+                     shadowAnchor: [shadowSize/2, shadowSize/2],
+                     shadowSize: [shadowSize,shadowSize],
+                     iconSize: [iconSize*1.2, iconSize], // size of the icon
+                     iconAnchor: [iconSize/2, iconSize/2], // point of the icon which will correspond to 
+                 });
+                 return icon;
+             }
+         }
+
+
+
+
+function colorPickSmall(temperature) {
              if (temperature >= 0 && temperature < 50) return sensorIconGreenSmall;
              if (temperature >= 50 && temperature < 100) return sensorIconYellowSmall;
              if (temperature >= 10 && temperature < 200) return sensorIconOrangeSmall;
@@ -237,7 +296,7 @@
          function adjustIcon() {
              var currentZoom = map.getZoom();
              console.log(currentZoom);
-             if (currentZoom >= 16) {
+             /*if (currentZoom >= 16) {
                  markersTemp.eachLayer(function (d) {
                      d.setIcon(colorPickSmall(20));
                  });
@@ -246,8 +305,10 @@
                  markersTemp.eachLayer(function (d) {
                      d.setIcon(colorPick(20));
                  });
-             }
-            
+             }*/
+            markersTemp.eachLayer(function(d){
+                d.setIcon(iconPicker(20, currentZoom));
+            });
             /*myMarker.setRadius(currentZoom);*/
          }
          map.on('zoomend', adjustIcon);

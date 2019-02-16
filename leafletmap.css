@@ -71,8 +71,8 @@ body{
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 5%;
-    right: 3%;
+    bottom:30px;
+    right: 20px;
     visibility: hidden;
 }
 
@@ -102,7 +102,7 @@ body{
     justify-content: center;
     width: 95%;
     height: 30px;
-    padding-bottom: 2%;
+    padding-bottom: 20px;
     border-bottom: 1px solid #dedede;
 }
 #sensorInfo p{
