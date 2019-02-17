@@ -285,9 +285,24 @@ body{
     background-color: white;
     height: 35px;
     border-radius: 5px;
-    border: 1.5px solid #eee;
+    border: 1.2px solid #dedede;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
+}
+
+.topTitles {
+    color: #656565;
+    padding: 0% 0% 0% 5%;
+}
+
+.topDetails {
+    padding: 0% 5%;
+    color: #3e3e3e;
+    border-right: 1px solid #b9b9b9;
+}
+
+#locationCity {
+    border: 0px;
 }
