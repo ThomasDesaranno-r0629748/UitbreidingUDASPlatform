@@ -191,7 +191,7 @@
          //Pick right icon
          function iconPicker(temperature, zoom) {
              var iconSize = zoom + 10;
-             var shadowSize = Math.pow((zoom * 10), zoom/(30-(zoom-zoom/7)))+50;
+             var shadowSize = Math.pow((zoom * 10), zoom / (30 - (zoom - zoom / 10))) + 50;
              console.log(shadowSize)
              console.log(zoom);
              if (temperature >= 0 && temperature < 50) {
@@ -320,7 +320,6 @@
          var popup = L.popup();
 
          function onMapClick(e) {
-             popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString()).openOn(map);
              document.getElementById("chartCollection").style.visibility = "hidden";
          }
          map.on('click', onMapClick);
