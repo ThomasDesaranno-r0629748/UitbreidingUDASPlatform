@@ -194,6 +194,14 @@
              var shadowSize = Math.pow((zoom * 10), zoom / (30 - (zoom - zoom / 10))) + 50;
              console.log(shadowSize)
              console.log(zoom);
+             if (temperature == "" || temperature == null || temperature < 0) {
+                 var icon = L.icon({
+                     iconUrl: 'images/blacksensor.png',
+                     iconSize: [iconSize * 1.2, iconSize], // size of the icon
+                     iconAnchor: [iconSize / 2, iconSize / 2], // point of the icon which will correspond to 
+                 });
+                 return icon;
+             }
              if (temperature >= 0 && temperature < 50) {
                  var icon = L.icon({
                      iconUrl: 'lightgreensensor.png',
@@ -270,8 +278,7 @@
                  mapLon = mapLon + d.lon;
                  amountData++;
                  var sensor = L.marker([d.lat, d.lon], {
-                     title: d.naam
-                 }, {
+                     title: d.naam,
                      icon: iconPicker(d.s1, 14)
                  });
                  /*var circle = L.circle([d.lat, d.lon], {
@@ -334,9 +341,9 @@
              var currentZoom = map.getZoom();
              console.log(currentZoom);
              
-             markersTemp.eachLayer(function (d) {
-                 d.setIcon(iconPicker(70, currentZoom));
-             });
+             /*markersTemp.eachLayer(function (d) {
+                 d.setIcon(iconPicker(-1, currentZoom));
+             });*/
              
              d3.json("SensorLocaties.json", function (data) {
                  
