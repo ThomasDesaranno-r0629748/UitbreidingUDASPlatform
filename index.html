@@ -1,59 +1,76 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>D3 World Map</title>
+    <title>AstMapping</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="" />
-    <link rel="stylesheet" href="map.css" />
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link rel="stylesheet" href="leafletmap.css">
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../leaflet-openweathermap.css" />
+    <script src="/leaflet-openweathermap.js"></script>
+
 </head>
 
 <body>
-    <div id="mapid"></div>
-    <script>
-        //        //icon aanmaken
-        //        var greenIcon = L.icon({
-        //    iconUrl: 'smog.jpg',
-        //    //shadowUrl: 'leaf-shadow.png',
-        //
-        //    iconSize:     [38, 95], // size of the icon
-        //    //shadowSize:   [50, 64], // size of the shadow
-        //    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-        //    //shadowAnchor: [4, 62],  // the same for the shadow
-        //    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-        //});
-        //map aanmaken
-        function colorPick(temperature) {
-            if (temperature < -10) return 'blue';
-            if (temperature >= -10 && temperature < 0) return 'lightblue';
-            if (temperature >= 0 && temperature < 10) return 'lightgreen';
-            if (temperature >= 10 && temperature < 12) return 'green';
-            if (temperature >= 12 && temperature < 15) return 'yellow';
-            if (temperature >= 15 && temperature < 20) return 'orange';
-            if (temperature > 20) return 'red';
-        }
-        d3.json("lastMesuraments.json", function (data) {
-                    var height = 400;
-                    var width = 600;
-                    var max
-                    data.forEach(function (d) {
-                        console.log(d.id);
-                        d.lat = +d.lat;
-                        d.lon = +d.lon;
-                        console.log(d.lat);
-                        console.log(d.lon);
-                        //L.marker([d.lat, d.lon], {icon: greenIcon}).addTo(mymap);
-                        var circle = L.circle([d.lat, d.lon], {
-                            color: colorPick(d.temperature)
-                            , fillColor: colorPick(d.temperature)
-                            , fillOpacity: 0.7
-                            , radius: 120
-                            , stroke: false
-                        })
-                    })});
-    </script>
+    <div id="map"></div>
+    <div id="legendCollection">
+        <div id="changeButtons" class="legendItem">
+            <h3>Display on map</h3>
+            <button type="button" id="changeSO2" class="changeType">SO2</button>
+            <button type="button" id="changeNO2" class="changeType">NO2</button>
+            <button type="button" id="changeO3" class="changeType">O3</button>
+            <button type="button" id="changePM1" class="changeType">PM1</button>
+        </div>
+        <div id="legendContainer" class="legendItem">
+            <div id="legendNumbers">
+                <p>Goed</p>
+                <p>Matig</p>
+                <p>VSG</p>
+                <p>Slecht</p>
+            </div>
+        </div>
+    </div>
+    <div id="chartCollection">
+        <button type="button" id="closeChartCollection">x</button>
+        <div id="sensorInfo">
+            <p class="sensorInfo">Sensor id:</p>
+            <p class="sensorInfo" id="sensorName">test</p>
+        </div>
+        <div id="scrollableDetails">
+            <div id="sensorDetails">
+            <div class="sensorDColumn">
+                <div>
+                    <p class="sensorDet">SO2:</p>
+                    <p class="sensorDetNum" id="SO2">test</p>
+                </div>
+                <div>
+                    <p class="sensorDet">NO2:</p>
+                    <p class="sensorDetNum" id="NO2">test</p>
+                </div>
+            </div>
+            <div class="sensorDColumn">
+                <div>
+                    <p class="sensorDet">O3:</p>
+                    <p class="sensorDetNum" id="O3">test</p>
+                </div>
+                <div>
+                    <p class="sensorDet">PM1:</p>
+                    <p class="sensorDetNum" id="PM1">test</p>
+                </div>
+            </div>
+        </div>
+        <div id="charts">
+            <canvas id="tempChart"></canvas>
+            <canvas id="pressureChart"></canvas>
+            <canvas id="O3Chart"></canvas>
+            <canvas id="PM1Chart"></canvas>
+        </div>
+        </div>
+    </div>
 </body>
+<script src="charts.js"></script>
+<script src="leafletmap.js"></script>
 
 </html>
