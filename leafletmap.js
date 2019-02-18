@@ -335,7 +335,7 @@
              console.log(currentZoom);
              
              markersTemp.eachLayer(function (d) {
-                 d.setIcon(iconPicker(200, currentZoom));
+                 d.setIcon(iconPicker(70, currentZoom));
              });
              
              d3.json("SensorLocaties.json", function (data) {
