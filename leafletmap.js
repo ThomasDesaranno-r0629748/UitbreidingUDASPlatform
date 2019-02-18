@@ -267,7 +267,7 @@
                  mapLat = mapLat + d.lat;
                  mapLon = mapLon + d.lon;
                  amountData++;
-                 var sensor = L.marker([d.lat, d.lon], {
+                 var sensor = L.marker([d.lat, d.lon], {title: d.naam}, {
                      icon: iconPicker(20, map.getZoom())
                  });
                  /*var circle = L.circle([d.lat, d.lon], {
@@ -375,3 +375,12 @@
          document.getElementById("closeChartCollection").onclick = function () {
              document.getElementById("chartCollection").style.visibility = "hidden";
          }
+
+         var controlSearch = new L.Control.Search({
+             position: 'topright',
+             layer: markersTemp,
+             initial: false,
+             zoom: 18,
+             marker: false
+         });
+         map.addControl(controlSearch);
