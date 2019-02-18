@@ -373,7 +373,6 @@
                          if (d._latlng.lat == sensord.lat && d._latlng.lng == sensord.lon) {
                              d3.json("LaatsteMetingen.json", function (metingd) {
                                  metingd.forEach(function (meting) {
-                                     console.log("testfezy");
                                      if (sensord.Deviceid == meting.Deviceid && displaystate == "SO2") {
                                          console.log(meting.s1);
                                          d.setIcon(iconPicker(meting.s1, currentZoom));
