@@ -315,6 +315,17 @@
          });
          map.addControl(controlSearch);
 
+        sliderControl = L.control.sliderControl({
+            position: "bottom",
+            layer: markersTemp,
+            range: true
+        });
+
+        //Make sure to add the slider to the map ;-)
+        map.addControl(sliderControl);
+        //And initialize the slider
+        sliderControl.startSlider();
+
 
          var cityname = "stad";
 
