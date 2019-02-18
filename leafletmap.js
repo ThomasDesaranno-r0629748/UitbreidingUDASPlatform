@@ -291,6 +291,15 @@
              map.setView([mapLat / amountData, mapLon / amountData], 14);
          })
 
+         var controlSearch = new L.Control.Search({
+             position: 'topright',
+             layer: markersTemp,
+             initial: false,
+             zoom: 18,
+             marker: false
+         });
+         map.addControl(controlSearch);
+
 
          //Adjust icon size on zoom
 
@@ -375,12 +384,3 @@
          document.getElementById("closeChartCollection").onclick = function () {
              document.getElementById("chartCollection").style.visibility = "hidden";
          }
-
-         var controlSearch = new L.Control.Search({
-             position: 'topright',
-             layer: markersTemp,
-             initial: false,
-             zoom: 18,
-             marker: false
-         });
-         map.addControl(controlSearch);
