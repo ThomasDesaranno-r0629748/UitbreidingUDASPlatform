@@ -312,6 +312,12 @@
          map.addControl(controlSearch);
 
          var cityname = "stad";
+         var slider = document.getElementById("myRange");
+         var output = document.getElementById("demo");
+
+         slider.oninput = function () {
+             output.innerHTML = this.value;
+         }
 
          function getCurrentLocation(latitude, longitude) {
              fetch("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + OWM_API_KEY)
@@ -346,6 +352,9 @@
                  return adjustIcon();
              }
              if ("changePM10" == id) {
+                 return document.getElementById("displayeddust").innerHTML = "PM10";
+             } else {
+                 return document.getElementById("displayeddust").innerHTML = "ERROR - nothing"
                  displaystate = "PM10";
                  document.getElementById("displayeddust").innerHTML = "PM10";
                  return adjustIcon();
@@ -408,7 +417,7 @@
              document.getElementById("chartCollection").style.visibility = "hidden";
          }
          map.on('click', onMapClick);
-         
+
          //Graph popup
          function onCircleClick(obj) {
              document.getElementById("chartCollection").style.visibility = "visible";
@@ -450,4 +459,3 @@
 
              document.getElementById("chartCollection").style.visibility = "hidden";
          }
-
