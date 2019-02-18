@@ -28,10 +28,10 @@
     <div id="map"></div>
     <div id="legendCollection">
         <div id="changeButtons" class="legendItem">
-            <button type="button" id="changeSO2" class="changeType">SO2</button>
-            <button type="button" id="changeNO2" class="changeType">NO2</button>
-            <button type="button" id="changeO3" class="changeType">O3</button>
-            <button type="button" id="changePM1" class="changeType">PM1</button>
+            <button type="button" id="changeSO2" class="changeType" onclick="displayedDust()">SO2</button>
+            <button type="button" id="changeNO2" class="changeType" onclick="displayedDust()">NO2</button>
+            <button type="button" id="changeO3" class="changeType" onclick="displayedDust()">O3</button>
+            <button type="button" id="changePM1" class="changeType" onclick="displayedDust()">PM1</button>
         </div>
         <div id="legendContainer" class="legendItem">
             <div id="legendNumbers">
@@ -81,7 +81,7 @@
     </div>
     <div id="topBar">
         <p class="topTitles">Displayed:</p>
-        <p class="topDetails">Stof</p>
+        <p class="topDetails" id="displayeddust">SO2</p>
         <p class="topTitles" id="loca">Location:</p>
         <p class="topDetails" id="locationCity">Stad</p>
     </div>
