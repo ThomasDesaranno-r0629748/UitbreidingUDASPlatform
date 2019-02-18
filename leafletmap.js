@@ -270,7 +270,7 @@
                  mapLon = mapLon + d.lon;
                  amountData++;
                  var sensor = L.marker([d.lat, d.lon], {title: d.naam}, {
-                     icon: iconPicker(d.s1, 14)};
+                     icon: iconPicker(d.s1, 14)});
                  /*var circle = L.circle([d.lat, d.lon], {
                      color: 'green',
                      fillColor: "green",
