@@ -19,7 +19,6 @@
     <div id="map"></div>
     <div id="legendCollection">
         <div id="changeButtons" class="legendItem">
-            <h3>Display on map</h3>
             <button type="button" id="changeSO2" class="changeType">SO2</button>
             <button type="button" id="changeNO2" class="changeType">NO2</button>
             <button type="button" id="changeO3" class="changeType">O3</button>
@@ -70,6 +69,12 @@
             <canvas id="PM1Chart"></canvas>
         </div>
         </div>
+    </div>
+    <div id="topBar">
+        <p class="topTitles">Displayed:</p>
+        <p class="topDetails">Stof</p>
+        <p class="topTitles" id="loca">Location:</p>
+        <p class="topDetails" id="locationCity">Stad</p>
     </div>
 </body>
 <script src="charts.js"></script>
