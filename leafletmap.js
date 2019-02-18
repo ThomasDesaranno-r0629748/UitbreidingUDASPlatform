@@ -334,16 +334,23 @@
                  });
          }
 
-        function displayedDust(){
-        if("SO2"== document.getElementById("changeSO2").innerHTML){
-            console.log(document.getElementById("changeSO2").innerHTML);
-            return document.getElementById("displayeddust").innerHTML = "SO2";
-        }
-            if("NO2"== document.getElementById("changeNO2").innerHTML){
-                console.log("test2");
-            return document.getElementById("displayeddust").innerHTML = "NO2";
-        }
-        }
+         function displayedDust(id) {
+             if ("changeSO2" == id) {
+                 return document.getElementById("displayeddust").innerHTML = "SO2";
+             }
+             if ("changeNO2" == id) {
+                 return document.getElementById("displayeddust").innerHTML = "NO2";
+             }
+             if ("changeO3" == id) {
+                 return document.getElementById("displayeddust").innerHTML = "O3";
+             }
+             if ("changePM10" == id) {
+                 return document.getElementById("displayeddust").innerHTML = "PM10";
+             }
+             else{
+                return document.getElementById("displayeddust").innerHTML = "ERROR - nothing" 
+             }
+         }
 
 
          //Adjust icon size on zoom
@@ -351,26 +358,26 @@
          function adjustIcon() {
              var currentZoom = map.getZoom();
              console.log(currentZoom);
-             
+
              /*markersTemp.eachLayer(function (d) {
                  d.setIcon(iconPicker(-1, currentZoom));
              });*/
-             
-             d3.json("SensorLocaties.json", function (data) {
-                 
-                 data.forEach(function(sensord){
-                     markersTemp.eachLayer(function (d) {
-                     if (d._latlng.lat == sensord.lat && d._latlng.lng == sensord.lon) {
-                         d3.json("LaatsteMetingen.json", function(metingd){
-                            metingd.forEach(function(meting){
-                                if(sensord.Deviceid == meting.Deviceid){
-                                d.setIcon(iconPicker(meting.s1, currentZoom));
-                            }
-                            })
-                         })
-                     }
 
-                 });
+             d3.json("SensorLocaties.json", function (data) {
+
+                 data.forEach(function (sensord) {
+                     markersTemp.eachLayer(function (d) {
+                         if (d._latlng.lat == sensord.lat && d._latlng.lng == sensord.lon) {
+                             d3.json("LaatsteMetingen.json", function (metingd) {
+                                 metingd.forEach(function (meting) {
+                                     if (sensord.Deviceid == meting.Deviceid) {
+                                         d.setIcon(iconPicker(meting.s1, currentZoom));
+                                     }
+                                 })
+                             })
+                         }
+
+                     });
                  });
              });
          }
@@ -415,9 +422,9 @@
              });
              d3.json("LaatsteMetingen.json", function (data) {
                  document.getElementById("SO2").innerHTML = "NA ug/m3";
-             document.getElementById("NO2").innerHTML = "NA ug/m3";
-            document.getElementById("O3").innerHTML = "NA ug/m3";
-             document.getElementById("PM1").innerHTML = "NA ug/m3";
+                 document.getElementById("NO2").innerHTML = "NA ug/m3";
+                 document.getElementById("O3").innerHTML = "NA ug/m3";
+                 document.getElementById("PM1").innerHTML = "NA ug/m3";
                  data.forEach(function (d) {
                      if (d.Deviceid == id) {
                          /*Nog te veranderen*/
@@ -439,6 +446,6 @@
          }
          //Close chart collection
          document.getElementById("closeChartCollection").onclick = function () {
-           
+
              document.getElementById("chartCollection").style.visibility = "hidden";
          }
