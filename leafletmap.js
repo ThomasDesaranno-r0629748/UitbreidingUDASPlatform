@@ -192,8 +192,6 @@
          function iconPicker(temperature, zoom) {
              var iconSize = zoom + 10;
              var shadowSize = Math.pow((zoom * 10), zoom / (30 - (zoom - zoom / 10))) + 50;
-             console.log(shadowSize)
-             console.log(zoom);
              if (temperature == "" || temperature == null || temperature < 0) {
                  var icon = L.icon({
                      iconUrl: 'images/blacksensor.png',
@@ -272,8 +270,7 @@
              data.forEach(function (d) {
                  d.lat = +d.lat;
                  d.lon = +d.lon;
-                 console.log(d.lat);
-                 console.log(d.lon);
+
                  mapLat = mapLat + d.lat;
                  mapLon = mapLon + d.lon;
                  amountData++;
@@ -301,7 +298,6 @@
              markersTemp.addTo(map);
              longem = mapLon / amountData;
              latgem = mapLat / amountData;
-             console.log(longem + "whiiitn fznip");
              getCurrentLocation(latgem, longem);
              map.setView([mapLat / amountData, mapLon / amountData], 14);
          })
@@ -324,7 +320,6 @@
                      return resp.json()
                  }) // Convert data to json
                  .then(function (data) {
-                     console.log(data);
                      cityname = data.name;
                      document.getElementById("locationCity").innerHTML = cityname;
 
@@ -339,8 +334,7 @@
 
          function adjustIcon() {
              var currentZoom = map.getZoom();
-             console.log(currentZoom);
-             
+
              /*markersTemp.eachLayer(function (d) {
                  d.setIcon(iconPicker(-1, currentZoom));
              });*/
@@ -374,28 +368,13 @@
              document.getElementById("chartCollection").style.visibility = "hidden";
          }
          map.on('click', onMapClick);
-         //Change to humidity
-         /*document.getElementById("changeSetting").onclick = function () {
-             if (clicked) {
-                 markersTemp.addTo(map);
-                 clicked = false;
-                 document.getElementById("changeSetting").innerHTML = "Humidity";
-                 document.getElementById("legendContainer").style.backgroundImage = 'linear-gradient(to right, red,orange,yellow, #ffff53,#00c400, lightgreen,lightblue, blue)';
-             } else {
-                 map.removeLayer(markersTemp);
-                 clicked = true;
-                 document.getElementById("changeSetting").innerHTML = "Temperature";
-                 document.getElementById("legendContainer").style.backgroundImage = 'linear-gradient(-90deg, blue, lightblue)';
-             }
-             document.getElementById("chartCollection").style.visibility = "hidden";
-         }*/
+         
          //Graph popup
          function onCircleClick(obj) {
              document.getElementById("chartCollection").style.visibility = "visible";
              var id;
              d3.json("SensorLocaties.json", function (data) {
                  data.forEach(function (d) {
-                     console.log(d);
                      if (d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng) {
                          document.getElementById("sensorName").innerHTML = d.naam;
                          id = d.Deviceid;
