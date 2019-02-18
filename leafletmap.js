@@ -222,7 +222,7 @@
                  });
                  return icon;
              }
-             if (temperature >= 10 && temperature < 200) {
+             if (temperature >= 100 && temperature < 200) {
                  var icon = L.icon({
                      iconUrl: 'orangesensor.png',
                      shadowUrl: 'images/orangeRadial.png',
@@ -339,22 +339,32 @@
                      // catch any errors
                  });
          }
+        var displaystate = "SO2";
 
          function displayedDust(id) {
              if ("changeSO2" == id) {
-                 return document.getElementById("displayeddust").innerHTML = "SO2";
+                 displaystate = "SO2";
+                 document.getElementById("displayeddust").innerHTML = "SO2";
+                 return adjustIcon();
              }
              if ("changeNO2" == id) {
-                 return document.getElementById("displayeddust").innerHTML = "NO2";
+                 displaystate = "NO2";
+                 document.getElementById("displayeddust").innerHTML = "NO2";
+                 return adjustIcon();
              }
              if ("changeO3" == id) {
-                 return document.getElementById("displayeddust").innerHTML = "O3";
+                 displaystate = "O3";
+                 document.getElementById("displayeddust").innerHTML = "O3";
+                 return adjustIcon();
              }
              if ("changePM10" == id) {
-                 return document.getElementById("displayeddust").innerHTML = "PM10";
+                 displaystate = "PM10";
+                 document.getElementById("displayeddust").innerHTML = "PM10";
+                 return adjustIcon();
              }
              else{
-                return document.getElementById("displayeddust").innerHTML = "ERROR - nothing" 
+                document.getElementById("displayeddust").innerHTML = "ERROR - nothing";
+                return adjustIcon();
              }
          }
 
@@ -375,8 +385,22 @@
                          if (d._latlng.lat == sensord.lat && d._latlng.lng == sensord.lon) {
                              d3.json("LaatsteMetingen.json", function (metingd) {
                                  metingd.forEach(function (meting) {
-                                     if (sensord.Deviceid == meting.Deviceid) {
+                                     console.log("testfezy");
+                                     if (sensord.Deviceid == meting.Deviceid && displaystate == "SO2") {
+                                         console.log(meting.s1);
                                          d.setIcon(iconPicker(meting.s1, currentZoom));
+                                     }
+                                      if (sensord.Deviceid == meting.Deviceid && displaystate == "NO2") {
+                                          console.log(meting.s2);
+                                         d.setIcon(iconPicker(meting.s2, currentZoom));
+                                     }
+                                      if (sensord.Deviceid == meting.Deviceid && displaystate == "O3") {
+                                          console.log(meting.s3);
+                                         d.setIcon(iconPicker(meting.s3, currentZoom));
+                                     }
+                                     if (sensord.Deviceid == meting.Deviceid && displaystate == "PM10") {
+                                         console.log(meting.s4);
+                                         d.setIcon(iconPicker(meting.s4, currentZoom));
                                      }
                                  })
                              })
