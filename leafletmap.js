@@ -222,7 +222,7 @@
                  });
                  return icon;
              }
-             if (temperature >= 10 && temperature < 200) {
+             if (temperature >= 100 && temperature < 200) {
                  var icon = L.icon({
                      iconUrl: 'orangesensor.png',
                      shadowUrl: 'images/orangeRadial.png',
@@ -311,19 +311,13 @@
          });
          map.addControl(controlSearch);
 
-        sliderControl = L.control.sliderControl({
-            position: "bottom",
-            layer: markersTemp,
-            range: true
-        });
-
-        //Make sure to add the slider to the map ;-)
-       // map.addControl(sliderControl);
-        //And initialize the slider
-        //sliderControl.startSlider();
-
-
          var cityname = "stad";
+         var slider = document.getElementById("myRange");
+         var output = document.getElementById("demo");
+
+         slider.oninput = function () {
+             output.innerHTML = this.value;
+         }
 
          function getCurrentLocation(latitude, longitude) {
              fetch("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + OWM_API_KEY)
@@ -339,22 +333,31 @@
                      // catch any errors
                  });
          }
+         var displaystate = "SO2";
 
          function displayedDust(id) {
              if ("changeSO2" == id) {
-                 return document.getElementById("displayeddust").innerHTML = "SO2";
+                 displaystate = "SO2";
+                 document.getElementById("displayeddust").innerHTML = "SO2";
+                 return adjustIcon();
              }
              if ("changeNO2" == id) {
-                 return document.getElementById("displayeddust").innerHTML = "NO2";
+                 displaystate = "NO2";
+                 document.getElementById("displayeddust").innerHTML = "NO2";
+                 return adjustIcon();
              }
              if ("changeO3" == id) {
-                 return document.getElementById("displayeddust").innerHTML = "O3";
+                 displaystate = "O3";
+                 document.getElementById("displayeddust").innerHTML = "O3";
+                 return adjustIcon();
              }
              if ("changePM10" == id) {
-                 return document.getElementById("displayeddust").innerHTML = "PM10";
-             }
-             else{
-                return document.getElementById("displayeddust").innerHTML = "ERROR - nothing" 
+                 displaystate = "PM10";
+                 document.getElementById("displayeddust").innerHTML = "PM10";
+                 return adjustIcon();
+             } else {
+                 document.getElementById("displayeddust").innerHTML = "ERROR - nothing";
+                 return adjustIcon();
              }
          }
 
@@ -375,8 +378,21 @@
                          if (d._latlng.lat == sensord.lat && d._latlng.lng == sensord.lon) {
                              d3.json("LaatsteMetingen.json", function (metingd) {
                                  metingd.forEach(function (meting) {
-                                     if (sensord.Deviceid == meting.Deviceid) {
+                                     if (sensord.Deviceid == meting.Deviceid && displaystate == "SO2") {
+                                         console.log(meting.s1);
                                          d.setIcon(iconPicker(meting.s1, currentZoom));
+                                     }
+                                     if (sensord.Deviceid == meting.Deviceid && displaystate == "NO2") {
+                                         console.log(meting.s2);
+                                         d.setIcon(iconPicker(meting.s2, currentZoom));
+                                     }
+                                     if (sensord.Deviceid == meting.Deviceid && displaystate == "O3") {
+                                         console.log(meting.s3);
+                                         d.setIcon(iconPicker(meting.s3, currentZoom));
+                                     }
+                                     if (sensord.Deviceid == meting.Deviceid && displaystate == "PM10") {
+                                         console.log(meting.s4);
+                                         d.setIcon(iconPicker(meting.s4, currentZoom));
                                      }
                                  })
                              })
@@ -397,7 +413,7 @@
              document.getElementById("chartCollection").style.visibility = "hidden";
          }
          map.on('click', onMapClick);
-         
+
          //Graph popup
          function onCircleClick(obj) {
              document.getElementById("chartCollection").style.visibility = "visible";
@@ -439,4 +455,3 @@
 
              document.getElementById("chartCollection").style.visibility = "hidden";
          }
-
