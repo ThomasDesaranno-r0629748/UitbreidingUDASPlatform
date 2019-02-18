@@ -1,0 +1,6 @@
+- Historiek voor specifieke sensor
+- Traffic Map
+- Locatie en sensordata in json
+- slider onderaan map voor historiek
+- Knoppen topbar
+- Zoekfunctie locaties
