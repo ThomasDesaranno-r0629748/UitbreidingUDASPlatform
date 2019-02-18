@@ -30,7 +30,7 @@ exportJson <- toJSON(LaatsteMetingen[1,], pretty=TRUE)
 write(exportJson, "LaatsteMetingen.json")
 
 
-#Metingen om de 5min
+#Metingen om de 5min voor sensor 10
 MetingenSensor10 <- Metingen[Metingen$date == Sys.Date(),]
 MetingenSensor10 <- Metingen[Metingen$Deviceid == 10,]
 MetingenSensor10$time <- gsub("\\..*","", MetingenSensor10$time) #millieseconden verwijderen

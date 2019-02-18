@@ -21,6 +21,7 @@ lon<-5.344373;
 
 naam<-"Stadspark";
 
+
 GPS_loc2<-cbind(lat,lon,naam)
 
 GPS_loc2<-as.data.frame(GPS_loc2)
@@ -29,5 +30,17 @@ GPS_loc2$lat<-as.numeric(levels(GPS_loc2$lat))[GPS_loc2$lat]
 
 GPS_loc2$lon<-as.numeric(levels(GPS_loc2$lon))[GPS_loc2$lon]
 
+GPS_loc1 <- rbind(GPS_loc1, GPS_loc2)
+
+Deviceid <- 0
+
+Deviceid <- as.data.frame(Deviceid)
+
+GPS_loc1 <- cbind(GPS_loc1, Deviceid)
+
+GPS_loc1[GPS_loc1$naam==naam,]$Deviceid <- 10 
+
 exportJson <- toJSON(GPS_loc1, pretty=TRUE)
 write(exportJson, "SensorLocaties.json")
+
+zoekJson <- cbind(zoekJson, GPS_loc1$lat+GPS_loc1$lon)
