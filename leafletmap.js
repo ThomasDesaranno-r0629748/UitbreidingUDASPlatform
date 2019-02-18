@@ -327,6 +327,17 @@
                  });
          }
 
+        function displayedDust(){
+        if("SO2"== document.getElementById("changeSO2").innerHTML){
+            console.log(document.getElementById("changeSO2").innerHTML);
+            return document.getElementById("displayeddust").innerHTML = "SO2";
+        }
+            if("NO2"== document.getElementById("changeNO2").innerHTML){
+                console.log("test2");
+            return document.getElementById("displayeddust").innerHTML = "NO2";
+        }
+        }
+
 
          //Adjust icon size on zoom
 
