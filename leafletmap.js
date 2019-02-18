@@ -243,18 +243,20 @@
 
 
 
-         function colorPickSmall(temperature) {
+         /*function colorPickSmall(temperature) {
              if (temperature >= 0 && temperature < 50) return sensorIconGreenSmall;
              if (temperature >= 50 && temperature < 100) return sensorIconYellowSmall;
              if (temperature >= 10 && temperature < 200) return sensorIconOrangeSmall;
              if (temperature >= 200) return sensorIconRedSmall;
-         }
+         }*/
          //Temperature clustergroup
          var markersTemp = L.layerGroup();
          var markerHumidity = L.layerGroup();
          var markerRadial = L.layerGroup();
          var clicked = false;
          //Add data to map and set view
+         var longem = 0;
+         var latgem = 0;
          d3.json("SensorLocaties.json", function (data) {
              var mapLat = 0;
              var mapLon = 0;
@@ -268,8 +270,7 @@
                  mapLon = mapLon + d.lon;
                  amountData++;
                  var sensor = L.marker([d.lat, d.lon], {title: d.naam}, {
-                     icon: iconPicker(20, 14)
-                 });
+                     icon: iconPicker(d.s1, 14)};
                  /*var circle = L.circle([d.lat, d.lon], {
                      color: 'green',
                      fillColor: "green",
@@ -288,6 +289,10 @@
              });
              markerRadial.addTo(map);
              markersTemp.addTo(map);
+             longem = mapLon / amountData;
+             latgem = mapLat / amountData;
+             console.log(longem + "whiiitn fznip");
+             getCurrentLocation(latgem, longem);
              map.setView([mapLat / amountData, mapLon / amountData], 14);
          })
 
@@ -301,25 +306,52 @@
          map.addControl(controlSearch);
 
 
+         var cityname = "stad";
+
+         function getCurrentLocation(latitude, longitude) {
+             fetch("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + OWM_API_KEY)
+                 .then(function (resp) {
+                     return resp.json()
+                 }) // Convert data to json
+                 .then(function (data) {
+                     console.log(data);
+                     cityname = data.name;
+                     document.getElementById("locationCity").innerHTML = cityname;
+
+                 })
+                 .catch(function () {
+                     // catch any errors
+                 });
+         }
+
+
          //Adjust icon size on zoom
 
          function adjustIcon() {
              var currentZoom = map.getZoom();
              console.log(currentZoom);
-             /*if (currentZoom >= 16) {
-                 markersTemp.eachLayer(function (d) {
-                     d.setIcon(colorPickSmall(20));
-                 });
-             }
-             if (currentZoom < 16) {
-                 markersTemp.eachLayer(function (d) {
-                     d.setIcon(colorPick(20));
-                 });
-             }*/
+             
              markersTemp.eachLayer(function (d) {
                  d.setIcon(iconPicker(20, currentZoom));
              });
-             /*myMarker.setRadius(currentZoom);*/
+             
+             d3.json("SensorLocaties.json", function (data) {
+                 
+                 data.forEach(function(sensord){
+                     markersTemp.eachLayer(function (d) {
+                     if (d._latlng.lat == sensord.lat && d._latlng.lng == sensord.lon) {
+                         d3.json("LaatsteMetingen.json", function(metingd){
+                            metingd.forEach(function(meting){
+                                if(sensord.Deviceid == meting.Deviceid){
+                                d.setIcon(iconPicker(meting.s1, currentZoom));
+                            }
+                            })
+                         })
+                     }
+
+                 });
+                 });
+             });
          }
          map.on('zoomend', adjustIcon);
 
@@ -351,18 +383,22 @@
          function onCircleClick(obj) {
              document.getElementById("chartCollection").style.visibility = "visible";
              var id;
-             d3.json("LaatsteMetingen.json", function (data) {
+             d3.json("SensorLocaties.json", function (data) {
                  data.forEach(function (d) {
                      console.log(d);
                      if (d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng) {
-                         document.getElementById("sensorName").innerHTML = d.id;
-                         id = d.id;
+                         document.getElementById("sensorName").innerHTML = d.naam;
+                         id = d.Deviceid;
                      }
                  })
              });
              d3.json("LaatsteMetingen.json", function (data) {
+                 document.getElementById("SO2").innerHTML = "NA ug/m3";
+             document.getElementById("NO2").innerHTML = "NA ug/m3";
+            document.getElementById("O3").innerHTML = "NA ug/m3";
+             document.getElementById("PM1").innerHTML = "NA ug/m3";
                  data.forEach(function (d) {
-                     if (d.Deviceid == 10) {
+                     if (d.Deviceid == id) {
                          /*Nog te veranderen*/
                          if (d.s1 != null) {
                              document.getElementById("SO2").innerHTML = d.s1 + " ug/m3";
@@ -382,5 +418,6 @@
          }
          //Close chart collection
          document.getElementById("closeChartCollection").onclick = function () {
+           
              document.getElementById("chartCollection").style.visibility = "hidden";
          }
