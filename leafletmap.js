@@ -318,9 +318,9 @@
         });
 
         //Make sure to add the slider to the map ;-)
-        map.addControl(sliderControl);
+       // map.addControl(sliderControl);
         //And initialize the slider
-        sliderControl.startSlider();
+        //sliderControl.startSlider();
 
 
          var cityname = "stad";
