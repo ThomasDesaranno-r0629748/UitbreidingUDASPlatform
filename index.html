@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../leaflet-openweathermap.css" />
     <script src="/leaflet-openweathermap.js"></script>
-     <link rel="stylesheet" type="text/css" href="../leaflet-search.css" />
+    <link rel="stylesheet" type="text/css" href="../leaflet-search.css" />
     <script src="/leaflet-search.js"></script>
 
 </head>
@@ -19,7 +19,7 @@
     <div id="map"></div>
     <div id="legendCollection">
         <div id="changeButtons" class="legendItem">
-            <button type="button" id="changeSO2" class="changeType" onclick="displayedDust(this.id)" >SO2</button>
+            <button type="button" id="changeSO2" class="changeType" onclick="displayedDust(this.id)">SO2</button>
             <button type="button" id="changeNO2" class="changeType" onclick="displayedDust(this.id)">NO2</button>
             <button type="button" id="changeO3" class="changeType" onclick="displayedDust(this.id)">O3</button>
             <button type="button" id="changePM10" class="changeType" onclick="displayedDust(this.id)">PM10</button>
@@ -34,8 +34,9 @@
         </div>
     </div>
     <div class="slidecontainer">
-  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-</div>
+        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        <p>Time: <span id="demo"></span></p>
+    </div>
     <div id="chartCollection">
         <button type="button" id="closeChartCollection">x</button>
         <div id="sensorInfo">
@@ -44,33 +45,33 @@
         </div>
         <div id="scrollableDetails">
             <div id="sensorDetails">
-            <div class="sensorDColumn">
-                <div>
-                    <p class="sensorDet">SO2:</p>
-                    <p class="sensorDetNum" id="SO2">test</p>
+                <div class="sensorDColumn">
+                    <div>
+                        <p class="sensorDet">SO2:</p>
+                        <p class="sensorDetNum" id="SO2">test</p>
+                    </div>
+                    <div>
+                        <p class="sensorDet">NO2:</p>
+                        <p class="sensorDetNum" id="NO2">test</p>
+                    </div>
                 </div>
-                <div>
-                    <p class="sensorDet">NO2:</p>
-                    <p class="sensorDetNum" id="NO2">test</p>
+                <div class="sensorDColumn">
+                    <div>
+                        <p class="sensorDet">O3:</p>
+                        <p class="sensorDetNum" id="O3">test</p>
+                    </div>
+                    <div>
+                        <p class="sensorDet">PM1:</p>
+                        <p class="sensorDetNum" id="PM1">test</p>
+                    </div>
                 </div>
             </div>
-            <div class="sensorDColumn">
-                <div>
-                    <p class="sensorDet">O3:</p>
-                    <p class="sensorDetNum" id="O3">test</p>
-                </div>
-                <div>
-                    <p class="sensorDet">PM1:</p>
-                    <p class="sensorDetNum" id="PM1">test</p>
-                </div>
+            <div id="charts">
+                <canvas id="tempChart"></canvas>
+                <canvas id="pressureChart"></canvas>
+                <canvas id="O3Chart"></canvas>
+                <canvas id="PM1Chart"></canvas>
             </div>
-        </div>
-        <div id="charts">
-            <canvas id="tempChart"></canvas>
-            <canvas id="pressureChart"></canvas>
-            <canvas id="O3Chart"></canvas>
-            <canvas id="PM1Chart"></canvas>
-        </div>
         </div>
     </div>
     <div id="topBar">
