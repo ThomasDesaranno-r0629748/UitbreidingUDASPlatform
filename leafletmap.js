@@ -255,6 +255,8 @@
          var markerRadial = L.layerGroup();
          var clicked = false;
          //Add data to map and set view
+         var longem = 0;
+         var latgem = 0;
          d3.json("SensorLocaties.json", function (data) {
              var mapLat = 0;
              var mapLon = 0;
@@ -288,8 +290,31 @@
              });
              markerRadial.addTo(map);
              markersTemp.addTo(map);
+             longem = mapLon / amountData;
+             latgem = mapLat / amountData;
+             console.log(longem + "whiiitn fznip");
+             getCurrentLocation(latgem, longem);
              map.setView([mapLat / amountData, mapLon / amountData], 14);
          })
+
+
+         var cityname = "stad";
+
+         function getCurrentLocation(latitude, longitude) {
+             fetch("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + OWM_API_KEY)
+                 .then(function (resp) {
+                     return resp.json()
+                 }) // Convert data to json
+                 .then(function (data) {
+                     console.log(data);
+                     cityname = data.name;
+                     document.getElementById("locationCity").innerHTML = cityname;
+
+                 })
+                 .catch(function () {
+                     // catch any errors
+                 });
+         }
 
 
          //Adjust icon size on zoom
