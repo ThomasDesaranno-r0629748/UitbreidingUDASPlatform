@@ -99,7 +99,7 @@
                   });*/
 
 
-
+         var sliderControl = null;
 
          // initialize the map
          var map = L.map('map');
@@ -301,6 +301,12 @@
              getCurrentLocation(latgem, longem);
              map.setView([mapLat / amountData, mapLon / amountData], 14);
          })
+         var sliderControl = L.control.sliderControl({
+             layer: markersTemp,
+             follow: true,
+             range: true
+         });
+         map.addControl(sliderControl);
 
          var controlSearch = new L.Control.Search({
              position: 'topright',
@@ -312,23 +318,6 @@
          map.addControl(controlSearch);
 
          var cityname = "stad";
-
-         var endDate = new Date();
-
-         var endDateBefore = new Date(endDate - (60 * 60 * 24 * 1000));
-
-         console.log(endDate);
-         console.log(endDateBefore);
-
-
-         var slider = document.getElementById("myRange");
-         slider.setAttribute("max", endDate);
-         slider.setAttribute("min", endDateBefore);
-         var output = document.getElementById("demo");
-
-         slider.oninput = function () {
-             output.innerHTML = this.value;
-         }
 
          function getCurrentLocation(latitude, longitude) {
              fetch("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + OWM_API_KEY)
