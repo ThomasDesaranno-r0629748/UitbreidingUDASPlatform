@@ -464,6 +464,8 @@
          document.getElementById("closeChartCollection").onclick = function () {
 
              document.getElementById("chartCollection").style.visibility = "hidden";
+             document.getElementById("chartHistory").style.visibility = "hidden";
+             document.getElementById("history").style.visibility = "hidden";
          }
          //Open history
          document.getElementById("history").onclick = function () {
