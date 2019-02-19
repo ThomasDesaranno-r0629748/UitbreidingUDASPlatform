@@ -426,6 +426,7 @@
          //Graph popup
          function onCircleClick(obj) {
              document.getElementById("chartCollection").style.visibility = "visible";
+             document.getElementById("history").style.visibility = "visible";
              var id;
              d3.json("SensorLocaties.json", function (data) {
                  data.forEach(function (d) {
@@ -463,4 +464,9 @@
          document.getElementById("closeChartCollection").onclick = function () {
 
              document.getElementById("chartCollection").style.visibility = "hidden";
+         }
+         //Open history
+         document.getElementById("history").onclick = function () {
+
+             document.getElementById("history").style.visibility = "hidden";
          }
