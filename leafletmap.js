@@ -99,7 +99,7 @@
                   });*/
 
 
-
+         var sliderControl = null;
 
          // initialize the map
          var map = L.map('map');
@@ -302,6 +302,22 @@
              map.setView([mapLat / amountData, mapLon / amountData], 14);
          })
 
+    $.getJSON("points.json", function(json) {
+        var testlayer = L.geoJson(json),
+            sliderControl = L.control.sliderControl({
+                position: "bottomright",
+                layer: testlayer
+            });
+        
+         var sliderControl = L.control.sliderControl({
+             layer: testlayer,
+             follow: true,
+             range: true
+         });
+         map.addControl(sliderControl);
+        sliderControl.startSlider();
+    })
+
          var controlSearch = new L.Control.Search({
              position: 'topright',
              layer: markersTemp,
@@ -312,23 +328,6 @@
          map.addControl(controlSearch);
 
          var cityname = "stad";
-
-         var endDate = new Date();
-
-         var endDateBefore = new Date(endDate - (60 * 60 * 24 * 1000));
-
-         console.log(endDate);
-         console.log(endDateBefore);
-
-
-         var slider = document.getElementById("myRange");
-         slider.setAttribute("max", endDate);
-         slider.setAttribute("min", endDateBefore);
-         var output = document.getElementById("demo");
-
-         slider.oninput = function () {
-             output.innerHTML = this.value;
-         }
 
          function getCurrentLocation(latitude, longitude) {
              fetch("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + OWM_API_KEY)
@@ -425,6 +424,7 @@
          //Graph popup
          function onCircleClick(obj) {
              document.getElementById("chartCollection").style.visibility = "visible";
+             document.getElementById("history").style.visibility = "visible";
              var id;
              d3.json("SensorLocaties.json", function (data) {
                  data.forEach(function (d) {
@@ -476,4 +476,20 @@
          document.getElementById("closeChartCollection").onclick = function () {
 
              document.getElementById("chartCollection").style.visibility = "hidden";
+             document.getElementById("chartHistory").style.visibility = "hidden";
+             document.getElementById("history").style.visibility = "hidden";
+         }
+         //Open history
+         document.getElementById("history").onclick = function () {
+
+
+             document.getElementById("chartHistory").style.visibility = "visible";
+             document.getElementById("history").style.visibility = "hidden";
+         }
+
+         //close history
+         document.getElementById("closeChartHistory").onclick = function () {
+
+             document.getElementById("chartHistory").style.visibility = "hidden";
+             document.getElementById("history").style.visibility = "visible";
          }

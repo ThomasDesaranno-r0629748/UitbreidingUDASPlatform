@@ -13,6 +13,11 @@
     <link rel="stylesheet" type="text/css" href="../leaflet-search.css" />
     <script src="/leaflet-search.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" type="text/css">
+     <script src="SliderControl.js"></script>
+    <script src="leaflet.SliderControl.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
 </head>
 
@@ -34,14 +39,11 @@
             </div>
         </div>
     </div>
-    <div class="slidecontainer">
-        <input type="range" class="slider" id="myRange">
-        <p>Time: <span id="demo"></span></p>
-    </div>
     <div id="chartCollection">
+        <input id="history" type="button" value="<">
         <button type="button" id="closeChartCollection">x</button>
         <div id="sensorInfo">
-            <p class="sensorInfo">Sensor id:</p>
+            <p class="sensorInfo">Sensor Place:</p>
             <p class="sensorInfo" id="sensorName">test</p>
         </div>
         <div id="scrollableDetails">
@@ -72,6 +74,43 @@
                 <canvas id="pressureChart"></canvas>
                 <canvas id="O3Chart"></canvas>
                 <canvas id="PM1Chart"></canvas>
+            </div>
+        </div>
+        <div id="chartHistory">
+            <button type="button" id="closeChartHistory">x</button>
+            <div id="sensorInfo">
+                <p class="sensorInfo">History</p>
+                <p class="sensorInfo" id="sensorName">test</p>
+            </div>
+            <div id="scrollableDetails">
+                <div id="sensorDetails">
+                    <div class="sensorDColumn">
+                        <div>
+                            <p class="sensorDet">SO2:</p>
+                            <p class="sensorDetNum" id="SO2">test</p>
+                        </div>
+                        <div>
+                            <p class="sensorDet">NO2:</p>
+                            <p class="sensorDetNum" id="NO2">test</p>
+                        </div>
+                    </div>
+                    <div class="sensorDColumn">
+                        <div>
+                            <p class="sensorDet">O3:</p>
+                            <p class="sensorDetNum" id="O3">test</p>
+                        </div>
+                        <div>
+                            <p class="sensorDet">PM1:</p>
+                            <p class="sensorDetNum" id="PM1">test</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="charts">
+                    <canvas id="tempChart"></canvas>
+                    <canvas id="pressureChart"></canvas>
+                    <canvas id="O3Chart"></canvas>
+                    <canvas id="PM1Chart"></canvas>
+                </div>
             </div>
         </div>
     </div>

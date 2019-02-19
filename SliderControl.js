@@ -1,6 +1,6 @@
 L.Control.SliderControl = L.Control.extend({
     options: {
-        position: 'topright',
+        position: 'bottomright',
         layers: null,
         timeAttribute: 'time',
         isEpoch: false,     // whether the time attribute is seconds elapsed from epoch
