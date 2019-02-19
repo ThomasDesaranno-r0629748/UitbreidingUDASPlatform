@@ -301,12 +301,22 @@
              getCurrentLocation(latgem, longem);
              map.setView([mapLat / amountData, mapLon / amountData], 14);
          })
+
+    $.getJSON("points.json", function(json) {
+        var testlayer = L.geoJson(json),
+            sliderControl = L.control.sliderControl({
+                position: "bottomright",
+                layer: testlayer
+            });
+        
          var sliderControl = L.control.sliderControl({
-             layer: markersTemp,
+             layer: testlayer,
              follow: true,
              range: true
          });
          map.addControl(sliderControl);
+        sliderControl.startSlider();
+    })
 
          var controlSearch = new L.Control.Search({
              position: 'topright',
