@@ -468,5 +468,14 @@
          //Open history
          document.getElementById("history").onclick = function () {
 
+
+             document.getElementById("chartHistory").style.visibility = "visible";
              document.getElementById("history").style.visibility = "hidden";
+         }
+
+         //close history
+         document.getElementById("closeChartHistory").onclick = function () {
+
+             document.getElementById("chartHistory").style.visibility = "hidden";
+             document.getElementById("history").style.visibility = "visible";
          }
