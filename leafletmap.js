@@ -313,17 +313,17 @@
 
          var cityname = "stad";
 
-        var endDate = new Date();
+         var endDate = new Date();
 
-        var endDateBefore = new Date(endDate - (60*60*24*1000));
+         var endDateBefore = new Date(endDate - (60 * 60 * 24 * 1000));
 
-        console.log(endDate);
-        console.log(endDateBefore);
-        
-        
+         console.log(endDate);
+         console.log(endDateBefore);
+
+
          var slider = document.getElementById("myRange");
-            slider.setAttribute("max" , endDate);
-            slider.setAttribute("min",endDateBefore);
+         slider.setAttribute("max", endDate);
+         slider.setAttribute("min", endDateBefore);
          var output = document.getElementById("demo");
 
          slider.oninput = function () {
@@ -364,14 +364,8 @@
              }
              if ("changePM10" == id) {
                  return document.getElementById("displayeddust").innerHTML = "PM10";
-             } 
-             else {
-                 return document.getElementById("displayeddust").innerHTML = "ERROR - nothing"
-                 displaystate = "PM10";
-                 document.getElementById("displayeddust").innerHTML = "PM10";
-                 return adjustIcon();
-                 displaystate = "PM10";
-                 document.getElementById("displayeddust").innerHTML = "PM10";
+             } else {
+                 document.getElementById("displayeddust").innerHTML = "ERROR - nothing";
                  return adjustIcon();
              }
          }
