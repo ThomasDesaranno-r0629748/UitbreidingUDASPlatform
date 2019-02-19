@@ -422,7 +422,6 @@
              document.getElementById("chartCollection").style.visibility = "hidden";
          }
          map.on('click', onMapClick);
-
          //Graph popup
          function onCircleClick(obj) {
              document.getElementById("chartCollection").style.visibility = "visible";
@@ -435,29 +434,43 @@
                      }
                  })
              });
-             d3.json("LaatsteMetingen.json", function (data) {
-                 document.getElementById("SO2").innerHTML = "NA ug/m3";
-                 document.getElementById("NO2").innerHTML = "NA ug/m3";
-                 document.getElementById("O3").innerHTML = "NA ug/m3";
-                 document.getElementById("PM1").innerHTML = "NA ug/m3";
-                 data.forEach(function (d) {
-                     if (d.Deviceid == id) {
-                         /*Nog te veranderen*/
-                         if (d.s1 != null) {
-                             document.getElementById("SO2").innerHTML = d.s1 + " ug/m3";
-                         }
-                         if (d.s2 != null) {
-                             document.getElementById("NO2").innerHTML = d.s2 + " ug/m3";
-                         }
-                         if (d.s3 != null) {
-                             document.getElementById("O3").innerHTML = d.s3 + " ug/m3";
-                         }
-                         if (d.s4 != null) {
-                             document.getElementById("PM1").innerHTML = d.s4 + " ug/m3";
-                         }
-                     }
-                 })
-             })
+
+             $.ajax({
+                 url: 'http://localhost:8080/Controller?action=returnLastData',
+                 type: 'GET',
+                 data: {
+                     test: '1'
+                 },
+                 dataType: "jsonp",
+                 headers: "Access-Control-Allow-Origin: http://localhost:8080",
+
+                 success: function (data) {
+                     d3.json(data, function (data) {
+                         document.getElementById("SO2").innerHTML = "NA ug/m3";
+                         document.getElementById("NO2").innerHTML = "NA ug/m3";
+                         document.getElementById("O3").innerHTML = "NA ug/m3";
+                         document.getElementById("PM1").innerHTML = "NA ug/m3";
+                         data.forEach(function (d) {
+                             if (d.deviceId == id) {
+                                 /*Nog te veranderen*/
+                                 if (d.s02 != null) {
+                                     document.getElementById("SO2").innerHTML = d.s02 + " ug/m3";
+                                 }
+                                 if (d.no2 != null) {
+                                     document.getElementById("NO2").innerHTML = d.no2 + " ug/m3";
+                                 }
+                                 if (d.o3 != null) {
+                                     document.getElementById("O3").innerHTML = d.o3 + " ug/m3";
+                                 }
+                                 if (d.pm10 != null) {
+                                     document.getElementById("PM1").innerHTML = d.pm10 + " ug/m3";
+                                 }
+                             }
+                         })
+                     })
+                 }
+             });
+
          }
          //Close chart collection
          document.getElementById("closeChartCollection").onclick = function () {

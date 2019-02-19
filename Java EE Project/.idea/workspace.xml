@@ -17,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="JdbcConnection.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="JdbcConnection.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/db/JdbcConnection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="39" column="43" lean-forward="true" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="62" />
+            <state relative-caret-position="-323">
+              <caret line="78" column="60" selection-start-line="78" selection-start-column="60" selection-end-line="78" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -75,16 +75,16 @@
         <entry file="file://$PROJECT_DIR$/src/controller/returnLastData.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="15" column="53" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+              <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MetingRepository.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MetingRepository.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/db/MetingRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="48" column="16" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="32" />
+            <state relative-caret-position="280">
+              <caret line="38" column="5" selection-start-line="38" selection-start-column="3" selection-end-line="52" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#206#207#0" expanded="true" />
@@ -121,9 +121,9 @@
         <option value="$PROJECT_DIR$/src/controller/RequestHandler.java" />
         <option value="$PROJECT_DIR$/src/controller/returnDataLast24.java" />
         <option value="$PROJECT_DIR$/src/controller/returnDayData.java" />
-        <option value="$PROJECT_DIR$/src/db/JdbcConnection.java" />
-        <option value="$PROJECT_DIR$/src/controller/returnLastData.java" />
         <option value="$PROJECT_DIR$/src/db/MetingRepository.java" />
+        <option value="$PROJECT_DIR$/src/controller/returnLastData.java" />
+        <option value="$PROJECT_DIR$/src/db/JdbcConnection.java" />
       </list>
     </option>
   </component>
@@ -143,8 +143,9 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="952" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
     <option name="width" value="977" />
     <option name="height" value="1038" />
   </component>
@@ -200,7 +201,8 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/WEB-INF/lib/sqljdbc42.jar!/" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/UCLL/Web4" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -408,12 +410,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1550493495952</updated>
-      <workItem from="1550493500553" duration="17731000" />
+      <workItem from="1550493500553" duration="26366000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17731000" />
+    <option name="totallyTimeSpent" value="26366000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -572,16 +574,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/db/JdbcConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="39" column="43" lean-forward="true" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/RequestHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -604,14 +596,14 @@
     <entry file="file://$PROJECT_DIR$/src/controller/returnLastData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="15" column="53" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+          <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/db/MetingRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="48" column="16" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="32" />
+        <state relative-caret-position="280">
+          <caret line="38" column="5" selection-start-line="38" selection-start-column="3" selection-end-line="52" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#206#207#0" expanded="true" />
@@ -624,13 +616,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/JdbcConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-323">
+          <caret line="78" column="60" selection-start-line="78" selection-start-column="60" selection-end-line="78" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited />
+          <last-edited>ServerConnection:war exploded</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

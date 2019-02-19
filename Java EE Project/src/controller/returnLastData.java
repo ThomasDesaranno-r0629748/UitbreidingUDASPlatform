@@ -13,7 +13,7 @@ public class returnLastData extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         connection.updateRepo(this.localRepo);
-        ArrayList data = getLocalRepo().getLastData();
+        ArrayList data = connection.repoLatestData().getAll();
         try{
             String json = toJSON(data);
             response.setContentType("application/json");

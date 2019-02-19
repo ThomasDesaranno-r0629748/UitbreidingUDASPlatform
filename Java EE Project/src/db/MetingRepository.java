@@ -36,7 +36,7 @@ public class MetingRepository {
         return lastData;
     }
 
-    public ArrayList getLastData(){
+   /* public ArrayList getLastData(){
         ArrayList lastData = new ArrayList();
         String timeSeconds = LocalTime.now().toString().split("\\.", 2)[0];
         String time = timeSeconds.substring(0, Math.min(timeSeconds.length(), 5));
@@ -44,11 +44,11 @@ public class MetingRepository {
         for(Meting m:getDayData()){
             String timeSecondsM = m.getTime();
             String timeM = timeSecondsM.substring(0, Math.min(timeSecondsM.length(), 5));
-            System.out.print("NExt " + time + " " + timeM +" ");
+            ArrayList
             if (time.equals(timeM)){
                 lastData.add(m);
             }
         }
         return lastData;
-    }
+    }*/
 }
