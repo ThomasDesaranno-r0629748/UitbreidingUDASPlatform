@@ -373,9 +373,6 @@
                  displaystate = "PM10";
                  document.getElementById("displayeddust").innerHTML = "PM10";
                  return adjustIcon();
-             } else {
-                 document.getElementById("displayeddust").innerHTML = "ERROR - nothing";
-                 return adjustIcon();
              }
          }
 
