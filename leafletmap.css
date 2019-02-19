@@ -72,6 +72,7 @@ body {
     bottom: 30px;
     right: 20px;
     visibility: hidden;
+    border-top-left-radius: 0px;
 }
 
 #chartCollection * {
@@ -102,6 +103,25 @@ body {
     height: 30px;
     padding-bottom: 20px;
     border-bottom: 1px solid #dedede;
+}
+
+#history{
+    margin-left: -9%;
+    margin-top: -4%;
+    margin-bottom: 0%;
+    margin-right: 0%;
+    width: 5%;
+    font-size: 20;
+    line-height: -5000%;
+    text-align: center;
+    height:40px;
+    position: absolute;
+    font-family: cursive;
+    background-color: #fff;
+    justify-content: center;
+    border: 1px solid #dedede;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 #sensorInfo p {
