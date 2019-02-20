@@ -16,6 +16,7 @@ import java.util.List;
 public class Controller extends HttpServlet {
     private MetingRepository model = new MetingRepository();
     private ControllerFactory controllerFactory = new ControllerFactory();
+    private JdbcConnection connection = new JdbcConnection(model);
 
 
 
@@ -42,7 +43,7 @@ public class Controller extends HttpServlet {
         if (action != null) {
             RequestHandler handler;
             try {
-                handler = controllerFactory.getController(action, model);
+                handler = controllerFactory.getController(action, model, connection);
                 destination = handler.handleRequest(request, response);
             }
             catch (Exception exc) {

@@ -380,7 +380,6 @@
              });*/
 
              d3.json("SensorLocaties.json", function (data) {
-
                  data.forEach(function (sensord) {
                      markersTemp.eachLayer(function (d) {
                          if (d._latlng.lat == sensord.lat && d._latlng.lng == sensord.lon) {
