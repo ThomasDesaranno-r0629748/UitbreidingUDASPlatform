@@ -302,21 +302,21 @@
              map.setView([mapLat / amountData, mapLon / amountData], 14);
          })
 
-    $.getJSON("points.json", function(json) {
-        var testlayer = L.geoJson(json),
-            sliderControl = L.control.sliderControl({
-                position: "bottomright",
-                layer: testlayer
-            });
-        
-         var sliderControl = L.control.sliderControl({
-             layer: testlayer,
-             follow: true,
-             range: true
-         });
-         map.addControl(sliderControl);
-        sliderControl.startSlider();
-    })
+         $.getJSON("points.json", function (json) {
+             var testlayer = L.geoJson(json),
+                 sliderControl = L.control.sliderControl({
+                     position: "bottomright",
+                     layer: testlayer
+                 });
+
+             var sliderControl = L.control.sliderControl({
+                 layer: testlayer,
+                 follow: true,
+                 range: true
+             });
+             map.addControl(sliderControl);
+             sliderControl.startSlider();
+         })
 
          var controlSearch = new L.Control.Search({
              position: 'topright',
@@ -492,4 +492,10 @@
 
              document.getElementById("chartHistory").style.visibility = "hidden";
              document.getElementById("history").style.visibility = "visible";
+         }
+
+         // compare sensors
+         function comparePage() {
+             console.log("tget");
+             window.location = 'comparePage.html';
          }

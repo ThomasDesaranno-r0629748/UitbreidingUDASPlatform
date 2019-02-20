@@ -22,11 +22,9 @@
 </head>
 
 <body>
-    <div id="compare">
-    <button id="comparebttn" onclick="comparePage()">Compare sensors</button>
-    </div>
+   <div id="compareMap">
     <div id="map"></div>
-    <div id="legendCollection">
+    <div id="legendCollectioncomp">
         <div id="changeButtons" class="legendItem">
             <button type="button" id="changeSO2" class="changeType" onclick="displayedDust(this.id)">SO2</button>
             <button type="button" id="changeNO2" class="changeType" onclick="displayedDust(this.id)">NO2</button>
@@ -122,6 +120,12 @@
         <p class="topDetails" id="displayeddust">SO2</p>
         <p class="topTitles" id="loca">Location:</p>
         <p class="topDetails" id="locationCity">Stad</p>
+    </div>
+    </div>
+    <div id="comparePart">
+         <div id="topBarcomp">
+        <p class="topTitles">compare the sensors</p>
+    </div>
     </div>
 </body>
 <script src="charts.js"></script>

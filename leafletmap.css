@@ -52,6 +52,18 @@ body {
     width: 220px;
 }
 
+#legendCollectioncomp {
+    position: absolute;
+    bottom: 52%;
+    left: 2%;
+    z-index: 2;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 220px;
+}
+
 .legendItem {
     margin-top: 5px;
 }
@@ -159,6 +171,20 @@ body {
     right: 100%;
     border-top-right-radius: 0px;
     
+}
+
+#compare{
+    position: absolute;
+    z-index: 2;
+    margin-top: 0;
+    display: flex;
+    margin-right: 0;
+    margin-left: 80%;
+    height: 5%;
+    margin-top: 1%;
+}
+#compareMap{
+    height: 50%;
 }
 
 #sensorInfo p {
@@ -331,7 +357,6 @@ body {
 }
 
 
-
 #topBar {
     position: absolute;
     top: 15px;
@@ -347,6 +372,27 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
+}
+
+#topBarcomp {
+    position: absolute;
+    top: 51%;
+    right: 30%;
+    left: 30%;
+    width: 40%;
+    z-index: 2;
+    background-color: white;
+    height: 35px;
+    border-radius: 5px;
+    border: 1.5px solid #eee;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+#comparePart{
+    background: red;
 }
 
 .topTitles {
