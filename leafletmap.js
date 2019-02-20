@@ -380,7 +380,6 @@
              });*/
 
              d3.json("SensorLocaties.json", function (data) {
-
                  data.forEach(function (sensord) {
                      markersTemp.eachLayer(function (d) {
                          if (d._latlng.lat == sensord.lat && d._latlng.lng == sensord.lon) {
@@ -435,9 +434,7 @@
                  })
              });
              setInterval(function () {
-                 console.log("pulling");
                  d3.json("http://localhost:8080/Controller?action=returnLastData", function (data) {
-                     console.log(data);
                      document.getElementById("SO2").innerHTML = "NA ug/m3";
                      document.getElementById("NO2").innerHTML = "NA ug/m3";
                      document.getElementById("O3").innerHTML = "NA ug/m3";

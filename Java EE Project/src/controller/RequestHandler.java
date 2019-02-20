@@ -11,14 +11,15 @@ import java.sql.JDBCType;
 
 public abstract class RequestHandler {
 
-    protected MetingRepository localRepo = new MetingRepository();
+    protected MetingRepository localRepo;
     protected JdbcConnection connection;
 
     public abstract String handleRequest (HttpServletRequest request, HttpServletResponse response) throws IOException;
 
-    public void setModel (MetingRepository personService) {
+    public void setModel (MetingRepository personService, JdbcConnection connection) {
         this.localRepo = personService;
-        connection = new JdbcConnection(localRepo);
+        this.connection = connection;
+        //connection.pullData();
     }
 
     public MetingRepository getLocalRepo() {

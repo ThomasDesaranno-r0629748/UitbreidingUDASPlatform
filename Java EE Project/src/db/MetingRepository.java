@@ -31,6 +31,9 @@ public class MetingRepository {
     public ArrayList getAllLast(){
         return laatsteMetingen;
     }
+    public void setLaatsteMetingen(ArrayList<Meting> laatsteMetingen){
+        this.laatsteMetingen = laatsteMetingen;
+    }
 
     public void emptyLastDataRepo(){
         laatsteMetingen = new ArrayList<>();

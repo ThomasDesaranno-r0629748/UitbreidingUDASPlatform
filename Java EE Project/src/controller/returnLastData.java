@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class returnLastData extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        connection.updateRepo(this.localRepo);
+        //connection.updateRepo(this.localRepo);
         ArrayList<Meting> data = localRepo.getAllLast();
         try{
             String json = toJSON(data);
