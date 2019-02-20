@@ -20,10 +20,9 @@
       <file leaf-file-name="JdbcConnection.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/db/JdbcConnection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1054">
-              <caret line="97" column="38" lean-forward="true" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
+            <state relative-caret-position="187">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="e#1094#1095#0" expanded="true" />
                 <element signature="e#1134#1135#0" expanded="true" />
               </folding>
@@ -423,12 +422,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1550493495952</updated>
-      <workItem from="1550493500553" duration="42257000" />
+      <workItem from="1550493500553" duration="43542000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42257000" />
+    <option name="totallyTimeSpent" value="43542000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -461,10 +460,10 @@
       <window_info id="Image Layers" />
       <window_info anchor="bottom" id="Java Enterprise" weight="0.32905984" />
       <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.36039886" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.36039886" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" weight="0.32905984" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20402685" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20402685" />
       <window_info id="Web" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
       <window_info anchor="right" id="Theme Preview" />
@@ -654,10 +653,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/db/JdbcConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="97" column="38" lean-forward="true" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
+        <state relative-caret-position="187">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="e#1094#1095#0" expanded="true" />
             <element signature="e#1134#1135#0" expanded="true" />
           </folding>

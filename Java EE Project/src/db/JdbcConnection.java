@@ -5,19 +5,11 @@ package db;
         import java.sql.ResultSet;
         import java.sql.SQLException;
         import java.sql.Statement;
-        import java.text.DateFormat;
-        import java.text.SimpleDateFormat;
-        import java.time.LocalDateTime;
         import java.util.ArrayList;
-        import java.util.Date;
-        import java.util.Properties;
         import java.util.concurrent.Executors;
         import java.util.concurrent.ScheduledExecutorService;
         import java.util.concurrent.TimeUnit;
-
-        import com.microsoft.sqlserver.jdbc.SQLServerDriver;
         import domain.Meting;
-        import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 public class JdbcConnection {
     String url = "jdbc:sqlserver://193.190.58.30;user=snuffelpaal;password=snuffelpaal";

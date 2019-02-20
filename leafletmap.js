@@ -1,104 +1,3 @@
-         //make the icons
-         //red
-         var sensorIconRed = L.icon({
-             iconUrl: 'redsensor.png',
-             shadowUrl: 'images/redRadial.png',
-             shadowAnchor: [100, 100],
-             shadowSize: [200, 200],
-             iconSize: [40, 30], // size of the icon
-             iconAnchor: [30, 20], // point of the icon which will correspond to 
-         });
-         var sensorIconRedSmall = L.icon({
-             iconUrl: 'redsensor.png',
-             shadowUrl: 'images/redRadial.png',
-             shadowAnchor: [300, 300],
-             shadowSize: [600, 600],
-             iconSize: [40, 30], // size of the icon
-             iconAnchor: [30, 20], // point of the icon which will correspond to 
-         });
-         //red
-         var sensorIconyellow = L.icon({
-             iconUrl: 'yellowsensor.png',
-             shadowUrl: 'images/yellowRadial.png',
-             shadowAnchor: [100, 100],
-             shadowSize: [200, 200],
-             iconSize: [60, 40], // size of the icon
-             iconAnchor: [30, 20], // point of the icon which will correspond to 
-         });
-         var sensorIconYellowSmall = L.icon({
-             iconUrl: 'yellowsensor.png',
-             shadowUrl: 'images/yellowRadial.png',
-             shadowAnchor: [300, 300],
-             shadowSize: [600, 600],
-             iconSize: [40, 30], // size of the icon
-             iconAnchor: [30, 20], // point of the icon which will correspond to 
-         });
-         var sensorIconorange = L.icon({
-             iconUrl: 'orangesensor.png',
-             shadowUrl: 'images/orangeRadial.png',
-             shadowAnchor: [100, 100],
-             shadowSize: [200, 200],
-             iconSize: [60, 40], // size of the icon
-             iconAnchor: [30, 20], // point of the icon which will correspond to 
-         });
-         var sensorIconOrangeSmall = L.icon({
-             iconUrl: 'orangesensor.png',
-             shadowUrl: 'images/orangeRadial.png',
-             shadowAnchor: [300, 300],
-             shadowSize: [600, 600],
-             iconSize: [40, 30], // size of the icon
-             iconAnchor: [30, 20], // point of the icon which will correspond to 
-         });
-         var sensorIconblue = L.icon({
-             iconUrl: 'bluesensor.png',
-             iconSize: [60, 40], // size of the icon
-             iconAnchor: [30, 20], // point of the icon which will correspond to 
-         });
-         var sensorIcongreenyellow = L.icon({
-             iconUrl: 'greenyellowsensor.png',
-             iconSize: [60, 40], // size of the icon
-             iconAnchor: [30, 20], // point of the icon which will correspond to
-         });
-         var sensorIconlightgreen = L.icon({
-             iconUrl: 'lightgreensensor.png',
-             shadowUrl: 'images/greenRadial.png',
-             shadowAnchor: [100, 100],
-             shadowSize: [200, 200],
-             iconSize: [60, 40], // size of the icon
-             iconAnchor: [30, 20], // point of the icon which will correspond to
-         });
-         var sensorIconGreenSmall = L.icon({
-             iconUrl: 'lightgreensensor.png',
-             shadowUrl: 'images/greenRadial.png',
-             shadowAnchor: [300, 300],
-             shadowSize: [600, 600],
-             iconSize: [40, 30], // size of the icon
-             iconAnchor: [30, 20], // point of the icon which will correspond to 
-         });
-         var sensorIconlightblue = L.icon({
-             iconUrl: 'lightbluesensor.png',
-             iconSize: [60, 40], // size of the icon
-             iconAnchor: [30, 20], // point of the icon which will correspond to
-         });
-
-         /*var sensorIconlightgreen = L.icon({
-                      iconUrl: 'images/circleGreen.png'
-                      , shadowUrl: 'images/greenRadial.png'
-                      , shadowAnchor: [90, 99]
-                      , shadowSize: [200, 200]
-                      , iconSize: [30, 30], // size of the icon
-                      iconAnchor: [15, 15], // point of the icon which will correspond to
-                  });
-                  var sensorIconGreenSmall = L.icon({
-                      iconUrl: 'images/circleGreen.png'
-                      , shadowUrl: 'images/greenRadial.png'
-                      , shadowAnchor: [280, 300]
-                      , shadowSize: [600, 600]
-                      , iconSize: [40, 40], // size of the icon
-                      iconAnchor: [20, 20], // point of the icon which will correspond to 
-                  });*/
-
-
          var sliderControl = null;
 
          // initialize the map
@@ -179,6 +78,12 @@
              "Wind": wind
          };
          L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+         //On document load
+         document.addEventListener("DOMContentLoaded", function () {
+             lastMomentDataPull();
+         });
+
          //Pick icon
          function colorPick(temperature) {
              if (temperature >= 0 && temperature < 50) return sensorIconlightgreen;
@@ -246,15 +151,33 @@
              }
          }
 
+         //Pull data van laatste dag laatset moment
+         function lastMomentDataPull() {
+             d3.json("http://localhost:8080/Controller?action=returnLastData", function (data) {
+                 document.getElementById("SO2").innerHTML = "NA ug/m3";
+                 document.getElementById("NO2").innerHTML = "NA ug/m3";
+                 document.getElementById("O3").innerHTML = "NA ug/m3";
+                 document.getElementById("PM1").innerHTML = "NA ug/m3";
+                 data.forEach(function (d) {
+                     if (d.deviceId == id) {
+                         /*Nog te veranderen*/
+                         if (d.so2 != null) {
+                             document.getElementById("SO2").innerHTML = d.so2 + " ug/m3";
+                         }
+                         if (d.no2 != null) {
+                             document.getElementById("NO2").innerHTML = d.no2 + " ug/m3";
+                         }
+                         if (d.o3 != null) {
+                             document.getElementById("O3").innerHTML = d.o3 + " ug/m3";
+                         }
+                         if (d.pm10 != null) {
+                             document.getElementById("PM1").innerHTML = d.pm10 + " ug/m3";
+                         }
+                     }
+                 })
+             })
+         }
 
-
-
-         /*function colorPickSmall(temperature) {
-             if (temperature >= 0 && temperature < 50) return sensorIconGreenSmall;
-             if (temperature >= 50 && temperature < 100) return sensorIconYellowSmall;
-             if (temperature >= 10 && temperature < 200) return sensorIconOrangeSmall;
-             if (temperature >= 200) return sensorIconRedSmall;
-         }*/
          //Temperature clustergroup
          var markersTemp = L.layerGroup();
          var markerHumidity = L.layerGroup();
@@ -422,10 +345,9 @@
          map.on('click', onMapClick);
          //Graph popup
 
-        var comparegraphs = 0;
+         var comparegraphs = 0;
+
          function onCircleClick(obj) {
-             console.log("click");
-             console.log(compare+"teste")
              if (compare == false) {
                  console.log("clicktest");
                  document.getElementById("chartCollection").style.visibility = "visible";
@@ -441,35 +363,10 @@
                      })
                  });
                  setInterval(function () {
-                     console.log("pulling");
-                     d3.json("http://localhost:8080/Controller?action=returnLastData", function (data) {
-                         console.log(data);
-                         document.getElementById("SO2").innerHTML = "NA ug/m3";
-                         document.getElementById("NO2").innerHTML = "NA ug/m3";
-                         document.getElementById("O3").innerHTML = "NA ug/m3";
-                         document.getElementById("PM1").innerHTML = "NA ug/m3";
-                         data.forEach(function (d) {
-                             if (d.deviceId == id) {
-                                 /*Nog te veranderen*/
-                                 if (d.so2 != null) {
-                                     document.getElementById("SO2").innerHTML = d.so2 + " ug/m3";
-                                 }
-                                 if (d.no2 != null) {
-                                     document.getElementById("NO2").innerHTML = d.no2 + " ug/m3";
-                                 }
-                                 if (d.o3 != null) {
-                                     document.getElementById("O3").innerHTML = d.o3 + " ug/m3";
-                                 }
-                                 if (d.pm10 != null) {
-                                     document.getElementById("PM1").innerHTML = d.pm10 + " ug/m3";
-                                 }
-                             }
-                         })
-                     })
+                     lastMomentDataPull();
                  }, 5 * 1000);
 
-             }
-             else{
+             } else {
                  console.log("comparchats");
                  comparegraphs += 1;
                  console.log(comparegraphs);
@@ -486,34 +383,10 @@
                      })
                  });
                  setInterval(function () {
-                     console.log("pulling");
-                     d3.json("http://localhost:8080/Controller?action=returnLastData", function (data) {
-                         console.log(data);
-                         document.getElementById("SO2").innerHTML = "NA ug/m3";
-                         document.getElementById("NO2").innerHTML = "NA ug/m3";
-                         document.getElementById("O3").innerHTML = "NA ug/m3";
-                         document.getElementById("PM1").innerHTML = "NA ug/m3";
-                         data.forEach(function (d) {
-                             if (d.deviceId == id) {
-                                 /*Nog te veranderen*/
-                                 if (d.so2 != null) {
-                                     document.getElementById("SO2").innerHTML = d.so2 + " ug/m3";
-                                 }
-                                 if (d.no2 != null) {
-                                     document.getElementById("NO2").innerHTML = d.no2 + " ug/m3";
-                                 }
-                                 if (d.o3 != null) {
-                                     document.getElementById("O3").innerHTML = d.o3 + " ug/m3";
-                                 }
-                                 if (d.pm10 != null) {
-                                     document.getElementById("PM1").innerHTML = d.pm10 + " ug/m3";
-                                 }
-                             }
-                         })
-                     })
+                     lastMomentDataPull();
                  }, 5 * 1000);
 
-                 
+
              }
 
          }
@@ -558,5 +431,5 @@
              document.getElementById("compare").style.visibility = "visible";
              document.getElementById("map").style.height = "100%";
              document.getElementById("legendCollection").style.bottom = "5%";
-             comparegraphs =0;
+             comparegraphs = 0;
          }
