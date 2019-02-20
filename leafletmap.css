@@ -52,11 +52,24 @@ body {
     width: 220px;
 }
 
+#legendCollectioncomp {
+    position: absolute;
+    bottom: 52%;
+    left: 2%;
+    z-index: 2;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 220px;
+}
+
 .legendItem {
     margin-top: 5px;
 }
 
 #chartCollection {
+    top: 13%;
     width: 370px;
     height: 80%;
     z-index: 2;
@@ -70,7 +83,7 @@ body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 30px;
+    bottom: 5%;
     right: 20px;
     visibility: hidden;
     border-top-left-radius: 0px;
@@ -159,6 +172,34 @@ body {
     right: 100%;
     border-top-right-radius: 0px;
     
+}
+
+#compare{
+    position: absolute;
+    z-index: 2;
+    margin-top: 0;
+    display: flex;
+    margin-right: 0;
+    margin-left: 80%;
+    height: 5%;
+    margin-top: 1%;
+    visibility: visible;
+}
+
+#closecompare{
+    position: absolute;
+    margin-left: 97%;
+    margin-top: 1%;
+    background-color: transparent;
+    width: 22px;
+    height: 22px;
+    padding: 0px;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: grey;
+    border: 1px solid #dedede;
+    border-radius: 5px;
 }
 
 #sensorInfo p {
@@ -331,7 +372,6 @@ body {
 }
 
 
-
 #topBar {
     position: absolute;
     top: 15px;
@@ -347,6 +387,27 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
+}
+
+#topBarcomp {
+    position: absolute;
+    top: 51%;
+    right: 30%;
+    left: 30%;
+    width: 40%;
+    z-index: 2;
+    background-color: white;
+    height: 35px;
+    border-radius: 5px;
+    border: 1.5px solid #eee;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+#comparePart{
+    visibility: hidden;
 }
 
 .topTitles {
