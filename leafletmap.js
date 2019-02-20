@@ -426,7 +426,9 @@
         var comparegraphs = 0;
          function onCircleClick(obj) {
              console.log("click");
-             if (document.getElementById("comparePart").style.visibility == "hidden") {
+             console.log(compare+"teste")
+             if (compare == false) {
+                 console.log("clicktest");
                  document.getElementById("chartCollection").style.visibility = "visible";
                  document.getElementById("chartCollection").style.top = "13%";
                  document.getElementById("history").style.visibility = "visible";
@@ -537,11 +539,13 @@
              document.getElementById("chartHistory").style.visibility = "hidden";
              document.getElementById("history").style.visibility = "visible";
          }
+         var compare = false;
 
          // compare sensors
          function comparePage() {
              console.log("tget");
              //window.location = 'comparePage.html';
+             compare = true;
              document.getElementById("comparePart").style.visibility = "visible";
              document.getElementById("compare").style.visibility = "hidden";
              document.getElementById("map").style.height = "50%";
@@ -550,6 +554,7 @@
 
          function closeCompare() {
              console.log("close");
+             compare = false;
              document.getElementById("comparePart").style.visibility = "hidden";
              document.getElementById("compare").style.visibility = "visible";
              document.getElementById("map").style.height = "100%";
