@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
 
-public class returnLastData extends RequestHandler {
+public class returnLast24hData extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        //connection.updateRepo(this.localRepo);
-        ArrayList<Meting> data = localRepo.getAllLast();
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        connection.updateRepo(this.localRepo);
+        ArrayList<Meting> data = localRepo.metingenLast24();
         try{
             String json = toJSON(data);
             response.setContentType("application/json");

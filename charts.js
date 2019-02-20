@@ -9,13 +9,14 @@ var chartDataPressure = [];
 var chartDataO3 = [];
 var chartDataPM1 = [];
 
-d3.json("MetingenSensor10.json", function (data) {
+d3.json("http://localhost:8080/Controller?action=returnLast24hData", function (data) {
+    console.log(data)
     data.forEach(function (d) {
         chartLabels.push(d.time);
-        chartDataTemp.push(d.s1);
-        chartDataPressure.push(d.s2);
-        chartDataO3.push(d.s3);
-        chartDataPM1.push(d.s4);
+        chartDataTemp.push(d.so2);
+        chartDataPressure.push(d.no2);
+        chartDataO3.push(d.o3);
+        chartDataPM1.push(d.pm10);
     })
 })
 
