@@ -10,8 +10,10 @@ import java.util.Date;
 
 public class MetingRepository {
     private ArrayList<Meting> metingen;
+    private ArrayList<Meting> laatsteMetingen;
     public MetingRepository() {
         metingen = new ArrayList<>();
+        laatsteMetingen = new ArrayList<>();
     }
 
     public void add(Meting meting){
@@ -20,6 +22,18 @@ public class MetingRepository {
 
     public ArrayList getAll(){
         return metingen;
+    }
+
+    public void addLast(Meting meting){
+        laatsteMetingen.add(meting);
+    }
+
+    public ArrayList getAllLast(){
+        return laatsteMetingen;
+    }
+
+    public void emptyLastDataRepo(){
+        laatsteMetingen = new ArrayList<>();
     }
 
     public ArrayList<Meting> getDayData(){

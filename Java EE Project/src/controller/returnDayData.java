@@ -21,6 +21,7 @@ public class returnDayData extends RequestHandler {
         } catch (Exception e){
             e.printStackTrace();
         }
+        response.addHeader("Access-Control-Allow-Origin", "http://127.0.0.1:55195");
         return null;
     }
 
