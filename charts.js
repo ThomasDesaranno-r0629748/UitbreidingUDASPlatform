@@ -21,6 +21,7 @@ setInterval(function(){
 setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
 setTimeout(createChart, 1000, chartLabels, chartDataPressure, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
 setTimeout(createChart, 1000, chartLabels, chartDataPressure, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
+
     getData()
 }, 5*1000);
 
@@ -32,7 +33,6 @@ function getData() {
     chartDataO3 = [];
     chartDataPM1 = []
     d3.json("http://localhost:8080/Controller?action=returnLast24hData", function (data) {
-        console.log(data)
         data.forEach(function (d) {
             chartLabels.push(d.time);
             chartDataTemp.push(d.so2);
@@ -57,6 +57,10 @@ function createChart(chartLabels, chartData, chart, label, backgroundcolor, begi
         }]
         },
         options: {
+            animation: {
+        duration: 0,
+        easing: 'linear'
+      },
             scales: {
                 yAxes: [{
                         ticks: {
