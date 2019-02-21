@@ -10,7 +10,6 @@ var chartDataO3 = [];
 var chartDataPM1 = [];
 
 d3.json("http://localhost:8080/Controller?action=returnLast24hData", function (data) {
-    console.log(data)
     data.forEach(function (d) {
         chartLabels.push(d.time);
         chartDataTemp.push(d.so2);
@@ -18,12 +17,13 @@ d3.json("http://localhost:8080/Controller?action=returnLast24hData", function (d
         chartDataO3.push(d.o3);
         chartDataPM1.push(d.pm10);
     })
+    console.log(chartLabels)
+    console.log(chartDataTemp)
 })
-
-setTimeout(createChart, 500, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
-setTimeout(createChart, 500, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
-setTimeout(createChart, 500, chartLabels, chartDataPressure, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
-setTimeout(createChart, 500, chartLabels, chartDataPressure, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
+setTimeout(createChart, 1000, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
+setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
+setTimeout(createChart, 1000, chartLabels, chartDataPressure, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
+setTimeout(createChart, 1000, chartLabels, chartDataPressure, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
 
 function createChart(chartLabels, chartData, chart, label, backgroundcolor, beginAtZero, borderColor) {
     let LineChart = new Chart(chart, {

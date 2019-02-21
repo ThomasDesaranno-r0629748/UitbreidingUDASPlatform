@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class returnLast24hData extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
         connection.updateRepo(this.localRepo);
         ArrayList<Meting> data = localRepo.metingenLast24();
         try{
