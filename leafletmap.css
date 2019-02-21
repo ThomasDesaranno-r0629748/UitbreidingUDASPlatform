@@ -99,7 +99,6 @@ body {
     padding: 15px;
     padding-right: 0px;
     padding-bottom: 5px;
-    border: 1.5px solid rgb(222, 222, 222);
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -249,8 +248,8 @@ body {
 
 #closecompare{
     position: absolute;
-    margin-left: 94%;
-    margin-top: 1%;
+    margin-left: 97%;
+    margin-top: 0%;
     background-color: transparent;
     width: 22px;
     height: 22px;
