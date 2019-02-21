@@ -24,6 +24,8 @@ public class Meting {
         this.metingId = metingId;
     }
 
+    public Meting(){}
+
     public String getDate() {
         return date;
     }

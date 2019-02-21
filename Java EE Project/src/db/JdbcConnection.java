@@ -13,7 +13,7 @@ package db;
 
 public class JdbcConnection {
     String url = "jdbc:sqlserver://193.190.58.30;user=snuffelpaal;password=snuffelpaal";
-    private MetingRepository repo = new MetingRepository();
+    private MetingRepository repo;
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     private Runnable runnable = new Runnable() {
@@ -98,7 +98,33 @@ public class JdbcConnection {
         }
     }
 
+    public ArrayList<Meting> getLast24Hours(){
+        try {
+
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            try (Connection connection = DriverManager.getConnection(url)) {
+                Statement statement = connection.createStatement();
+
+                ResultSet result = statement.executeQuery("SELECT * FROM Metingen as T WHERE T.date=CONVERT(date,GETDATE())");
+                fillLastRepo(repo, result);
+            } catch (SQLException e) {
+                System.out.println("SQL exception");
+                System.out.print(e.getMessage());
+            }
+
+        } catch (Exception e) {
+            System.out.println("class not found");
+            System.out.println(e.getMessage());
+        }
+
+        return repo.getAll();
+    }
+
+
+
     private void fillRepo(MetingRepository repo, ResultSet result) throws SQLException {
+        ArrayList<Meting> tempList = new ArrayList<>();
         while (result.next()) {
             String id = result.getString("id");
             String deviceId = result.getString("Deviceid");
@@ -111,9 +137,9 @@ public class JdbcConnection {
             String date = parts[0];
             String time = parts[1];
             Meting meting = new Meting(Double.parseDouble(s1), Double.parseDouble(s2), Double.parseDouble(s3), Double.parseDouble(s4), date, time, Integer.parseInt(deviceId), Integer.parseInt(id));
-            repo.add(meting);
-
+            tempList.add(meting);
         }
+        repo.setMetingen(tempList);
     }
 
     private void fillLastRepo(MetingRepository repo, ResultSet result) throws SQLException {

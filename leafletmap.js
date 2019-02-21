@@ -81,7 +81,7 @@
 
          //On document load
          document.addEventListener("DOMContentLoaded", function () {
-             lastMomentDataPull();
+             lastMomentDataPull(0);
          });
 
          //Pick icon
@@ -152,15 +152,12 @@
          }
 
          //Pull data van laatste dag laatset moment
-         function lastMomentDataPull() {
+         function lastMomentDataPull(id) {
              d3.json("http://localhost:8080/Controller?action=returnLastData", function (data) {
-                 document.getElementById("SO2").innerHTML = "NA ug/m3";
-                 document.getElementById("NO2").innerHTML = "NA ug/m3";
-                 document.getElementById("O3").innerHTML = "NA ug/m3";
-                 document.getElementById("PM1").innerHTML = "NA ug/m3";
+                 var idInPull = false;
                  data.forEach(function (d) {
                      if (d.deviceId == id) {
-                         /*Nog te veranderen*/
+                         idInPull = true;
                          if (d.so2 != null) {
                              document.getElementById("SO2").innerHTML = d.so2 + " ug/m3";
                          }
@@ -175,6 +172,12 @@
                          }
                      }
                  })
+                 if(!idInPull){
+                 document.getElementById("SO2").innerHTML = "NA ug/m3";
+                 document.getElementById("NO2").innerHTML = "NA ug/m3";
+                 document.getElementById("O3").innerHTML = "NA ug/m3";
+                 document.getElementById("PM1").innerHTML = "NA ug/m3";
+             }
              })
          }
 
@@ -346,26 +349,30 @@
          //Graph popup
 
          var comparegraphs = 0;
-        var cgraphs = [];
+        var id = 0;
 
          function onCircleClick(obj) {
+             document.getElementById("SO2").innerHTML = "Loading";
+                 document.getElementById("NO2").innerHTML = "Loading";
+                 document.getElementById("O3").innerHTML = "Loading";
+                 document.getElementById("PM1").innerHTML = "Loading";
              if (compare == false) {
                  console.log("clicktest");
                  document.getElementById("history").style.visibility = "visible";
                  document.getElementById("chartCollection").style.visibility = "visible";
                  document.getElementById("chartCollection").style.top = "17%";
                  document.getElementById("history").style.right = "visible";
-                 var id;
                  d3.json("SensorLocaties.json", function (data) {
                      data.forEach(function (d) {
                          if (d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng) {
                              document.getElementById("sensorName").innerHTML = d.naam;
                              id = d.Deviceid;
                          }
+                         
                      })
                  });
                  setInterval(function () {
-                     lastMomentDataPull();
+                     lastMomentDataPull(id);
                  }, 5 * 1000);
 
              }
@@ -383,17 +390,20 @@
 //                 }
                  comparegraphs += 1;
                  console.log(comparegraphs);
-                 var id;
+                 document.getElementById("chartCollection").style.visibility = "visible";
+                 document.getElementById("chartCollection").style.top = "58%";
+                 document.getElementById("history").style.visibility = "visible";
                  d3.json("SensorLocaties.json", function (data) {
                      data.forEach(function (d) {
                          if (d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng) {
                              document.getElementById("sensorName").innerHTML = d.naam;
                              id = d.Deviceid;
                          }
+                         console.log("id is " + id);
                      })
                  });
-                 setInterval(function () {
-                     lastMomentDataPull();
+                 setInterval(function (id) {
+                     lastMomentDataPull(id);
                  }, 5 * 1000);
 
 
