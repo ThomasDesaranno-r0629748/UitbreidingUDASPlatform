@@ -346,13 +346,15 @@
          //Graph popup
 
          var comparegraphs = 0;
+        var cgraphs = [];
 
          function onCircleClick(obj) {
              if (compare == false) {
                  console.log("clicktest");
-                 document.getElementById("chartCollection").style.visibility = "visible";
-                 document.getElementById("chartCollection").style.top = "13%";
                  document.getElementById("history").style.visibility = "visible";
+                 document.getElementById("chartCollection").style.visibility = "visible";
+                 document.getElementById("chartCollection").style.top = "17%";
+                 document.getElementById("history").style.right = "visible";
                  var id;
                  d3.json("SensorLocaties.json", function (data) {
                      data.forEach(function (d) {
@@ -366,13 +368,21 @@
                      lastMomentDataPull();
                  }, 5 * 1000);
 
-             } else {
+             }
+             if (compare == true) {
                  console.log("comparchats");
+                 document.getElementById("comparePart").style.display = "contents";
+//                 if (comparegraphs == 0){
+//                     document.getElementById("chartCollection2").style.right = "70%";
+//                 }
+//                 if (comparegraphs == 1){
+//                     document.getElementById("chartCollection2").style.right = "40%";
+//                 }
+//                  if (comparegraphs == 2){
+//                     document.getElementById("chartCollection2").style.right = "10%";
+//                 }
                  comparegraphs += 1;
                  console.log(comparegraphs);
-                 document.getElementById("chartCollection").style.visibility = "visible";
-                 document.getElementById("chartCollection").style.top = "58%";
-                 document.getElementById("history").style.visibility = "visible";
                  var id;
                  d3.json("SensorLocaties.json", function (data) {
                      data.forEach(function (d) {
@@ -395,6 +405,7 @@
 
              document.getElementById("chartCollection").style.visibility = "hidden";
              document.getElementById("chartHistory").style.visibility = "hidden";
+             document.getElementById("history").style.visibility = "hidden";
              document.getElementById("history").style.visibility = "hidden";
          }
          //Open history
@@ -419,6 +430,7 @@
              //window.location = 'comparePage.html';
              compare = true;
              document.getElementById("comparePart").style.visibility = "visible";
+             document.getElementById("comparePart").style.display = "contents";
              document.getElementById("compare").style.visibility = "hidden";
              document.getElementById("map").style.height = "50%";
              document.getElementById("legendCollection").style.bottom = "52%";
@@ -428,6 +440,7 @@
              console.log("close");
              compare = false;
              document.getElementById("comparePart").style.visibility = "hidden";
+             document.getElementById("comparePart").style.display = "none";
              document.getElementById("compare").style.visibility = "visible";
              document.getElementById("map").style.height = "100%";
              document.getElementById("legendCollection").style.bottom = "5%";

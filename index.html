@@ -14,9 +14,9 @@
     <script src="/leaflet-search.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" type="text/css">
-     <script src="SliderControl.js"></script>
+    <script src="SliderControl.js"></script>
     <script src="leaflet.SliderControl.min.js"></script>
-        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script src="chartRefresh.js"></script>
 
@@ -24,7 +24,7 @@
 
 <body>
     <div id="compare">
-    <button id="comparebttn" onclick="comparePage()">Compare sensors</button>
+        <button id="comparebttn" onclick="comparePage()">Compare sensors</button>
     </div>
     <div id="map"></div>
     <div id="legendCollection">
@@ -124,14 +124,24 @@
         <p class="topTitles" id="loca">Location:</p>
         <p class="topDetails" id="locationCity">Stad</p>
     </div>
+    <div id="democontainer"></div>
     <div id="comparePart">
-         <div id="topBarcomp">
-        <p>compare the sensors</p>
-    </div>
-    <button id ="closecompare" onclick="closeCompare()">x</button>
+        <div id="chartCollection2">
+            <button id="closecompare" onclick="closeCompare()">x</button>
+        <div id="topBarcomp">
+            <p>compare the sensors</p>
+        </div>
+                <div id="charts2">
+                    <canvas id="tempChart2"></canvas>
+                    <canvas id="pressureChart2"></canvas>
+                    <canvas id="O3Chart2"></canvas>
+                    <canvas id="PM1Chart2"></canvas>
+                </div>
+            </div>
     </div>
 </body>
 <script src="charts.js"></script>
+<script src="comparecharts.js"></script>
 <script src="leafletmap.js"></script>
 
 </html>
