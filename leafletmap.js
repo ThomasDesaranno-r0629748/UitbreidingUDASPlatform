@@ -172,12 +172,12 @@
                          }
                      }
                  })
-                 if(!idInPull){
-                 document.getElementById("SO2").innerHTML = "NA ug/m3";
-                 document.getElementById("NO2").innerHTML = "NA ug/m3";
-                 document.getElementById("O3").innerHTML = "NA ug/m3";
-                 document.getElementById("PM1").innerHTML = "NA ug/m3";
-             }
+                 if (!idInPull) {
+                     document.getElementById("SO2").innerHTML = "NA ug/m3";
+                     document.getElementById("NO2").innerHTML = "NA ug/m3";
+                     document.getElementById("O3").innerHTML = "NA ug/m3";
+                     document.getElementById("PM1").innerHTML = "NA ug/m3";
+                 }
              })
          }
 
@@ -349,26 +349,25 @@
          //Graph popup
 
          var comparegraphs = 0;
-        var id = 0;
+         var id = 0;
 
          function onCircleClick(obj) {
              document.getElementById("SO2").innerHTML = "Loading";
-                 document.getElementById("NO2").innerHTML = "Loading";
-                 document.getElementById("O3").innerHTML = "Loading";
-                 document.getElementById("PM1").innerHTML = "Loading";
+             document.getElementById("NO2").innerHTML = "Loading";
+             document.getElementById("O3").innerHTML = "Loading";
+             document.getElementById("PM1").innerHTML = "Loading";
              if (compare == false) {
                  console.log("clicktest");
                  document.getElementById("history").style.visibility = "visible";
                  document.getElementById("chartCollection").style.visibility = "visible";
                  document.getElementById("chartCollection").style.top = "17%";
-                 document.getElementById("history").style.right = "visible";
                  d3.json("SensorLocaties.json", function (data) {
                      data.forEach(function (d) {
                          if (d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng) {
                              document.getElementById("sensorName").innerHTML = d.naam;
                              id = d.Deviceid;
                          }
-                         
+
                      })
                  });
                  setInterval(function () {
@@ -379,20 +378,18 @@
              if (compare == true) {
                  console.log("comparchats");
                  document.getElementById("comparePart").style.display = "contents";
-//                 if (comparegraphs == 0){
-//                     document.getElementById("chartCollection2").style.right = "70%";
-//                 }
-//                 if (comparegraphs == 1){
-//                     document.getElementById("chartCollection2").style.right = "40%";
-//                 }
-//                  if (comparegraphs == 2){
-//                     document.getElementById("chartCollection2").style.right = "10%";
-//                 }
+                 //                 if (comparegraphs == 0){
+                 //                     document.getElementById("chartCollection2").style.right = "70%";
+                 //                 }
+                 //                 if (comparegraphs == 1){
+                 //                     document.getElementById("chartCollection2").style.right = "40%";
+                 //                 }
+                 //                  if (comparegraphs == 2){
+                 //                     document.getElementById("chartCollection2").style.right = "10%";
+                 //                 }
                  comparegraphs += 1;
                  console.log(comparegraphs);
-                 document.getElementById("chartCollection").style.visibility = "visible";
                  document.getElementById("chartCollection").style.top = "58%";
-                 document.getElementById("history").style.visibility = "visible";
                  d3.json("SensorLocaties.json", function (data) {
                      data.forEach(function (d) {
                          if (d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng) {
@@ -444,6 +441,36 @@
              document.getElementById("compare").style.visibility = "hidden";
              document.getElementById("map").style.height = "50%";
              document.getElementById("legendCollection").style.bottom = "52%";
+             document.getElementById("chartHistory").style.visibility = "hidden";
+             
+             
+                 console.log("testchart");
+                 let tempChart2 = document.getElementById("tempChart2").getContext('2d');
+                 console.log(tempChart2 + "whuuutnfeosdfj");
+                 let pressureChart2 = document.getElementById("pressureChart2").getContext('2d');
+                 let O3Chart2 = document.getElementById("O3Chart2").getContext('2d');
+                 let PM1Chart2 = document.getElementById("PM1Chart2").getContext('2d');
+
+                 var chartLabels2 = [];
+                 var chartDataTemp2 = [];
+                 var chartDataPressure2 = [];
+                 var chartDataO32 = [];
+                 var chartDataPM12 = [];
+
+                 d3.json("MetingenSensor10.json", function (data) {
+                     data.forEach(function (d) {
+                         chartLabels.push(d.time);
+                         chartDataTemp.push(d.s1);
+                         chartDataPressure.push(d.s2);
+                         chartDataO3.push(d.s3);
+                         chartDataPM1.push(d.s4);
+                     })
+                 })
+
+                 setTimeout(createChart, 500, chartLabels2, chartDataTemp2, tempChart2, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
+                 setTimeout(createChart, 500, chartLabels2, chartDataPressure2, pressureChart2, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
+                 setTimeout(createChart, 500, chartLabels2, chartDataPressure2, O3Chart2, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
+                 setTimeout(createChart, 500, chartLabels2, chartDataPressure2, PM1Chart2, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
          }
 
          function closeCompare() {
@@ -455,4 +482,33 @@
              document.getElementById("map").style.height = "100%";
              document.getElementById("legendCollection").style.bottom = "5%";
              comparegraphs = 0;
+         }
+
+         // make comparegraphs
+
+
+         function createChart(chartLabels2, chartData, chart, label, backgroundcolor, beginAtZero, borderColor) {
+             let LineChart = new Chart(chart, {
+                 type: 'line',
+                 data: {
+                     labels: chartLabels2,
+                     datasets: [{
+                         label: label,
+                         data: chartData,
+                         backgroundColor: backgroundcolor,
+                         pointRadius: 0,
+                         borderColor: borderColor
+        }]
+                 },
+                 options: {
+                     scales: {
+                         yAxes: [{
+                                 ticks: {
+                                     beginAtZero: beginAtZero
+                                 }
+                }
+                ]
+                     }
+                 }
+             })
          }
