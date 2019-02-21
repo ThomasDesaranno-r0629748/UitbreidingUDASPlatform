@@ -463,6 +463,18 @@
          }
          var compare = false;
 
+  //Close compare
+         document.getElementById("closecompare").onclick = function () {
+             compare = false;
+             document.getElementById("comparePart").style.visibility = "hidden";
+             document.getElementById("comparePart").style.display = "none";
+             document.getElementById("compare").style.visibility = "visible";
+             document.getElementById("map").style.height = "100%";
+             document.getElementById("legendCollection").style.bottom = "5%";
+
+             
+         }
+
          // compare sensors
          function comparePage() {
              console.log("tget");

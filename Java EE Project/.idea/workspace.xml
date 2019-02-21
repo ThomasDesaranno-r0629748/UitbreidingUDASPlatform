@@ -6,9 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bef9b1d7-7bab-4188-bf53-64c73dc9536e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="bef9b1d7-7bab-4188-bf53-64c73dc9536e" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -415,12 +413,12 @@
       <option name="presentableId" value="Default" />
       <updated>1550493495952</updated>
       <workItem from="1550493500553" duration="63743000" />
-      <workItem from="1550764947226" duration="676000" />
+      <workItem from="1550764947226" duration="706000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64419000" />
+    <option name="totallyTimeSpent" value="64449000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -432,7 +430,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.07449664" />
