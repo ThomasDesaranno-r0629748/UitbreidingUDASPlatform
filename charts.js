@@ -7,18 +7,6 @@ var chartDataTemp = [];
 var chartDataPressure = [];
 var chartDataO3 = [];
 var chartDataPM1 = [];
-/*getData();
-setTimeout(createChart, 1000, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
-setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
-setTimeout(createChart, 1000, chartLabels, chartDataPressure, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
-setTimeout(createChart, 1000, chartLabels, chartDataPressure, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
-setInterval(function () {
-    setTimeout(createChart, 1000, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
-    setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
-    setTimeout(createChart, 1000, chartLabels, chartDataPressure, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
-    setTimeout(createChart, 1000, chartLabels, chartDataPressure, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
-    getData()
-}, 5 * 1000);*/
 
 function getData(id) {
     chartLabels = [];
@@ -28,53 +16,98 @@ function getData(id) {
     chartDataPM1 = []
     d3.json("http://localhost:8080/Controller?action=returnLast24hData", function (data) {
         data.forEach(function (d) {
-            if(d.deviceId == id){
+            if (d.deviceId == id) {
                 chartLabels.push(d.time);
-            chartDataTemp.push(d.so2);
-            chartDataPressure.push(d.no2);
-            chartDataO3.push(d.o3);
-            chartDataPM1.push(d.pm10);
+                chartDataTemp.push(d.so2);
+                chartDataPressure.push(d.no2);
+                chartDataO3.push(d.o3);
+                chartDataPM1.push(d.pm10);
             }
         })
-        
+
     })
 }
 
-function createSpecificChart(id){
-    if(id == 0){
-        chartLabels = [];
+function getDataLink(id, link, labelFormat) {
+    chartLabels = [];
     chartDataTemp = [];
     chartDataPressure = [];
     chartDataO3 = [];
     chartDataPM1 = []
+    d3.json(link, function (data) {
+        console.log(data)
+        data.forEach(function (d) {
+            if (d.deviceId == id) {
+                if(labelFormat == "24h"){
+                    chartLabels.push(d.time);
+                }
+                if(labelFormat == "week"){
+                    chartLabels.push(d.date);
+                }
+                if(labelFormat == "month"){
+                    chartLabels.push(d.date);
+                }
+                if(labelFormat == "year"){
+                    chartLabels.push(d.date);
+                }
+                chartDataTemp.push(d.so2);
+                chartDataPressure.push(d.no2);
+                chartDataO3.push(d.o3);
+                chartDataPM1.push(d.pm10);
+            }
+        })
+    })
+}
+
+function createSpecificChartLink(id, link, labelFormat) {
+    if (id == 0) {
+        chartLabels = [];
+        chartDataTemp = [];
+        chartDataPressure = [];
+        chartDataO3 = [];
+        chartDataPM1 = []
     }
-    if(id != 0){
+    if (id != 0) {
+        getDataLink(id, link, labelFormat);
+    }
+    setTimeout(createChart, 1000, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
+    setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
+    setTimeout(createChart, 1000, chartLabels, chartDataPressure, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
+    setTimeout(createChart, 1000, chartLabels, chartDataPressure, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
+}
+
+function createSpecificChart(id) {
+    if (id == 0) {
+        chartLabels = [];
+        chartDataTemp = [];
+        chartDataPressure = [];
+        chartDataO3 = [];
+        chartDataPM1 = []
+    }
+    if (id != 0) {
         getData(id);
     }
     setTimeout(createChart, 1000, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
-setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
-setTimeout(createChart, 1000, chartLabels, chartDataPressure, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
-setTimeout(createChart, 1000, chartLabels, chartDataPressure, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
+    setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
+    setTimeout(createChart, 1000, chartLabels, chartDataPressure, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
+    setTimeout(createChart, 1000, chartLabels, chartDataPressure, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
 }
 
 function createChart(chartLabels, chartData, chart, label, backgroundcolor, beginAtZero, borderColor) {
     let LineChart = new Chart(chart, {
-        type: 'line'
-        , data: {
-            labels: chartLabels
-            , datasets: [{
-                label: label
-                , data: chartData
-                , backgroundColor: backgroundcolor
-                , pointRadius: 0
-                , borderColor: borderColor
+        type: 'line',
+        data: {
+            labels: chartLabels,
+            datasets: [{
+                label: label,
+                data: chartData,
+                backgroundColor: backgroundcolor,
+                pointRadius: 0,
+                borderColor: borderColor
         }]
-        }
-        , options: {
-            animation: {
-                duration: 0
-            }
-            , scales: {
+        },
+        options: {
+            scales: {
                 yAxes: [{
                         ticks: {
                             beginAtZero: beginAtZero
