@@ -6,9 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bef9b1d7-7bab-4188-bf53-64c73dc9536e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../leafletmap.css" beforeDir="false" afterPath="$PROJECT_DIR$/../leafletmap.css" afterDir="false" />
-    </list>
+    <list default="true" id="bef9b1d7-7bab-4188-bf53-64c73dc9536e" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -108,8 +106,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7650">
-              <caret line="455" column="55" selection-start-line="455" selection-start-column="55" selection-end-line="455" selection-end-column="55" />
+            <state relative-caret-position="7327">
+              <caret line="436" column="55" selection-start-line="436" selection-start-column="55" selection-end-line="436" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -172,7 +170,7 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-9" />
     <option name="width" value="978" />
     <option name="height" value="1039" />
@@ -436,7 +434,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64694000" />
+    <option name="totallyTimeSpent" value="65593000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -461,12 +459,12 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.36025506" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.35886526" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32905984" />
-      <window_info anchor="bottom" id="Application Servers" order="7" visible="true" weight="0.32765958" />
+      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.32765958" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32905984" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50067115" side_tool="true" weight="0.36039886" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32905984" />
