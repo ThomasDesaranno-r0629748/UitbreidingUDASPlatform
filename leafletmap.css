@@ -26,8 +26,8 @@ body {
 }
 
 #changeButtons {
-    width: 50px;
-    min-height: 10px;
+    width: 95%;
+    min-height: 35px;
     background-color: #ffffff;
     display: flex;
     align-items: center;
@@ -242,10 +242,17 @@ body {
 }
 
 #compare{
-    position: absolute;
-    z-index: 2;
-    right: 70px;
-    margin: 0px;
+  width: 95%;
+    min-height: 35px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    border: 1.5px solid #dedede;
+    border-radius: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-self: flex-start;
+    padding: 5px;
 }
 
 #closecompare{
@@ -478,11 +485,13 @@ body {
     color: #2cd0d0;
     border-style: none;
     font-size: 15;
-    width: 90%;
+    width: 20%;
     height: 30px;
     margin: 5%;
     font-family: 'Roboto Slab', serif;
     border: 1px solid #2cd0d0;
+    font-size: 13;
+    margin: 0 2.5%;
 }
 
 .changeType:hover {
@@ -495,9 +504,11 @@ body {
 #topBar {
     position: absolute;
     top: 15px;
-    right: 30%;
-    left: 30%;
+    right: 0;
+    left: 0;
+    margin: auto;
     width: 40%;
+    min-width: 370px;
     z-index: 2;
     background-color: white;
     height: 35px;
@@ -610,3 +621,23 @@ body {
 
 
 
+
+#comparebttn {
+    border-radius: 5px;
+    background-color: #fff;
+    color: #2cd0d0;
+    border-style: none;
+    font-size: 15;
+    width: 90%;
+    height: 30px;
+    font-family: 'Roboto Slab', serif;
+    border: 1px solid #2cd0d0;
+    font-size: 15;
+    
+}
+
+#comparebttn:hover{
+    background-color: #2cd0d0;
+    color: #FFF;
+    transition: 0.2s;
+}
