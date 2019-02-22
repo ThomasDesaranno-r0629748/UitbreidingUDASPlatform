@@ -94,7 +94,7 @@
 
 
          //Pick right icon
-         function iconPicker(temperature, zoom) {
+         function iconPicker(temperature, zoom, good, moderate, bad) {
              var iconSize = zoom + 10;
              var shadowSize = Math.pow((zoom * 10), zoom / (30 - (zoom - zoom / 10))) + 50;
              if (temperature == "" || temperature == null || temperature < 0) {
@@ -105,7 +105,7 @@
                  });
                  return icon;
              }
-             if (temperature >= 0 && temperature < 50) {
+             if (temperature >= 0 && temperature < good) {
                  var icon = L.icon({
                      iconUrl: 'lightgreensensor.png',
                      shadowUrl: 'images/greenRadial.png',
@@ -116,7 +116,7 @@
                  });
                  return icon;
              }
-             if (temperature >= 50 && temperature < 100) {
+             if (temperature >= good && temperature < moderate) {
                  var icon = L.icon({
                      iconUrl: 'yellowsensor.png',
                      shadowUrl: 'images/yellowRadial.png',
@@ -127,7 +127,7 @@
                  });
                  return icon;
              }
-             if (temperature >= 100 && temperature < 200) {
+             if (temperature >= moderate && temperature < bad) {
                  var icon = L.icon({
                      iconUrl: 'orangesensor.png',
                      shadowUrl: 'images/orangeRadial.png',
@@ -138,7 +138,7 @@
                  });
                  return icon;
              }
-             if (temperature >= 200) {
+             if (temperature >= bad) {
                  var icon = L.icon({
                      iconUrl: 'redsensor.png',
                      shadowUrl: 'images/redRadial.png',
@@ -202,7 +202,7 @@
                  amountData++;
                  var sensor = L.marker([d.lat, d.lon], {
                      title: d.naam,
-                     icon: iconPicker(d.s1, 14)
+                     icon: iconPicker(d.s1, 14, 38, 59, 80) //Standaardwaarden SO2
                  });
                  /*var circle = L.circle([d.lat, d.lon], {
                      color: 'green',
@@ -313,19 +313,19 @@
                                  metingd.forEach(function (meting) {
                                      if (sensord.Deviceid == meting.Deviceid && displaystate == "SO2") {
                                          console.log(meting.s1);
-                                         d.setIcon(iconPicker(meting.s1, currentZoom));
+                                         d.setIcon(iconPicker(meting.s1, currentZoom, 38, 59, 80));
                                      }
                                      if (sensord.Deviceid == meting.Deviceid && displaystate == "NO2") {
                                          console.log(meting.s2);
-                                         d.setIcon(iconPicker(meting.s2, currentZoom));
+                                         d.setIcon(iconPicker(meting.s2, currentZoom, 38, 59, 80));
                                      }
                                      if (sensord.Deviceid == meting.Deviceid && displaystate == "O3") {
                                          console.log(meting.s3);
-                                         d.setIcon(iconPicker(meting.s3, currentZoom));
+                                         d.setIcon(iconPicker(meting.s3, currentZoom, 38, 59, 80));
                                      }
                                      if (sensord.Deviceid == meting.Deviceid && displaystate == "PM10") {
                                          console.log(meting.s4);
-                                         d.setIcon(iconPicker(meting.s4, currentZoom));
+                                         d.setIcon(iconPicker(meting.s4, currentZoom, 38, 59, 80));
                                      }
                                  })
                              })
@@ -358,6 +358,7 @@
              document.getElementById("NO2").innerHTML = "Loading";
              document.getElementById("O3").innerHTML = "Loading";
              document.getElementById("PM1").innerHTML = "Loading";
+             createSpecificChart(0);
              if (compare == false) {
                  console.log("clicktest");
                  document.getElementById("history").style.visibility = "visible";
@@ -369,12 +370,19 @@
                              document.getElementById("sensorName").innerHTML = d.naam;
                              id = d.Deviceid;
                          }
+                         if(d.naam == "VanCaenegemlaan"){
+                             id = 1011;
+                         }
 
                      })
+                     lastMomentDataPull(id);
+                     createSpecificChart(id);
                  });
+                 
                  setInterval(function () {
                      lastMomentDataPull(id);
-                 }, 5 * 1000);
+                     createSpecificChart(id);
+                 }, 10 * 1000);
 
              }
              if (compare == true) {
@@ -401,9 +409,10 @@
                          console.log("id is " + id);
                      })
                  });
-                 setInterval(function (id) {
+                 setInterval(function () {
                      lastMomentDataPull(id);
-                 }, 5 * 1000);
+                     createSpecificChart(id);
+                 }, 10 * 1000);
 
                  console.log("testchart");
                  let tempChart2 = document.getElementById("tempChart2").getContext('2d');

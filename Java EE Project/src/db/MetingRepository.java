@@ -64,7 +64,7 @@ public class MetingRepository {
        /*DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
        DateFormat dateFormat1 = new SimpleDateFormat("HH:mm:ss");*/
        Calendar calendar = Calendar.getInstance();
-       calendar.add(Calendar.HOUR_OF_DAY, -48);
+       calendar.add(Calendar.HOUR_OF_DAY, -24);
 
        DateFormat format = new SimpleDateFormat("yyyy-MM-dd,HH:mm:ss");
        for (Meting m : metingen){
