@@ -580,6 +580,32 @@ body {
     transition: 0.2s;
 }
 
+#selectedsensor1{
+    display: none;
+}
+
+#selectedsensor2{
+    display: none;
+}
+#selectedsensor3{
+    display: none;
+}
+#selectedsensor4{
+    display: none;
+}
+#selectedsensor5{
+    display: none;
+}
+
+.sesensor{
+    display: inline;
+}
+
+.remove{
+    display: inline;
+}
+
+
 #lastMeasurement {
     display: flex;
     flex-direction: row;

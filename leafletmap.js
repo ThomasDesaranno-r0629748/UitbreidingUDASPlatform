@@ -380,14 +380,22 @@
                  console.log(comparegraphs);
                  document.getElementById("chartCollection").style.top = "58%";
                  d3.json("SensorLocaties.json", function (data) {
+                     var name = "";
                      data.forEach(function (d) {
                          if (d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng) {
                              document.getElementById("sensorName").innerHTML = d.naam;
                              id = d.Deviceid;
+                             name = d.naam;
                              selectedSensors(d.naam);
                          }
-                         console.log("id is " + id);
+                         if (name == "VanCaenegemlaan") {
+                             id = 1011;
+                         }
+
                      })
+                     console.log("id is " + id);
+                     lastMomentDataPull(id);
+                     createSpecificChart(id);
                  });
                  chartButtons(id);
                  setInterval(function () {
@@ -431,31 +439,45 @@
 
          }
 
-         function checkselected(naam) {
-             ssensor.forEach(function (s) {
-                 console.log("testfdqyuvdsj");
-                 if (naam == s) {
-                     return window.alert("sensor already selected");
-                 }
-                 return ssensor.push(naam);
-             })
-         }
-
-var selected = false;
+         var selected = false;
 
          function selectedSensors(naam) {
+             if (ssensor.length >= 5) {
+
+                 return window.alert("maximum 5 sensors to be selected");
+             }
              selected = false;
-               ssensor.forEach(function (s) {
-                 console.log("testfdqyuvdsj");
-                 if (naam == s) {
+             ssensor.forEach(function (s) {
+                 if (" " + naam + " " == s) {
                      selected = true;
+
                      return window.alert("sensor already selected");
                  }
              })
-             if (selected == false){
-                 ssensor.push(" "+naam);
+             if (selected == false) {
+                 ssensor.push(" " + naam + " ");
+                 setsensornames();
              }
-             document.getElementById("selectedsensor").innerHTML = ssensor;
+
+         }
+
+         function setsensornames() {
+             var l = ssensor.length;
+             var n = 1;
+             ssensor.forEach(function (v) {
+                 document.getElementById("selectedsensor" + n).style.display = "block";
+                 document.getElementById("sesensor" + n).innerHTML = v;
+                 n++;
+             })
+
+         }
+
+         function remove(num) {
+             var n = 1;
+              document.getElementById("selectedsensor" + ssensor.length).style.display = "none";
+             document.getElementById("sesensor" + ssensor.length).innerHTML = "no";
+             ssensor.splice(num - 1, 1);
+             setsensornames();
 
          }
          //Close chart collection
