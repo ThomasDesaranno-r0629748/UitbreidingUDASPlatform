@@ -234,6 +234,15 @@ body {
     
 }
 
+.comparebttn{
+    background-color: white;
+    border-radius: 10%;
+    margin-top: -5%;column-rule: 
+}
+.comparebttn:hover {
+  background-color: beige; /* Green */
+}
+
 #compare{
     position: absolute;
     z-index: 2;

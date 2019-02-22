@@ -6,7 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bef9b1d7-7bab-4188-bf53-64c73dc9536e" name="Default" comment="" />
+    <list default="true" id="bef9b1d7-7bab-4188-bf53-64c73dc9536e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../leafletmap.css" beforeDir="false" afterPath="$PROJECT_DIR$/../leafletmap.css" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -413,12 +415,12 @@
       <option name="presentableId" value="Default" />
       <updated>1550493495952</updated>
       <workItem from="1550493500553" duration="63743000" />
-      <workItem from="1550764947226" duration="706000" />
+      <workItem from="1550764947226" duration="950000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64449000" />
+    <option name="totallyTimeSpent" value="64693000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
