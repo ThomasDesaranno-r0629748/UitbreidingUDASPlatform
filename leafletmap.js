@@ -94,7 +94,7 @@
 
 
          //Pick right icon
-         function iconPicker(temperature, zoom) {
+         function iconPicker(temperature, zoom, good, moderate, bad) {
              var iconSize = zoom + 10;
              var shadowSize = Math.pow((zoom * 10), zoom / (30 - (zoom - zoom / 10))) + 50;
              if (temperature == "" || temperature == null || temperature < 0) {
@@ -105,7 +105,7 @@
                  });
                  return icon;
              }
-             if (temperature >= 0 && temperature < 50) {
+             if (temperature >= 0 && temperature < good) {
                  var icon = L.icon({
                      iconUrl: 'lightgreensensor.png',
                      shadowUrl: 'images/greenRadial.png',
@@ -116,7 +116,7 @@
                  });
                  return icon;
              }
-             if (temperature >= 50 && temperature < 100) {
+             if (temperature >= good && temperature < moderate) {
                  var icon = L.icon({
                      iconUrl: 'yellowsensor.png',
                      shadowUrl: 'images/yellowRadial.png',
@@ -127,7 +127,7 @@
                  });
                  return icon;
              }
-             if (temperature >= 100 && temperature < 200) {
+             if (temperature >= moderate && temperature < bad) {
                  var icon = L.icon({
                      iconUrl: 'orangesensor.png',
                      shadowUrl: 'images/orangeRadial.png',
@@ -138,7 +138,7 @@
                  });
                  return icon;
              }
-             if (temperature >= 200) {
+             if (temperature >= bad) {
                  var icon = L.icon({
                      iconUrl: 'redsensor.png',
                      shadowUrl: 'images/redRadial.png',
@@ -202,22 +202,12 @@
                  amountData++;
                  var sensor = L.marker([d.lat, d.lon], {
                      title: d.naam,
-                     icon: iconPicker(d.s1, 14)
+                     icon: iconPicker(d.s1, 14, 38, 59, 80) //Standaardwaarden SO2
                  });
-                 /*var circle = L.circle([d.lat, d.lon], {
-                     color: 'green',
-                     fillColor: "green",
-                     fillOpacity: 0.8,
-                     radius: 20,
-                     stroke: true,
-                     className: "test"
-                 });*/
-
+                 
                  sensor.bindPopup("Locatie: " + d.naam);
                  sensor.on('click', onCircleClick, d);
-                 /*circle.bindPopup("Locatie: " + d.naam);
-                     circle.on('click', onCircleClick, d);
-                    markersTemp.addLayer(circle);*/
+                
                  markersTemp.addLayer(sensor);
              });
              markerRadial.addTo(map);
@@ -295,37 +285,51 @@
              }
          }
 
+        //Change Dust buttons
+        document.getElementById("changePM10").onclick = function () {
+            displaystate = "PM10";
+            adjustIcon();
+        }
+        document.getElementById("changeO3").onclick = function () {
+            displaystate = "O3";
+            adjustIcon();
+        }
+        document.getElementById("changeSO2").onclick = function () {
+            displaystate = "SO2";
+            adjustIcon();
+        }
+        document.getElementById("changeNO2").onclick = function () {
+            displaystate = "NO2";
+            adjustIcon();
+        }
+
 
          //Adjust icon size on zoom
-
          function adjustIcon() {
              var currentZoom = map.getZoom();
 
-             /*markersTemp.eachLayer(function (d) {
-                 d.setIcon(iconPicker(-1, currentZoom));
-             });*/
 
              d3.json("SensorLocaties.json", function (data) {
                  data.forEach(function (sensord) {
                      markersTemp.eachLayer(function (d) {
                          if (d._latlng.lat == sensord.lat && d._latlng.lng == sensord.lon) {
-                             d3.json("LaatsteMetingen.json", function (metingd) {
+                             d3.json("http://localhost:8080/Controller?action=returnLastData", function (metingd) {
                                  metingd.forEach(function (meting) {
-                                     if (sensord.Deviceid == meting.Deviceid && displaystate == "SO2") {
-                                         console.log(meting.s1);
-                                         d.setIcon(iconPicker(meting.s1, currentZoom));
+                                     if (sensord.Deviceid == meting.deviceId && displaystate == "SO2") {
+                                         console.log(meting.so2);
+                                         d.setIcon(iconPicker(meting.so2, currentZoom, 38, 59, 80));
                                      }
-                                     if (sensord.Deviceid == meting.Deviceid && displaystate == "NO2") {
-                                         console.log(meting.s2);
-                                         d.setIcon(iconPicker(meting.s2, currentZoom));
+                                     if (sensord.Deviceid == meting.deviceId && displaystate == "NO2") {
+                                         console.log(meting.no2);
+                                         d.setIcon(iconPicker(meting.no2, currentZoom, 80, 180, 122));
                                      }
-                                     if (sensord.Deviceid == meting.Deviceid && displaystate == "O3") {
-                                         console.log(meting.s3);
-                                         d.setIcon(iconPicker(meting.s3, currentZoom));
+                                     if (sensord.Deviceid == meting.deviceId && displaystate == "O3") {
+                                         console.log(meting.o3);
+                                         d.setIcon(iconPicker(meting.o3, currentZoom, 17, 20, 24));
                                      }
-                                     if (sensord.Deviceid == meting.Deviceid && displaystate == "PM10") {
-                                         console.log(meting.s4);
-                                         d.setIcon(iconPicker(meting.s4, currentZoom));
+                                     if (sensord.Deviceid == meting.deviceId && displaystate == "PM10") {
+                                         console.log(meting.pm10);
+                                         d.setIcon(iconPicker(meting.pm10, currentZoom, 10, 75, 100)); //NOG VERANDEREN
                                      }
                                  })
                              })
@@ -358,23 +362,34 @@
              document.getElementById("NO2").innerHTML = "Loading";
              document.getElementById("O3").innerHTML = "Loading";
              document.getElementById("PM1").innerHTML = "Loading";
+             createSpecificChart(0);
              if (compare == false) {
                  console.log("clicktest");
                  document.getElementById("history").style.visibility = "visible";
                  document.getElementById("chartCollection").style.visibility = "visible";
                  document.getElementById("chartCollection").style.top = "17%";
                  d3.json("SensorLocaties.json", function (data) {
+                     var name = "";
                      data.forEach(function (d) {
                          if (d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng) {
                              document.getElementById("sensorName").innerHTML = d.naam;
                              id = d.Deviceid;
+                             name = d.naam;
+                         }
+                         if(name == "VanCaenegemlaan"){
+                             id = 1011;
                          }
 
                      })
+                     console.log("id is " + id);
+                     lastMomentDataPull(id);
+                     createSpecificChart(id);
                  });
+                 
                  setInterval(function () {
                      lastMomentDataPull(id);
-                 }, 5 * 1000);
+                     createSpecificChart(id);
+                 }, 10 * 1000);
 
              }
              if (compare == true) {
@@ -401,9 +416,10 @@
                          console.log("id is " + id);
                      })
                  });
-                 setInterval(function (id) {
+                 setInterval(function () {
                      lastMomentDataPull(id);
-                 }, 5 * 1000);
+                     createSpecificChart(id);
+                 }, 10 * 1000);
 
                  console.log("testchart");
                  let tempChart2 = document.getElementById("tempChart2").getContext('2d');
@@ -438,6 +454,7 @@
 
 
              }
+             
 
          }
          //Close chart collection
