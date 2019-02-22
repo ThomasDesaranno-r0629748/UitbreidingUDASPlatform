@@ -5,7 +5,6 @@ import domain.Meting;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.*;
 
 public class MetingRepository {

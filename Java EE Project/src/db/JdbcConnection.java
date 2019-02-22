@@ -31,7 +31,7 @@ public class JdbcConnection {
 
             try(Connection connection = DriverManager.getConnection(url)){
                 Statement statement = connection.createStatement();
-                ResultSet result = statement.executeQuery("SELECT * FROM Metingen");
+                ResultSet result = statement.executeQuery("SELECT * FROM Metingen WHERE id BETWEEN (SELECT MAX(id) FROM Metingen)-5000 AND (SELECT MAX(id) FROM Metingen)");
 
                 fillRepo(repo, result);
                 System.out.println("Fase 1");
@@ -58,7 +58,7 @@ public class JdbcConnection {
 
             try (Connection connection = DriverManager.getConnection(url)) {
                 Statement statement = connection.createStatement();
-                ResultSet result = statement.executeQuery("SELECT * FROM Metingen");
+                ResultSet result = statement.executeQuery("SELECT * FROM Metingen WHERE id BETWEEN (SELECT MAX(id) FROM Metingen)-5000 AND (SELECT MAX(id) FROM Metingen)");
 
                 fillRepo(repo, result);
             } catch (SQLException e) {
