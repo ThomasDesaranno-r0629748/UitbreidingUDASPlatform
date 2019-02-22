@@ -204,10 +204,10 @@
                      title: d.naam,
                      icon: iconPicker(d.s1, 14, 38, 59, 80) //Standaardwaarden SO2
                  });
-                 
+
                  sensor.bindPopup("Locatie: " + d.naam);
                  sensor.on('click', onCircleClick, d);
-                
+
                  markersTemp.addLayer(sensor);
              });
              markerRadial.addTo(map);
@@ -285,27 +285,27 @@
              }
          }
 
-        //Change Dust buttons
-        document.getElementById("changePM10").onclick = function () {
-            document.getElementById("displayeddust").innerHTML = "PM10";
-            displaystate = "PM10";
-            adjustIcon();
-        }
-        document.getElementById("changeO3").onclick = function () {
-            document.getElementById("displayeddust").innerHTML = "O3";
-            displaystate = "O3";
-            adjustIcon();
-        }
-        document.getElementById("changeSO2").onclick = function () {
-            document.getElementById("displayeddust").innerHTML = "SO2";
-            displaystate = "SO2";
-            adjustIcon();
-        }
-        document.getElementById("changeNO2").onclick = function () {
-            document.getElementById("displayeddust").innerHTML = "NO2";
-            displaystate = "NO2";
-            adjustIcon();
-        }
+         //Change Dust buttons
+         document.getElementById("changePM10").onclick = function () {
+             document.getElementById("displayeddust").innerHTML = "PM10";
+             displaystate = "PM10";
+             adjustIcon();
+         }
+         document.getElementById("changeO3").onclick = function () {
+             document.getElementById("displayeddust").innerHTML = "O3";
+             displaystate = "O3";
+             adjustIcon();
+         }
+         document.getElementById("changeSO2").onclick = function () {
+             document.getElementById("displayeddust").innerHTML = "SO2";
+             displaystate = "SO2";
+             adjustIcon();
+         }
+         document.getElementById("changeNO2").onclick = function () {
+             document.getElementById("displayeddust").innerHTML = "NO2";
+             displaystate = "NO2";
+             adjustIcon();
+         }
 
 
          //Adjust icon size on zoom
@@ -360,6 +360,7 @@
 
          var comparegraphs = 0;
          var id = 0;
+         var ssensor = [];
 
          function onCircleClick(obj) {
              document.getElementById("SO2").innerHTML = "Loading";
@@ -380,7 +381,7 @@
                              id = d.Deviceid;
                              name = d.naam;
                          }
-                         if(name == "VanCaenegemlaan"){
+                         if (name == "VanCaenegemlaan") {
                              id = 1011;
                          }
 
@@ -389,7 +390,7 @@
                      lastMomentDataPull(id);
                      createSpecificChart(id);
                  });
-                 
+
                  setInterval(function () {
                      lastMomentDataPull(id);
                      createSpecificChart(id);
@@ -416,6 +417,7 @@
                          if (d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng) {
                              document.getElementById("sensorName").innerHTML = d.naam;
                              id = d.Deviceid;
+                             selectedSensors(d.naam);
                          }
                          console.log("id is " + id);
                      })
@@ -458,7 +460,35 @@
 
 
              }
-             
+
+
+         }
+
+         function checkselected(naam) {
+             ssensor.forEach(function (s) {
+                 console.log("testfdqyuvdsj");
+                 if (naam == s) {
+                     return window.alert("sensor already selected");
+                 }
+                 return ssensor.push(naam);
+             })
+         }
+
+var selected = false;
+
+         function selectedSensors(naam) {
+             selected = false;
+               ssensor.forEach(function (s) {
+                 console.log("testfdqyuvdsj");
+                 if (naam == s) {
+                     selected = true;
+                     return window.alert("sensor already selected");
+                 }
+             })
+             if (selected == false){
+                 ssensor.push(" "+naam);
+             }
+             document.getElementById("selectedsensor").innerHTML = ssensor;
 
          }
          //Close chart collection
@@ -484,7 +514,7 @@
          }
          var compare = false;
 
-  //Close compare
+         //Close compare
          document.getElementById("closecompare").onclick = function () {
              compare = false;
              document.getElementById("comparePart").style.visibility = "hidden";
@@ -493,7 +523,7 @@
              document.getElementById("map").style.height = "100%";
              document.getElementById("legendCollection").style.bottom = "5%";
 
-             
+
          }
 
          // compare sensors
