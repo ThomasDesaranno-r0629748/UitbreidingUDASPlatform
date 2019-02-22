@@ -158,6 +158,8 @@
                  data.forEach(function (d) {
                      if (d.deviceId == id) {
                          idInPull = true;
+                         document.getElementById("lastDate").innerHTML = d.date;
+                         document.getElementById("lastTime").innerHTML = d.time;
                          if (d.so2 != null) {
                              document.getElementById("SO2").innerHTML = d.so2 + " ug/m3";
                          }
@@ -173,10 +175,12 @@
                      }
                  })
                  if (!idInPull) {
-                     document.getElementById("SO2").innerHTML = "NA ug/m3";
-                     document.getElementById("NO2").innerHTML = "NA ug/m3";
-                     document.getElementById("O3").innerHTML = "NA ug/m3";
-                     document.getElementById("PM1").innerHTML = "NA ug/m3";
+                     document.getElementById("SO2").innerHTML = "NA";
+                     document.getElementById("NO2").innerHTML = "NA";
+                     document.getElementById("O3").innerHTML = "NA";
+                     document.getElementById("PM1").innerHTML = "NA";
+                     document.getElementById("lastDate").innerHTML = "NA";
+                     document.getElementById("lastTime").innerHTML = "NA";
                  }
              })
          }
@@ -261,51 +265,27 @@
          }
          var displaystate = "SO2";
 
-         function displayedDust(id) {
-             if ("changeSO2" == id) {
-                 displaystate = "SO2";
-                 document.getElementById("displayeddust").innerHTML = "SO2";
-                 return adjustIcon();
-             }
-             if ("changeNO2" == id) {
-                 displaystate = "NO2";
-                 document.getElementById("displayeddust").innerHTML = "NO2";
-                 return adjustIcon();
-             }
-             if ("changeO3" == id) {
-                 displaystate = "O3";
-                 document.getElementById("displayeddust").innerHTML = "O3";
-                 return adjustIcon();
-             }
-             if ("changePM10" == id) {
-                 return document.getElementById("displayeddust").innerHTML = "PM10";
-             } else {
-                 document.getElementById("displayeddust").innerHTML = "ERROR - nothing";
-                 return adjustIcon();
-             }
-         }
-
-         //Change Dust buttons
-         document.getElementById("changePM10").onclick = function () {
-             document.getElementById("displayeddust").innerHTML = "PM10";
-             displaystate = "PM10";
-             adjustIcon();
-         }
-         document.getElementById("changeO3").onclick = function () {
-             document.getElementById("displayeddust").innerHTML = "O3";
-             displaystate = "O3";
-             adjustIcon();
-         }
-         document.getElementById("changeSO2").onclick = function () {
-             document.getElementById("displayeddust").innerHTML = "SO2";
-             displaystate = "SO2";
-             adjustIcon();
-         }
-         document.getElementById("changeNO2").onclick = function () {
-             document.getElementById("displayeddust").innerHTML = "NO2";
-             displaystate = "NO2";
-             adjustIcon();
-         }
+        //Change Dust buttons
+        document.getElementById("changePM10").onclick = function () {
+            document.getElementById("displayeddust").innerHTML = "PM10";
+            displaystate = "PM10";
+            adjustIcon();
+        }
+        document.getElementById("changeO3").onclick = function () {
+            document.getElementById("displayeddust").innerHTML = "O3";
+            displaystate = "O3";
+            adjustIcon();
+        }
+        document.getElementById("changeSO2").onclick = function () {
+            document.getElementById("displayeddust").innerHTML = "SO2";
+            displaystate = "SO2";
+            adjustIcon();
+        }
+        document.getElementById("changeNO2").onclick = function () {
+            document.getElementById("displayeddust").innerHTML = "NO2";
+            displaystate = "NO2";
+            adjustIcon();
+        }
 
 
          //Adjust icon size on zoom
@@ -319,6 +299,7 @@
                          if (d._latlng.lat == sensord.lat && d._latlng.lng == sensord.lon) {
                              d3.json("http://localhost:8080/Controller?action=returnLastData", function (metingd) {
                                  metingd.forEach(function (meting) {
+                                     console.log(meting)
                                      if (sensord.Deviceid == meting.deviceId && displaystate == "SO2") {
                                          console.log(meting.so2);
                                          d.setIcon(iconPicker(meting.so2, currentZoom, 38, 59, 80));
@@ -367,6 +348,8 @@
              document.getElementById("NO2").innerHTML = "Loading";
              document.getElementById("O3").innerHTML = "Loading";
              document.getElementById("PM1").innerHTML = "Loading";
+             document.getElementById("lastDate").innerHTML = "Loading";
+             document.getElementById("lastTime").innerHTML = "Loading";
              createSpecificChart(0);
              if (compare == false) {
                  console.log("clicktest");

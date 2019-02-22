@@ -177,7 +177,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     width: 95%;
-    height: 30px;
+    height: 50px;
     padding-bottom: 20px;
     border-bottom: 1px solid #dedede;
 }
@@ -295,7 +295,6 @@ body {
     align-items: center;
     margin: 0px;
     padding-bottom: 7%;
-    margin-top: 5%;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -658,4 +657,13 @@ body {
 }
 
 
-
+#lastMeasurement {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    justify-content: center;
+    font-size: 11;
+    height: 20px;
+    align-items: center;
+    font-weight: 700;
+}
