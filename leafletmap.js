@@ -413,15 +413,24 @@
                  console.log(comparegraphs);
                  document.getElementById("chartCollection").style.top = "58%";
                  d3.json("SensorLocaties.json", function (data) {
+                     var name = "";
                      data.forEach(function (d) {
                          if (d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng) {
                              document.getElementById("sensorName").innerHTML = d.naam;
                              id = d.Deviceid;
+                             name = d.naam;
                              selectedSensors(d.naam);
                          }
-                         console.log("id is " + id);
+                         if (name == "VanCaenegemlaan") {
+                             id = 1011;
+                         }
+
                      })
+                     console.log("id is " + id);
+                     lastMomentDataPull(id);
+                     createSpecificChart(id);
                  });
+
                  setInterval(function () {
                      lastMomentDataPull(id);
                      createSpecificChart(id);
@@ -464,31 +473,45 @@
 
          }
 
-         function checkselected(naam) {
-             ssensor.forEach(function (s) {
-                 console.log("testfdqyuvdsj");
-                 if (naam == s) {
-                     return window.alert("sensor already selected");
-                 }
-                 return ssensor.push(naam);
-             })
-         }
-
-var selected = false;
+         var selected = false;
 
          function selectedSensors(naam) {
+             if (ssensor.length >= 5) {
+
+                 return window.alert("maximum 5 sensors to be selected");
+             }
              selected = false;
-               ssensor.forEach(function (s) {
-                 console.log("testfdqyuvdsj");
-                 if (naam == s) {
+             ssensor.forEach(function (s) {
+                 if (" " + naam + " " == s) {
                      selected = true;
+
                      return window.alert("sensor already selected");
                  }
              })
-             if (selected == false){
-                 ssensor.push(" "+naam);
+             if (selected == false) {
+                 ssensor.push(" " + naam + " ");
+                 setsensornames();
              }
-             document.getElementById("selectedsensor").innerHTML = ssensor;
+
+         }
+
+         function setsensornames() {
+             var l = ssensor.length;
+             var n = 1;
+             ssensor.forEach(function (v) {
+                 document.getElementById("selectedsensor" + n).style.display = "block";
+                 document.getElementById("sesensor" + n).innerHTML = v;
+                 n++;
+             })
+
+         }
+
+         function remove(num) {
+             var n = 1;
+              document.getElementById("selectedsensor" + ssensor.length).style.display = "none";
+             document.getElementById("sesensor" + ssensor.length).innerHTML = "no";
+             ssensor.splice(num - 1, 1);
+             setsensornames();
 
          }
          //Close chart collection
@@ -539,52 +562,6 @@ var selected = false;
              document.getElementById("chartHistory").style.visibility = "hidden";
              document.getElementById("chartCollection").style.visibility = "hidden";
              document.getElementById("history").style.visibility = "hidden";
-
-
-             let tempChart = document.getElementById("tempChart2").getContext('2d');
-             console.log(tempChart + "teststetetstst");
-             let pressureChart = document.getElementById("pressureChart2").getContext('2d');
-             let O3Chart = document.getElementById("O3Chart2").getContext('2d');
-             let PM1Chart = document.getElementById("PM1Chart2").getContext('2d');
-
-             var chartLabels = [];
-             var chartDataTemp = [];
-             var chartDataPressure = [];
-             var chartDataO3 = [];
-             var chartDataPM1 = [];
-
-             getData();
-             setTimeout(createChart, 1000, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
-             setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
-             setTimeout(createChart, 1000, chartLabels, chartDataPressure, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
-             setTimeout(createChart, 1000, chartLabels, chartDataPressure, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
-
-             setInterval(function () {
-                 setTimeout(createChart, 1000, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
-                 setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
-                 setTimeout(createChart, 1000, chartLabels, chartDataPressure, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
-                 setTimeout(createChart, 1000, chartLabels, chartDataPressure, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
-                 getData()
-             }, 5 * 1000);
-
-             function getData() {
-
-                 chartLabels = [];
-                 chartDataTemp = [];
-                 chartDataPressure = [];
-                 chartDataO3 = [];
-                 chartDataPM1 = []
-                 d3.json("http://localhost:8080/Controller?action=returnLast24hData", function (data) {
-                     console.log(data)
-                     data.forEach(function (d) {
-                         chartLabels.push(d.time);
-                         chartDataTemp.push(d.so2);
-                         chartDataPressure.push(d.no2);
-                         chartDataO3.push(d.o3);
-                         chartDataPM1.push(d.pm10);
-                     })
-                 })
-             }
          }
 
          // make comparegraphs

@@ -6,9 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bef9b1d7-7bab-4188-bf53-64c73dc9536e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../leafletmap.js" beforeDir="false" afterPath="$PROJECT_DIR$/../leafletmap.js" afterDir="false" />
-    </list>
+    <list default="true" id="bef9b1d7-7bab-4188-bf53-64c73dc9536e" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,8 +96,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
-              <caret line="456" column="77" selection-start-line="456" selection-start-column="77" selection-end-line="456" selection-end-column="77" />
+            <state relative-caret-position="-58">
+              <caret line="449" column="77" selection-start-line="449" selection-start-column="77" selection-end-line="449" selection-end-column="77" />
             </state>
           </provider>
         </entry>
@@ -423,7 +421,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65071000" />
+    <option name="totallyTimeSpent" value="65759000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
