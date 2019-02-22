@@ -287,18 +287,22 @@
 
         //Change Dust buttons
         document.getElementById("changePM10").onclick = function () {
+            document.getElementById("displayeddust").innerHTML = "PM10";
             displaystate = "PM10";
             adjustIcon();
         }
         document.getElementById("changeO3").onclick = function () {
+            document.getElementById("displayeddust").innerHTML = "O3";
             displaystate = "O3";
             adjustIcon();
         }
         document.getElementById("changeSO2").onclick = function () {
+            document.getElementById("displayeddust").innerHTML = "SO2";
             displaystate = "SO2";
             adjustIcon();
         }
         document.getElementById("changeNO2").onclick = function () {
+            document.getElementById("displayeddust").innerHTML = "NO2";
             displaystate = "NO2";
             adjustIcon();
         }
