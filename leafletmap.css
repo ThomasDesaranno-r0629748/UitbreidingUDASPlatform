@@ -232,15 +232,6 @@ body {
     
 }
 
-.comparebttn{
-    background-color: white;
-    border-radius: 10%;
-    margin-top: -5%;column-rule: 
-}
-.comparebttn:hover {
-  background-color: beige; /* Green */
-}
-
 #compare{
   width: 95%;
     min-height: 35px;
@@ -507,8 +498,7 @@ body {
     right: 0;
     left: 0;
     margin: auto;
-    width: 40%;
-    min-width: 370px;
+    width: 370px;
     z-index: 2;
     background-color: white;
     height: 35px;
@@ -628,7 +618,7 @@ body {
     color: #2cd0d0;
     border-style: none;
     font-size: 15;
-    width: 90%;
+    width: 95%;
     height: 30px;
     font-family: 'Roboto Slab', serif;
     border: 1px solid #2cd0d0;
