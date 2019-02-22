@@ -46,7 +46,6 @@
         </div>
     </div>
     <div id="chartCollection">
-        <input id="history" type="button" value="<">
         <button type="button" id="closeChartCollection">x</button>
         <div id="sensorInfo">
             <p class="sensorInfo">Sensor Place:</p>
@@ -56,6 +55,12 @@
                 <p id="lastDate">yyyy-MM-dd</p>
                 <p id="lastTime">hh-mm</p>
             </div>
+        </div>
+        <div id="chartButtons">
+            <button class="chartButton" id="24hChart">24h</button>
+            <button class="chartButton" id="weekChart">Week</button>
+            <button class="chartButton" id="monthChart">Month</button>
+            <button class="chartButton" id="yearChart">Year</button>
         </div>
         <div id="scrollableDetails">
             <div id="sensorDetails">
@@ -87,43 +92,6 @@
                 <canvas id="PM1Chart"></canvas>
             </div>
         </div>
-        <div id="chartHistory">
-            <button type="button" id="closeChartHistory">x</button>
-            <div id="sensorInfo">
-                <p class="sensorInfo">History</p>
-                <p class="sensorInfo" id="sensorName">test</p>
-            </div>
-            <div id="scrollableDetails">
-                <div id="sensorDetails">
-                    <div class="sensorDColumn">
-                        <div>
-                            <p class="sensorDet">SO2:</p>
-                            <p class="sensorDetNum" id="SO2">test</p>
-                        </div>
-                        <div>
-                            <p class="sensorDet">NO2:</p>
-                            <p class="sensorDetNum" id="NO2">test</p>
-                        </div>
-                    </div>
-                    <div class="sensorDColumn">
-                        <div>
-                            <p class="sensorDet">O3:</p>
-                            <p class="sensorDetNum" id="O3">test</p>
-                        </div>
-                        <div>
-                            <p class="sensorDet">PM1:</p>
-                            <p class="sensorDetNum" id="PM1">test</p>
-                        </div>
-                    </div>
-                </div>
-                <div id="charts">
-                    <canvas id="tempChart"></canvas>
-                    <canvas id="pressureChart"></canvas>
-                    <canvas id="O3Chart"></canvas>
-                    <canvas id="PM1Chart"></canvas>
-                </div>
-            </div>
-        </div>
     </div>
     <div id="topBar">
         <p class="topTitles">Displayed:</p>
@@ -150,6 +118,8 @@
 </body>
 <script src="charts.js"></script>
 <script src="comparecharts.js"></script>
+<script src="chartButtons.js"></script>
 <script src="leafletmap.js"></script>
+
 
 </html>

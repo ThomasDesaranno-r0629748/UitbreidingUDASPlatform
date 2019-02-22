@@ -299,7 +299,6 @@
                          if (d._latlng.lat == sensord.lat && d._latlng.lng == sensord.lon) {
                              d3.json("http://localhost:8080/Controller?action=returnLastData", function (metingd) {
                                  metingd.forEach(function (meting) {
-                                     console.log(meting)
                                      if (sensord.Deviceid == meting.deviceId && displaystate == "SO2") {
                                          console.log(meting.so2);
                                          d.setIcon(iconPicker(meting.so2, currentZoom, 38, 59, 80));
@@ -333,8 +332,6 @@
 
          function onMapClick(e) {
              document.getElementById("chartCollection").style.visibility = "hidden";
-             document.getElementById("history").style.visibility = "hidden";
-             document.getElementById("chartHistory").style.visibility = "hidden";
          }
          map.on('click', onMapClick);
          //Graph popup
@@ -352,10 +349,7 @@
              document.getElementById("lastTime").innerHTML = "Loading";
              createSpecificChart(0);
              if (compare == false) {
-                 console.log("clicktest");
-                 document.getElementById("history").style.visibility = "visible";
                  document.getElementById("chartCollection").style.visibility = "visible";
-                 document.getElementById("chartCollection").style.top = "17%";
                  d3.json("SensorLocaties.json", function (data) {
                      var name = "";
                      data.forEach(function (d) {
@@ -371,27 +365,17 @@
                      })
                      console.log("id is " + id);
                      lastMomentDataPull(id);
-                     createSpecificChart(id);
+                     chartButtons(id);
                  });
-
                  setInterval(function () {
                      lastMomentDataPull(id);
-                     createSpecificChart(id);
                  }, 10 * 1000);
 
              }
              if (compare == true) {
                  console.log("comparchats");
                  document.getElementById("comparePart").style.display = "contents";
-                 //                 if (comparegraphs == 0){
-                 //                     document.getElementById("chartCollection2").style.right = "70%";
-                 //                 }
-                 //                 if (comparegraphs == 1){
-                 //                     document.getElementById("chartCollection2").style.right = "40%";
-                 //                 }
-                 //                  if (comparegraphs == 2){
-                 //                     document.getElementById("chartCollection2").style.right = "10%";
-                 //                 }
+                 
                  comparegraphs += 1;
                  console.log(comparegraphs);
                  document.getElementById("chartCollection").style.top = "58%";
@@ -405,9 +389,9 @@
                          console.log("id is " + id);
                      })
                  });
+                 chartButtons(id);
                  setInterval(function () {
                      lastMomentDataPull(id);
-                     createSpecificChart(id);
                  }, 10 * 1000);
 
                  console.log("testchart");
@@ -478,23 +462,8 @@ var selected = false;
          document.getElementById("closeChartCollection").onclick = function () {
 
              document.getElementById("chartCollection").style.visibility = "hidden";
-             document.getElementById("chartHistory").style.visibility = "hidden";
-             document.getElementById("history").style.visibility = "hidden";
          }
-         //Open history
-         document.getElementById("history").onclick = function () {
-
-
-             document.getElementById("chartHistory").style.visibility = "visible";
-             document.getElementById("history").style.visibility = "hidden";
-         }
-
-         //close history
-         document.getElementById("closeChartHistory").onclick = function () {
-
-             document.getElementById("chartHistory").style.visibility = "hidden";
-             document.getElementById("history").style.visibility = "visible";
-         }
+         
          var compare = false;
 
          //Close compare
@@ -519,9 +488,7 @@ var selected = false;
              document.getElementById("compare").style.visibility = "hidden";
              document.getElementById("map").style.height = "50%";
              document.getElementById("legendCollection").style.bottom = "52%";
-             document.getElementById("chartHistory").style.visibility = "hidden";
              document.getElementById("chartCollection").style.visibility = "hidden";
-             document.getElementById("history").style.visibility = "hidden";
 
 
              let tempChart = document.getElementById("tempChart2").getContext('2d');
