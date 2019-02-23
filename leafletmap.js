@@ -514,7 +514,6 @@
 
 
              let tempChart = document.getElementById("tempChart2").getContext('2d');
-             console.log(tempChart + "teststetetstst");
              let pressureChart = document.getElementById("pressureChart2").getContext('2d');
              let O3Chart = document.getElementById("O3Chart2").getContext('2d');
              let PM1Chart = document.getElementById("PM1Chart2").getContext('2d');
@@ -576,6 +575,7 @@
         }]
                  },
                  options: {
+                     responsive:false,
                      scales: {
                          yAxes: [{
                                  ticks: {

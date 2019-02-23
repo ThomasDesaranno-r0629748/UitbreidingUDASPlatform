@@ -57,7 +57,7 @@ public class MetingRepository {
     }
 
    public ArrayList<Meting> metingenLast24(){
-       ArrayList<Meting> data = new ArrayList();
+       ArrayList<Meting> data = new ArrayList<>();
 
 
        /*DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
@@ -79,29 +79,37 @@ public class MetingRepository {
                e.printStackTrace();
            }
        }
+       if (data.size()==0){
+           return data;
+       }
        data.sort((Comparator<Meting>) (fruit2, fruit1) -> fruit1.getDate().compareTo(fruit2.getDate()));
        data.sort((Comparator<Meting>) (fruit2, fruit1) -> fruit1.getTime().compareTo(fruit2.getTime()));
        ArrayList<Meting> finalData = new ArrayList<>();
        finalData.add(data.get(0));
         for (Meting m:data){
-            ArrayList<Meting> gelijkeMetingen = new ArrayList<>();
-            for (Meting me:data){
-                if (m.getDate().equals(me.getDate()) && m.getTime().equals(me.getTime())){
-                    gelijkeMetingen.add(me);
-                }
-            }
-            if (gelijkeMetingen.size() == 0){
-                System.out.print("SIZE NULL:\n");
-                finalData.add(m);
-            } else {
-                boolean add = true;
-                for (Meting met: finalData){
-                    if(met.getMetingId()==gelijkeMetingen.get(0).getMetingId()) add = false;
-                }
-                if (add){
-                    finalData.add(gelijkeMetingen.get(0));
-                }
-            }
+           try{
+               ArrayList<Meting> gelijkeMetingen = new ArrayList<>();
+               for (Meting me:data){
+                   if (m.getDate().equals(me.getDate()) && m.getTime().equals(me.getTime())){
+                       gelijkeMetingen.add(me);
+                   }
+               }
+               if (gelijkeMetingen.size() == 0){
+                   System.out.print("SIZE NULL:\n");
+                   finalData.add(m);
+               } else {
+                   boolean add = true;
+                   for (Meting met: finalData){
+                       if(met.getMetingId()==gelijkeMetingen.get(0).getMetingId()) add = false;
+                   }
+                   if (add){
+                       finalData.add(gelijkeMetingen.get(0));
+                   }
+               }
+           } catch (Exception e){
+               System.out.print(e.getClass().toString()+"\n");
+               System.out.print(e.getMessage()+"\n");
+           }
         }
        return finalData;
    }

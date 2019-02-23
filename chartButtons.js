@@ -7,55 +7,55 @@ var selectedChart = "24h";
 var localid = 0
 
 last24hButton.onclick = function(){
-    last24hButton.style.backgroundColor = "#2cd0d0";
+    last24hButton.style.backgroundColor = "#13abc4";
     last24hButton.style.color = "#fff";
     lastWeekButton.style.backgroundColor = "#fff";
-    lastWeekButton.style.color = "#2cd0d0";
+    lastWeekButton.style.color = "#13abc4";
     lastMonthButton.style.backgroundColor = "#fff";
-    lastMonthButton.style.color = "#2cd0d0";
+    lastMonthButton.style.color = "#13abc4";
     lastYearButton.style.backgroundColor = "#fff";
-    lastYearButton.style.color = "#2cd0d0";
+    lastYearButton.style.color = "#13abc4";
     createSpecificChart(id);
     selectedChart = "24h";
 }
 
 lastWeekButton.onclick = function(){
-    lastWeekButton.style.backgroundColor = "#2cd0d0";
+    lastWeekButton.style.backgroundColor = "#13abc4";
     lastWeekButton.style.color = "#fff";
     last24hButton.style.backgroundColor = "#fff";
-    last24hButton.style.color = "#2cd0d0";
+    last24hButton.style.color = "#13abc4";
     lastMonthButton.style.backgroundColor = "#fff";
-    lastMonthButton.style.color = "#2cd0d0";
+    lastMonthButton.style.color = "#13abc4";
     lastYearButton.style.backgroundColor = "#fff";
-    lastYearButton.style.color = "#2cd0d0";
+    lastYearButton.style.color = "#13abc4";
     selectedChart = "week";
     chartButtons(localid);
     
 }
 
 lastMonthButton.onclick = function(){
-    lastMonthButton.style.backgroundColor = "#2cd0d0";
+    lastMonthButton.style.backgroundColor = "#13abc4";
     lastMonthButton.style.color = "#fff";
     last24hButton.style.backgroundColor = "#fff";
-    last24hButton.style.color = "#2cd0d0";
+    last24hButton.style.color = "#13abc4";
     lastWeekButton.style.backgroundColor = "#fff";
-    lastWeekButton.style.color = "#2cd0d0";
+    lastWeekButton.style.color = "#13abc4";
     lastYearButton.style.backgroundColor = "#fff";
-    lastYearButton.style.color = "#2cd0d0";
+    lastYearButton.style.color = "#13abc4";
     selectedChart = "month";
     chartButtons(localid);
     
 }
 
 lastYearButton.onclick = function(){
-    lastYearButton.style.backgroundColor = "#2cd0d0";
+    lastYearButton.style.backgroundColor = "#13abc4";
     lastYearButton.style.color = "#fff";
     last24hButton.style.backgroundColor = "#fff";
-    last24hButton.style.color = "#2cd0d0";
+    last24hButton.style.color = "#13abc4";
     lastWeekButton.style.backgroundColor = "#fff";
-    lastWeekButton.style.color = "#2cd0d0";
+    lastWeekButton.style.color = "#13abc4";
     lastMonthButton.style.backgroundColor = "#fff";
-    lastMonthButton.style.color = "#2cd0d0";
+    lastMonthButton.style.color = "#13abc4";
     selectedChart = "year";
     chartButtons(localid);
     
