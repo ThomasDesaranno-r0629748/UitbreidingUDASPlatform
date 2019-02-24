@@ -378,7 +378,6 @@
                  
                  comparegraphs += 1;
                  console.log(comparegraphs);
-                 document.getElementById("chartCollection").style.top = "58%";
                  d3.json("SensorLocaties.json", function (data) {
                      var name = "";
                      data.forEach(function (d) {
@@ -395,43 +394,43 @@
                      })
                      console.log("id is " + id);
                      lastMomentDataPull(id);
-                     createSpecificChart(id);
+                     chartButtons(id);
                  });
                  chartButtons(id);
                  setInterval(function () {
                      lastMomentDataPull(id);
                  }, 10 * 1000);
 
-                 console.log("testchart");
-                 let tempChart2 = document.getElementById("tempChart2").getContext('2d');
-                 console.log(tempChart2 + "whuuutnfeosdfj");
-                 let pressureChart2 = document.getElementById("pressureChart2").getContext('2d');
-                 let O3Chart2 = document.getElementById("O3Chart2").getContext('2d');
-                 let PM1Chart2 = document.getElementById("PM1Chart2").getContext('2d');
-
-                 var chartLabels2 = [];
-                 var chartDataTemp2 = [];
-                 var chartDataPressure2 = [];
-                 var chartDataO32 = [];
-                 var chartDataPM12 = [];
-
-                 d3.json("http://localhost:8080/Controller?action=returnLast24hData", function (data) {
-                     console.log(data)
-                     data.forEach(function (d) {
-                         chartLabels2.push(d.time);
-                         chartDataTemp2.push(d.so2);
-                         chartDataPressure2.push(d.no2);
-                         chartDataO32.push(d.o3);
-                         chartDataPM12.push(d.pm10);
-                     })
-                 })
-
-                 console.log(chartDataO32 + "chuze");
-
-                 setTimeout(createChart, 500, chartLabels2, chartDataTemp2, tempChart2, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
-                 setTimeout(createChart, 500, chartLabels2, chartDataPressure2, pressureChart2, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
-                 setTimeout(createChart, 500, chartLabels2, chartDataPressure2, O3Chart2, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
-                 setTimeout(createChart, 500, chartLabels2, chartDataPressure2, PM1Chart2, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
+//                 console.log("testchart");
+//                 let tempChart2 = document.getElementById("tempChart2").getContext('2d');
+//                 console.log(tempChart2 + "whuuutnfeosdfj");
+//                 let pressureChart2 = document.getElementById("pressureChart2").getContext('2d');
+//                 let O3Chart2 = document.getElementById("O3Chart2").getContext('2d');
+//                 let PM1Chart2 = document.getElementById("PM1Chart2").getContext('2d');
+//
+//                 var chartLabels2 = [];
+//                 var chartDataTemp2 = [];
+//                 var chartDataPressure2 = [];
+//                 var chartDataO32 = [];
+//                 var chartDataPM12 = [];
+//
+//                 d3.json("http://localhost:8080/Controller?action=returnLast24hData", function (data) {
+//                     console.log(data)
+//                     data.forEach(function (d) {
+//                         chartLabels2.push(d.time);
+//                         chartDataTemp2.push(d.so2);
+//                         chartDataPressure2.push(d.no2);
+//                         chartDataO32.push(d.o3);
+//                         chartDataPM12.push(d.pm10);
+//                     })
+//                 })
+//
+//                 console.log(chartDataO32 + "chuze");
+//
+//                 setTimeout(createChart, 500, chartLabels2, chartDataTemp2, tempChart2, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
+//                 setTimeout(createChart, 500, chartLabels2, chartDataPressure2, pressureChart2, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
+//                 setTimeout(createChart, 500, chartLabels2, chartDataPressure2, O3Chart2, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
+//                 setTimeout(createChart, 500, chartLabels2, chartDataPressure2, PM1Chart2, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
 
 
              }
