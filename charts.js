@@ -94,6 +94,7 @@ function createSpecificChart(id) {
 }
 
 function createChart(chartLabels, chartData, chart, label, backgroundcolor, beginAtZero, borderColor) {
+
     let LineChart = new Chart(chart, {
         type: 'line',
         data: {
@@ -107,6 +108,7 @@ function createChart(chartLabels, chartData, chart, label, backgroundcolor, begi
         }]
         },
         options: {
+            responsive: true,
             scales: {
                 yAxes: [{
                         ticks: {
@@ -117,4 +119,5 @@ function createChart(chartLabels, chartData, chart, label, backgroundcolor, begi
             }
         }
     })
+
 }
