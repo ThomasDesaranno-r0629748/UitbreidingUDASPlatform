@@ -103,46 +103,50 @@
         <div id="chartCollection2">
             <div id="compareTitleBar">
                 <div id="topBarcomp">
-                <p>Compare Sensors</p>
-            </div>
-            <button id="closecompare" onclick="closeCompare()">x</button>
+                    <p>Compare Sensors</p>
+                </div>
+                <button id="closecompare" onclick="closeCompare()">x</button>
             </div>
 
             <div id="selectedSensors">
-            <ul>
-                <li id="selectedsensor1">
-                <div class="selectedSensorLi">
-                    <p id="sesensor1" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(1)">x</button>
-                </div>
-            </li>
-            <li id="selectedsensor2">
-                <div class="selectedSensorLi">
-                    <p id="sesensor2" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(2)">x</button>
-                </div>
-            </li>
-            <li id="selectedsensor3">
-                <div class="selectedSensorLi">
-                    <p id="sesensor3" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(3)">x</button>
-                </div>
-            </li>
-            <li id="selectedsensor4">
-                <div class="selectedSensorLi">
-                    <p id="sesensor4" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(4)">x</button>
-                </div>
-            </li>
-            <li id="selectedsensor5">
-                <div class="selectedSensorLi">
-                    <p id="sesensor5" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(5)">x</button>
-                </div>
-            </li>
-            </ul>
+                <ul>
+                    <li id="selectedsensor1">
+                        <div class="selectedSensorLi">
+                            <p id="sesensor1" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(1)">x</button>
+                        </div>
+                    </li>
+                    <li id="selectedsensor2">
+                        <div class="selectedSensorLi">
+                            <p id="sesensor2" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(2)">x</button>
+                        </div>
+                    </li>
+                    <li id="selectedsensor3">
+                        <div class="selectedSensorLi">
+                            <p id="sesensor3" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(3)">x</button>
+                        </div>
+                    </li>
+                    <li id="selectedsensor4">
+                        <div class="selectedSensorLi">
+                            <p id="sesensor4" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(4)">x</button>
+                        </div>
+                    </li>
+                    <li id="selectedsensor5">
+                        <div class="selectedSensorLi">
+                            <p id="sesensor5" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(5)">x</button>
+                        </div>
+                    </li>
+                </ul>
             </div>
 
             <div id="charts2">
-                <canvas id="tempChart2"></canvas>
-                <canvas id="pressureChart2"></canvas>
-                <canvas id="O3Chart2"></canvas>
-                <canvas id="PM1Chart2"></canvas>
+                <div>
+                    <canvas id="tempChart2"></canvas>
+                    <canvas id="pressureChart2"></canvas>
+                </div>
+                <div>
+                    <canvas id="O3Chart2"></canvas>
+                    <canvas id="PM1Chart2"></canvas>
+                </div>
             </div>
         </div>
     </div>

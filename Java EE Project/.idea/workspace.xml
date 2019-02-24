@@ -91,11 +91,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/db/MetingRepository.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="134">
               <caret line="85" column="23" selection-start-line="85" selection-start-column="23" selection-end-line="85" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="598" column="12" selection-start-line="598" selection-start-column="12" selection-end-line="598" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -177,6 +186,11 @@
             <path>
               <item name="ServerConnection" type="b2602c69:ProjectViewProjectNode" />
               <item name="Java EE Project" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ServerConnection" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java EE Project" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ServerConnection" type="b2602c69:ProjectViewProjectNode" />
@@ -419,7 +433,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74436000" />
+    <option name="totallyTimeSpent" value="74442000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -432,6 +446,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15704697" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -443,12 +458,12 @@
       <window_info id="Image Layers" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.35886526" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.35886526" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32905984" />
-      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.32837406" />
+      <window_info anchor="bottom" id="Application Servers" order="7" visible="true" weight="0.32765958" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32905984" />
       <window_info anchor="bottom" id="Java Enterprise" order="9" weight="0.32905984" />
       <window_info anchor="bottom" id="Version Control" order="10" />
@@ -487,8 +502,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="484" column="12" selection-start-line="484" selection-start-column="12" selection-end-line="484" selection-end-column="12" />
+        <state relative-caret-position="34">
+          <caret line="598" column="12" selection-start-line="598" selection-start-column="12" selection-end-line="598" selection-end-column="12" />
         </state>
       </provider>
     </entry>

@@ -561,7 +561,7 @@
          // make comparegraphs
 
 
-         function createChart(chartLabels, chartData, chart, label, backgroundcolor, beginAtZero, borderColor) {
+         /*function createChart(chartLabels, chartData, chart, label, backgroundcolor, beginAtZero, borderColor) {
              let LineChart = new Chart(chart, {
                  type: 'line',
                  data: {
@@ -586,4 +586,4 @@
                      }
                  }
              })
-         }
+         }*/

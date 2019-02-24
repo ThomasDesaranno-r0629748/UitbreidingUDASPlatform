@@ -93,11 +93,10 @@ body {
     z-index: 2;
     background: #fff;
     padding-right: 0px;
-    padding-bottom: 5px;
     display: flex;
     flex-direction: column;
-    margin-left: 0px;
-    height: 780px;
+    margin: 0px;
+    height: auto;
 }
 
 #chartCollection * {
@@ -229,13 +228,20 @@ body {
     flex-direction: column;
 }
 
+
 #charts2 {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    align-items: center;
     margin-top: 20px;
+    flex-direction: row;
+    margin: 0px
+}
+#charts2 div{
+    width: 45%;
+    margin: 0 10px;
 }
 
 #sensorDetails {
@@ -302,7 +308,7 @@ body {
 
 #tempChart2 {
     width: 45%;
-    padding: 20px 20px;
+    padding: 20px 0px;
     border-bottom: 1px solid #dedede;
 }
 
@@ -314,9 +320,7 @@ body {
 
 #pressureChart2 {
     width: 45%;
-    padding: 20px 20px;
-    border-bottom: 1px solid #dedede;
-    border-left: 1px solid #dedede;
+    padding: 20px 0px;
 }
 
 #legendContainer {
@@ -359,7 +363,8 @@ body {
 
 #O3Chart2 {
     width: 45%;
-    padding: 20px 20px;
+    padding: 20px 0px;
+    border-bottom: 1px solid #dedede;
 }
 
 #PM1Chart {
@@ -369,8 +374,7 @@ body {
 
 #PM1Chart2 {
     width: 45%;
-    padding: 20px 20px;
-    border-left: 1px solid #dedede;
+    padding: 20px 0px;
 }
 
 #chartScroller {
@@ -665,7 +669,7 @@ body {
     align-items: center;
     margin: 0px;
     align-items: center;
-    height: 50px;
+    height: 100px;
 }
 
 
