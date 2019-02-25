@@ -570,7 +570,9 @@
                      chartNO2List.push(chartDataPressureId);
                      chartO3List.push(chartDataO3Id);
                      chartPM10List.push(chartDataPM1Id);
-                     labelsList = chartLabelsId;
+                     if(i == 0){
+                         labelsList = chartLabelsId;
+                     }
                      chartLabelsId = [];
                      chartDataTempId = [];
                      chartDataPressureId = [];
@@ -578,8 +580,6 @@
                      chartDataPM1Id = []
                  }, 2000)
              }
-             console.log("chartSO2List")
-             console.log(chartSO2List)
          }
          //Make comparegraphs
          function createChartCompare(chartLabels, chartData, chart, labelList, beginAtZero, borderColor) {
@@ -592,17 +592,20 @@
                              data: chartData[0]
                              , pointRadius: 0
                              , borderColor: borderColor[0]
+                         , backgroundColor: "rgba(255, 255, 255, 0)"
                     }
                          , {
                              data: chartData[1]
                              , pointRadius: 0
                              , borderColor: borderColor[1]
+                             , backgroundColor: "rgba(255, 255, 255, 0)"
                     },
 
                          {
                              data: chartData[2]
                              , pointRadius: 0
                              , borderColor: borderColor[2]
+                             , backgroundColor: "rgba(255, 255, 255, 0)"
                      }
                          , {
                              data: chartData[3]
@@ -613,12 +616,9 @@
                              data: chartData[4]
                              , pointRadius: 0
                              , borderColor: borderColor[4]
+                             , backgroundColor: "rgba(255, 255, 255, 0)"
                     }
-                         , {
-                             data: chartData[5]
-                             , pointRadius: 0
-                             , borderColor: borderColor[5]
-                    }]
+                        ]
                  }
                  , options: {
                      legend: {
