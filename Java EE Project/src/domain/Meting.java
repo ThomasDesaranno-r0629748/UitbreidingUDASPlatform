@@ -4,20 +4,20 @@ import java.sql.Time;
 import java.util.Date;
 
 public class Meting {
-    private double SO2;
-    private double NO2;
-    private double O3;
-    private double PM10;
+    private double s1;
+    private double s2;
+    private double s3;
+    private double s4;
     private String date;
     private String time;
     private int deviceId;
     private int metingId;
 
     public Meting(double SO2, double NO2, double o3, double PM10, String date, String time, int deviceId, int metingId) {
-        this.SO2 = SO2;
-        this.NO2 = NO2;
-        O3 = o3;
-        this.PM10 = PM10;
+        this.s1 = SO2;
+        this.s2 = NO2;
+        s3 = o3;
+        this.s4 = PM10;
         this.date = date;
         this.time = time;
         this.deviceId = deviceId;
@@ -51,35 +51,35 @@ public class Meting {
     }
 
     public double getSO2() {
-        return SO2;
+        return s1;
     }
 
     public void setSO2(double SO2) {
-        this.SO2 = SO2;
+        this.s1 = SO2;
     }
 
     public double getNO2() {
-        return NO2;
+        return s2;
     }
 
     public void setNO2(double NO2) {
-        this.NO2 = NO2;
+        this.s2 = NO2;
     }
 
     public double getO3() {
-        return O3;
+        return s3;
     }
 
     public void setO3(double o3) {
-        O3 = o3;
+        s3 = o3;
     }
 
     public double getPM10() {
-        return PM10;
+        return s4;
     }
 
     public void setPM10(double PM10) {
-        this.PM10 = PM10;
+        this.s4 = PM10;
     }
 
     public String getTime() {

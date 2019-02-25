@@ -3,6 +3,7 @@ var lastWeekButton = document.getElementById("weekChart");
 var lastMonthButton = document.getElementById("monthChart");
 var lastYearButton = document.getElementById("yearChart");
 
+
 var selectedChart = "24h";
 var localid = 0
 
@@ -62,11 +63,13 @@ lastYearButton.onclick = function(){
 }
 
 
+
+
 function chartButtons(id){
     console.log(localid)
     localid = id;
     if(selectedChart == "24h"){
-        createSpecificChart(10);
+        createSpecificChart(id);
     } 
     if(selectedChart == "week"){
         createSpecificChartLink(id, "http://localhost:8080/Controller?action=returnWeekData", "week");

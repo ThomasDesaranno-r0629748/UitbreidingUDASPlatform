@@ -19,14 +19,11 @@
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script src="chartRefresh.js"></script>
-
 </head>
 
 <body>
-
     <div id="map"></div>
     <div id="legendCollection">
-
         <div id="compare">
             <button id="comparebttn" onclick="comparePage()">Compare sensors</button>
         </div>
@@ -107,44 +104,57 @@
                 </div>
                 <button id="closecompare" onclick="closeCompare()">x</button>
             </div>
-
+            <div id="chartButtonsCompare">
+                <button class="chartButton" id="24hChartC">24h</button>
+                <button class="chartButton" id="weekChartC">Week</button>
+                <button class="chartButton" id="monthChartC">Month</button>
+                <button class="chartButton" id="yearChartC">Year</button>
+            </div>
             <div id="selectedSensors">
                 <ul>
                     <li id="selectedsensor1">
                         <div class="selectedSensorLi">
-                            <p id="sesensor1" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(1)">x</button>
+                            <p id="sesensor1" class="sesensor">No sensors selected</p>
+                            <button type="reset" class="remove" value="Reset" onclick="remove(1)">x</button>
                         </div>
                     </li>
                     <li id="selectedsensor2">
                         <div class="selectedSensorLi">
-                            <p id="sesensor2" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(2)">x</button>
+                            <p id="sesensor2" class="sesensor">No sensors selected</p>
+                            <button type="reset" class="remove" value="Reset" onclick="remove(2)">x</button>
                         </div>
                     </li>
                     <li id="selectedsensor3">
                         <div class="selectedSensorLi">
-                            <p id="sesensor3" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(3)">x</button>
+                            <p id="sesensor3" class="sesensor">No sensors selected</p>
+                            <button type="reset" class="remove" value="Reset" onclick="remove(3)">x</button>
                         </div>
                     </li>
                     <li id="selectedsensor4">
                         <div class="selectedSensorLi">
-                            <p id="sesensor4" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(4)">x</button>
+                            <p id="sesensor4" class="sesensor">No sensors selected</p>
+                            <button type="reset" class="remove" value="Reset" onclick="remove(4)">x</button>
                         </div>
                     </li>
                     <li id="selectedsensor5">
                         <div class="selectedSensorLi">
-                            <p id="sesensor5" class="sesensor">No sensors selected</p><button type="reset" class="remove" value="Reset" onclick="remove(5)">x</button>
+                            <p id="sesensor5" class="sesensor">No sensors selected</p>
+                            <button type="reset" class="remove" value="Reset" onclick="remove(5)">x</button>
                         </div>
                     </li>
                 </ul>
             </div>
-
             <div id="charts2">
                 <div>
+                    <h3>SO2</h3>
                     <canvas id="tempChart2"></canvas>
+                    <h3>NO2</h3>
                     <canvas id="pressureChart2"></canvas>
                 </div>
                 <div>
+                    <h3>O3</h3>
                     <canvas id="O3Chart2"></canvas>
+                    <h3>PM10</h3>
                     <canvas id="PM1Chart2"></canvas>
                 </div>
             </div>
@@ -155,6 +165,5 @@
 <script src="comparecharts.js"></script>
 <script src="chartButtons.js"></script>
 <script src="leafletmap.js"></script>
-
 
 </html>

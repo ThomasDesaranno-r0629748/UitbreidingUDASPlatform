@@ -1,89 +1,86 @@
          var sliderControl = null;
-
          // initialize the map
          var map = L.map('map');
          // load a tile layer
          mapLink = '<a href="http://www.esri.com/">Esri</a>';
          wholink = 'i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
          var Satelite = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-             attribution: '&copy; ' + mapLink + ', ' + wholink,
-             maxZoom: 19,
-         })
+             attribution: '&copy; ' + mapLink + ', ' + wholink
+             , maxZoom: 19
+         , })
          var Wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
-             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
-             minZoom: 1,
-             maxZoom: 19
+             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>'
+             , minZoom: 1
+             , maxZoom: 19
          }).addTo(map);
          var OWM_API_KEY = '3361df6687a5458ad0f9e3556c666018';
          var clouds = L.OWM.clouds({
-             opacity: 0.8,
-             legendImagePath: '/NT2.png',
-             appId: OWM_API_KEY
+             opacity: 0.8
+             , legendImagePath: '/NT2.png'
+             , appId: OWM_API_KEY
          });
          var cloudscls = L.OWM.cloudsClassic({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var precipitation = L.OWM.precipitation({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var precipitationcls = L.OWM.precipitationClassic({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var rain = L.OWM.rain({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var raincls = L.OWM.rainClassic({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var snow = L.OWM.snow({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var pressure = L.OWM.pressure({
-             opacity: 0.4,
-             appId: OWM_API_KEY
+             opacity: 0.4
+             , appId: OWM_API_KEY
          });
          var pressurecntr = L.OWM.pressureContour({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var temp = L.OWM.temperature({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var wind = L.OWM.wind({
-             opacity: 0.5,
-             appId: OWM_API_KEY
+             opacity: 0.5
+             , appId: OWM_API_KEY
          });
          var baseMaps = {
-             "Streets": Wikimedia,
-             "Satelite": Satelite
+             "Streets": Wikimedia
+             , "Satelite": Satelite
          };
          var overlayMaps = {
-             "Clouds": clouds,
-             "Clouds classic": cloudscls,
-             "Precipitation": precipitation,
-             "Precipitation classic": precipitationcls,
-             "Rain": rain,
-             "Rain Classic": raincls,
-             "Snow": snow,
-             "Pressure": pressure,
-             "Pressure contour": pressurecntr,
-             "Temperature": temp,
-             "Wind": wind
+             "Clouds": clouds
+             , "Clouds classic": cloudscls
+             , "Precipitation": precipitation
+             , "Precipitation classic": precipitationcls
+             , "Rain": rain
+             , "Rain Classic": raincls
+             , "Snow": snow
+             , "Pressure": pressure
+             , "Pressure contour": pressurecntr
+             , "Temperature": temp
+             , "Wind": wind
          };
          L.control.layers(baseMaps, overlayMaps).addTo(map);
-
          //On document load
          document.addEventListener("DOMContentLoaded", function () {
              lastMomentDataPull(0);
          });
-
          //Pick icon
          function colorPick(temperature) {
              if (temperature >= 0 && temperature < 50) return sensorIconlightgreen;
@@ -91,66 +88,63 @@
              if (temperature >= 10 && temperature < 200) return sensorIconorange;
              if (temperature >= 200) return sensorIconRed;
          }
-
-
          //Pick right icon
          function iconPicker(temperature, zoom, good, moderate, bad) {
              var iconSize = zoom + 10;
              var shadowSize = Math.pow((zoom * 10), zoom / (30 - (zoom - zoom / 10))) + 50;
              if (temperature == "" || temperature == null || temperature < 0) {
                  var icon = L.icon({
-                     iconUrl: 'images/blacksensor.png',
-                     iconSize: [iconSize * 1.2, iconSize], // size of the icon
+                     iconUrl: 'images/blacksensor.png'
+                     , iconSize: [iconSize * 1.2, iconSize], // size of the icon
                      iconAnchor: [iconSize / 2, iconSize / 2], // point of the icon which will correspond to 
                  });
                  return icon;
              }
              if (temperature >= 0 && temperature < good) {
                  var icon = L.icon({
-                     iconUrl: 'lightgreensensor.png',
-                     shadowUrl: 'images/greenRadial.png',
-                     shadowAnchor: [shadowSize / 2.11, shadowSize / 2],
-                     shadowSize: [shadowSize, shadowSize],
-                     iconSize: [iconSize * 1.2, iconSize], // size of the icon
+                     iconUrl: 'lightgreensensor.png'
+                     , shadowUrl: 'images/greenRadial.png'
+                     , shadowAnchor: [shadowSize / 2.11, shadowSize / 2]
+                     , shadowSize: [shadowSize, shadowSize]
+                     , iconSize: [iconSize * 1.2, iconSize], // size of the icon
                      iconAnchor: [iconSize / 2, iconSize / 2], // point of the icon which will correspond to 
                  });
                  return icon;
              }
              if (temperature >= good && temperature < moderate) {
                  var icon = L.icon({
-                     iconUrl: 'yellowsensor.png',
-                     shadowUrl: 'images/yellowRadial.png',
-                     shadowAnchor: [shadowSize / 2, shadowSize / 2],
-                     shadowSize: [shadowSize, shadowSize],
-                     iconSize: [iconSize * 1.2, iconSize], // size of the icon
+                     iconUrl: 'yellowsensor.png'
+                     , shadowUrl: 'images/yellowRadial.png'
+                     , shadowAnchor: [shadowSize / 2, shadowSize / 2]
+                     , shadowSize: [shadowSize, shadowSize]
+                     , iconSize: [iconSize * 1.2, iconSize], // size of the icon
                      iconAnchor: [iconSize / 2, iconSize / 2], // point of the icon which will correspond to 
                  });
                  return icon;
              }
              if (temperature >= moderate && temperature < bad) {
                  var icon = L.icon({
-                     iconUrl: 'orangesensor.png',
-                     shadowUrl: 'images/orangeRadial.png',
-                     shadowAnchor: [shadowSize / 2, shadowSize / 2],
-                     shadowSize: [shadowSize, shadowSize],
-                     iconSize: [iconSize * 1.2, iconSize], // size of the icon
+                     iconUrl: 'orangesensor.png'
+                     , shadowUrl: 'images/orangeRadial.png'
+                     , shadowAnchor: [shadowSize / 2, shadowSize / 2]
+                     , shadowSize: [shadowSize, shadowSize]
+                     , iconSize: [iconSize * 1.2, iconSize], // size of the icon
                      iconAnchor: [iconSize / 2, iconSize / 2], // point of the icon which will correspond to 
                  });
                  return icon;
              }
              if (temperature >= bad) {
                  var icon = L.icon({
-                     iconUrl: 'redsensor.png',
-                     shadowUrl: 'images/redRadial.png',
-                     shadowAnchor: [shadowSize / 2, shadowSize / 2],
-                     shadowSize: [shadowSize, shadowSize],
-                     iconSize: [iconSize * 1.2, iconSize], // size of the icon
+                     iconUrl: 'redsensor.png'
+                     , shadowUrl: 'images/redRadial.png'
+                     , shadowAnchor: [shadowSize / 2, shadowSize / 2]
+                     , shadowSize: [shadowSize, shadowSize]
+                     , iconSize: [iconSize * 1.2, iconSize], // size of the icon
                      iconAnchor: [iconSize / 2, iconSize / 2], // point of the icon which will correspond to 
                  });
                  return icon;
              }
          }
-
          //Pull data van laatste dag laatset moment
          function lastMomentDataPull(id) {
              d3.json("http://localhost:8080/Controller?action=returnLastData", function (data) {
@@ -184,7 +178,6 @@
                  }
              })
          }
-
          //Temperature clustergroup
          var markersTemp = L.layerGroup();
          var markerHumidity = L.layerGroup();
@@ -200,18 +193,15 @@
              data.forEach(function (d) {
                  d.lat = +d.lat;
                  d.lon = +d.lon;
-
                  mapLat = mapLat + d.lat;
                  mapLon = mapLon + d.lon;
                  amountData++;
                  var sensor = L.marker([d.lat, d.lon], {
-                     title: d.naam,
-                     icon: iconPicker(d.s1, 14, 38, 59, 80) //Standaardwaarden SO2
+                     title: d.naam
+                     , icon: iconPicker(d.s1, 14, 38, 59, 80) //Standaardwaarden SO2
                  });
-
                  sensor.bindPopup("Locatie: " + d.naam);
                  sensor.on('click', onCircleClick, d);
-
                  markersTemp.addLayer(sensor);
              });
              markerRadial.addTo(map);
@@ -221,50 +211,42 @@
              getCurrentLocation(latgem, longem);
              map.setView([mapLat / amountData, mapLon / amountData], 14);
          })
-
          $.getJSON("points.json", function (json) {
-             var testlayer = L.geoJson(json),
-                 sliderControl = L.control.sliderControl({
-                     position: "bottomright",
-                     layer: testlayer
+             var testlayer = L.geoJson(json)
+                 , sliderControl = L.control.sliderControl({
+                     position: "bottomright"
+                     , layer: testlayer
                  });
-
              var sliderControl = L.control.sliderControl({
-                 layer: testlayer,
-                 follow: true,
-                 range: true
+                 layer: testlayer
+                 , follow: true
+                 , range: true
              });
              map.addControl(sliderControl);
              sliderControl.startSlider();
          })
-
          var controlSearch = new L.Control.Search({
-             position: 'topright',
-             layer: markersTemp,
-             initial: false,
-             zoom: 18,
-             marker: false
+             position: 'topright'
+             , layer: markersTemp
+             , initial: false
+             , zoom: 18
+             , marker: false
          });
          map.addControl(controlSearch);
-
          var cityname = "stad";
 
          function getCurrentLocation(latitude, longitude) {
-             fetch("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + OWM_API_KEY)
-                 .then(function (resp) {
+             fetch("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + OWM_API_KEY).then(function (resp) {
                      return resp.json()
                  }) // Convert data to json
                  .then(function (data) {
                      cityname = data.name;
                      document.getElementById("locationCity").innerHTML = cityname;
-
-                 })
-                 .catch(function () {
+                 }).catch(function () {
                      // catch any errors
                  });
          }
          var displaystate = "SO2";
-
          //Change Dust buttons
          document.getElementById("changePM10").onclick = function () {
              document.getElementById("displayeddust").innerHTML = "PM10";
@@ -282,17 +264,13 @@
              adjustIcon();
          }
          document.getElementById("changeNO2").onclick = function () {
-             document.getElementById("displayeddust").innerHTML = "NO2";
-             displaystate = "NO2";
-             adjustIcon();
-         }
-
-
-         //Adjust icon size on zoom
+                 document.getElementById("displayeddust").innerHTML = "NO2";
+                 displaystate = "NO2";
+                 adjustIcon();
+             }
+             //Adjust icon size on zoom
          function adjustIcon() {
              var currentZoom = map.getZoom();
-
-
              d3.json("SensorLocaties.json", function (data) {
                  data.forEach(function (sensord) {
                      markersTemp.eachLayer(function (d) {
@@ -300,7 +278,6 @@
                              d3.json("http://localhost:8080/Controller?action=returnLastData", function (metingd) {
                                  metingd.forEach(function (meting) {
                                      if (sensord.Deviceid == meting.deviceId && displaystate == "SO2") {
-                                         console.log(meting.so2);
                                          d.setIcon(iconPicker(meting.so2, currentZoom, 38, 59, 80));
                                      }
                                      if (sensord.Deviceid == meting.deviceId && displaystate == "NO2") {
@@ -318,14 +295,11 @@
                                  })
                              })
                          }
-
                      });
                  });
              });
          }
          map.on('zoomend', adjustIcon);
-
-
          //Clickable map popups
          var popup = L.po
          var popup = L.popup();
@@ -335,7 +309,6 @@
          }
          map.on('click', onMapClick);
          //Graph popup
-
          var comparegraphs = 0;
          var id = 0;
          var ssensor = [];
@@ -361,7 +334,6 @@
                          if (name == "VanCaenegemlaan") {
                              id = 1011;
                          }
-
                      })
                      console.log("id is " + id);
                      lastMomentDataPull(id);
@@ -370,14 +342,10 @@
                  setInterval(function () {
                      lastMomentDataPull(id);
                  }, 10 * 1000);
-
              }
              if (compare == true) {
-                 console.log("comparchats");
                  document.getElementById("comparePart").style.display = "contents";
-
                  comparegraphs += 1;
-                 console.log(comparegraphs);
                  d3.json("SensorLocaties.json", function (data) {
                      var name = "";
                      data.forEach(function (d) {
@@ -385,16 +353,14 @@
                              document.getElementById("sensorName").innerHTML = d.naam;
                              id = d.Deviceid;
                              name = d.naam;
+                             idList.push(d.Deviceid);
                              selectedSensors(d.naam);
                          }
                          if (name == "VanCaenegemlaan") {
                              id = 1011;
                          }
-
                      })
-                     console.log("id is " + id);
                      lastMomentDataPull(id);
-                     chartButtons(id);
                  });
                  /*chartButtons(id);
                  setInterval(function () {
@@ -453,57 +419,53 @@
 
 */
              }
-
-
          }
-
          var selected = false;
 
          function selectedSensors(naam) {
              if (ssensor.length >= 5) {
-
                  return window.alert("maximum 5 sensors to be selected");
              }
              selected = false;
              ssensor.forEach(function (s) {
                  if (" " + naam + " " == s) {
                      selected = true;
-
                      return window.alert("sensor already selected");
                  }
              })
              if (selected == false) {
                  ssensor.push(" " + naam + " ");
                  labelList.push(naam);
-                 addIdToList(naam);
                  setsensornames();
-                 addDataId("http://localhost:8080/Controller?action=returnLastWeekData", "week")
+                 chartCompareButtons();
                  setTimeout(createChartCompare, 1000, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
                  setTimeout(createChartCompare, 1000, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
                  setTimeout(createChartCompare, 1000, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
                  setTimeout(createChartCompare, 1000, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
              }
-
          }
 
          function setsensornames() {
              var l = ssensor.length;
              var n = 1;
              ssensor.forEach(function (v) {
-                 console.log(n)
                  var sensor = document.getElementById("selectedsensor" + n);
                  sensor.style.display = "block";
                  document.getElementById("sesensor" + n).innerHTML = v;
                  if (n == 1) {
                      sensor.style.backgroundColor = "#ff3434";
-                 } else if (n == 2) {
+                 }
+                 else if (n == 2) {
                      sensor.style.backgroundColor = "#4dff4d";
-                 } else if (n == 3) {
+                 }
+                 else if (n == 3) {
                      sensor.style.backgroundColor = "#34d8ff";
-                 } else if (n == 4) {
+                 }
+                 else if (n == 4) {
                      sensor.style.backgroundColor = "#c834ff";
-                 } else if (n == 5) {
-                     sensor.style.backgroundColor = "#d0ff34";
+                 }
+                 else if (n == 5) {
+                     sensor.style.backgroundColor = "#aee300";
                  }
                  n++;
              })
@@ -521,7 +483,7 @@
              chartPM10List = [];
              labelsList = [];
              idList.splice(num - 1, 1);
-             addDataId("http://localhost:8080/Controller?action=returnLastWeekData", "week")
+             chartCompareButtons();
              setTimeout(createChartCompare, 1000, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
              setTimeout(createChartCompare, 1000, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
              setTimeout(createChartCompare, 1000, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
@@ -531,26 +493,21 @@
          document.getElementById("closeChartCollection").onclick = function () {
              document.getElementById("chartCollection").style.visibility = "hidden";
          }
-
          var compare = false;
-
          //Close compare
          document.getElementById("closecompare").onclick = function () {
-             compare = false;
-             document.getElementById("comparePart").style.visibility = "hidden";
-             document.getElementById("comparePart").style.display = "none";
-             document.getElementById("compare").style.visibility = "visible";
-             document.getElementById("map").style.height = "100%";
-             document.getElementById("legendCollection").style.bottom = "5%";
-
-
-         }
-         //Graphs
+                 compare = false;
+                 document.getElementById("comparePart").style.visibility = "hidden";
+                 document.getElementById("comparePart").style.display = "none";
+                 document.getElementById("compare").style.visibility = "visible";
+                 document.getElementById("map").style.height = "100%";
+                 document.getElementById("legendCollection").style.bottom = "5%";
+             }
+             //Graphs
          let tempChart2 = document.getElementById("tempChart2").getContext('2d');
          let pressureChart2 = document.getElementById("pressureChart2").getContext('2d');
          let O3Chart2 = document.getElementById("O3Chart2").getContext('2d');
          let PM1Chart2 = document.getElementById("PM1Chart2").getContext('2d');
-
          //Lists
          var idList = [];
          var labelList = [];
@@ -558,10 +515,8 @@
          var chartNO2List = [];
          var chartO3List = [];
          var chartPM10List = [];
-         var colorList = ["#ff3434", "#4dff4d", "#34d8ff", , "#c834ff", "#d0ff34"];
+         var colorList = ["#ff3434", "#4dff4d", "#34d8ff", , "#c834ff", "#3e3e3e"];
          var labelsList = [];
-
-
          // compare sensors
          function comparePage() {
              console.log("tget");
@@ -573,23 +528,11 @@
              document.getElementById("map").style.height = "50%";
              document.getElementById("legendCollection").style.bottom = "52%";
              document.getElementById("chartCollection").style.visibility = "hidden";
-
-             addDataId("http://localhost:8080/Controller?action=returnLastWeekData", "week")
+             chartCompareButtons();
              setTimeout(createChartCompare, 1000, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
              setTimeout(createChartCompare, 1000, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
              setTimeout(createChartCompare, 1000, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
              setTimeout(createChartCompare, 1000, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
-
-         }
-         //Add id to list
-         function addIdToList(name) {
-             d3.json("SensorLocaties.json", function (data) {
-                 data.forEach(function (d) {
-                     if (d.name == name) {
-                         idList.push(d.Deviceid);
-                     }
-                 })
-             })
          }
          //Add data from id
          function addDataId(link, labelFormat) {
@@ -597,89 +540,92 @@
              var chartDataTempId = [];
              var chartDataPressureId = [];
              var chartDataO3Id = [];
-             var chartDataPM1Id = []
-             for (var id of idList) {
+             var chartDataPM1Id = [];
+             for (i = 0; i < idList.length; i++) {
+                 var idFromList = idList[i];
                  d3.json(link, function (data) {
-                     console.log(data)
                      data.forEach(function (d) {
-                         if (d.deviceId == id) {
+                         if (d.deviceId == idFromList) {
                              if (labelFormat == "24h") {
-                                 chartLabels.push(d.time);
+                                 chartLabelsId.push(d.time);
                              }
                              if (labelFormat == "week") {
-                                 chartLabels.push(d.date);
+                                 chartLabelsId.push(d.date);
                              }
                              if (labelFormat == "month") {
-                                 chartLabels.push(d.date);
+                                 chartLabelsId.push(d.date);
                              }
                              if (labelFormat == "year") {
-                                 chartLabels.push(d.date);
+                                 chartLabelsId.push(d.date);
                              }
-                             chartLabelsId.push(d.so2);
+                             chartDataTempId.push(d.so2);
                              chartDataPressureId.push(d.no2);
                              chartDataO3Id.push(d.o3);
                              chartDataPM1Id.push(d.pm10);
                          }
                      })
                  })
-                 chartSO2List.push(chartDataTempId);
-                 chartNO2List.push(chartDataPressureId);
-                 chartO3List.push(chartDataO3Id);
-                 chartPM10List.push(chartDataPM1Id);
-                 labelsList.push(chartLabelsId);
-                 chartLabelsId = [];
-                 chartDataTempId = [];
-                 chartDataPressureId = [];
-                 chartDataO3Id = [];
-                 chartDataPM1Id = []
+                 setTimeout(function () {
+                     chartSO2List.push(chartDataTempId);
+                     chartNO2List.push(chartDataPressureId);
+                     chartO3List.push(chartDataO3Id);
+                     chartPM10List.push(chartDataPM1Id);
+                     labelsList = chartLabelsId;
+                     chartLabelsId = [];
+                     chartDataTempId = [];
+                     chartDataPressureId = [];
+                     chartDataO3Id = [];
+                     chartDataPM1Id = []
+                 }, 2000)
              }
+             console.log("chartSO2List")
+             console.log(chartSO2List)
          }
-
          //Make comparegraphs
          function createChartCompare(chartLabels, chartData, chart, labelList, beginAtZero, borderColor) {
+             //console.log(chartData[0])
              let LineChart = new Chart(chart, {
-                 type: 'line',
-                 data: {
-                     labels: chartLabels,
-                     datasets: [{
-                             data: chartData[0],
-                             pointRadius: 0,
-                             borderColor: borderColor[0]
-                    },
-                         {
-                             data: chartData[1],
-                             pointRadius: 0,
-                             borderColor: borderColor[1]
+                 type: 'line'
+                 , data: {
+                     labels: chartLabels
+                     , datasets: [{
+                             data: chartData[0]
+                             , pointRadius: 0
+                             , borderColor: borderColor[0]
+                    }
+                         , {
+                             data: chartData[1]
+                             , pointRadius: 0
+                             , borderColor: borderColor[1]
                     },
 
                          {
-                             data: chartData[2],
-                             pointRadius: 0,
-                             borderColor: borderColor[2]
-
-                     },
-                         {
-                             data: chartData[3],
-                             pointRadius: 0,
-                             borderColor: borderColor[3]
-                    },
-                         {
-                             data: chartData[4],
-                             pointRadius: 0,
-                             borderColor: borderColor[4]
-                    },
-                         {
-                             data: chartData[5],
-                             pointRadius: 0,
-                             borderColor: borderColor[5]
+                             data: chartData[2]
+                             , pointRadius: 0
+                             , borderColor: borderColor[2]
+                     }
+                         , {
+                             data: chartData[3]
+                             , pointRadius: 0
+                             , borderColor: borderColor[3]
+                    }
+                         , {
+                             data: chartData[4]
+                             , pointRadius: 0
+                             , borderColor: borderColor[4]
+                    }
+                         , {
+                             data: chartData[5]
+                             , pointRadius: 0
+                             , borderColor: borderColor[5]
                     }]
-                 },
-                 options: {
+                 }
+                 , options: {
                      legend: {
                          display: false
-                     },
-                     responsive: true,
-                     scales: {
+                     }
+                     , responsive: true
+                     , scales: {
                          yAxes: [{
                                  ticks: {
                                      beginAtZero: beginAtZero
@@ -689,4 +635,85 @@
                      }
                  }
              })
+         }
+         //Compare sensors butonns
+         var last24hCButton = document.getElementById("24hChartC");
+         var lastWeekCButton = document.getElementById("weekChartC");
+         var lastMonthCButton = document.getElementById("monthChartC");
+         var lastYearCButton = document.getElementById("yearChartC");
+         var selectedCompareChart = "24h";
+         last24hCButton.onclick = function () {
+             last24hCButton.style.backgroundColor = "#13abc4";
+             last24hCButton.style.color = "#fff";
+             lastWeekCButton.style.backgroundColor = "#fff";
+             lastWeekCButton.style.color = "#13abc4";
+             lastMonthCButton.style.backgroundColor = "#fff";
+             lastMonthCButton.style.color = "#13abc4";
+             lastYearCButton.style.backgroundColor = "#fff";
+             lastYearCButton.style.color = "#13abc4";
+             selectedCompareChart = "24h";
+             chartCompareButtons();
+         }
+         lastWeekCButton.onclick = function () {
+             lastWeekCButton.style.backgroundColor = "#13abc4";
+             lastWeekCButton.style.color = "#fff";
+             last24hCButton.style.backgroundColor = "#fff";
+             last24hCButton.style.color = "#13abc4";
+             lastMonthCButton.style.backgroundColor = "#fff";
+             lastMonthCButton.style.color = "#13abc4";
+             lastYearCButton.style.backgroundColor = "#fff";
+             lastYearCButton.style.color = "#13abc4";
+             selectedCompareChart = "week";
+             chartCompareButtons();
+         }
+         lastMonthCButton.onclick = function () {
+             lastMonthCButton.style.backgroundColor = "#13abc4";
+             lastMonthCButton.style.color = "#fff";
+             last24hCButton.style.backgroundColor = "#fff";
+             last24hCButton.style.color = "#13abc4";
+             lastWeekCButton.style.backgroundColor = "#fff";
+             lastWeekCButton.style.color = "#13abc4";
+             lastYearCButton.style.backgroundColor = "#fff";
+             lastYearCButton.style.color = "#13abc4";
+             selectedCompareChart = "month";
+             chartCompareButtons();
+         }
+         lastYearCButton.onclick = function () {
+             lastYearCButton.style.backgroundColor = "#13abc4";
+             lastYearCButton.style.color = "#fff";
+             last24hCButton.style.backgroundColor = "#fff";
+             last24hCButton.style.color = "#13abc4";
+             lastWeekCButton.style.backgroundColor = "#fff";
+             lastWeekCButton.style.color = "#13abc4";
+             lastMonthCButton.style.backgroundColor = "#fff";
+             lastMonthCButton.style.color = "#13abc4";
+             selectedCompareChart = "year";
+             chartCompareButtons();
+         }
+
+         function chartCompareButtons() {
+             chartSO2List = [];
+             chartNO2List = [];
+             chartO3List = [];
+             chartPM10List = [];
+             labelsList = [];
+             if (selectedCompareChart == "24h") {
+                 addDataId("http://localhost:8080/Controller?action=returnLast24hData", "24h");
+                 console.log("24h")
+             }
+             if (selectedCompareChart == "week") {
+                 addDataId("http://localhost:8080/Controller?action=returnWeekData", "week");
+                 console.log("week")
+             }
+             if (selectedCompareChart == "month") {
+                 addDataId("http://localhost:8080/Controller?action=returnWeekData", "month");
+             }
+             if (selectedCompareChart == "year") {
+                 addDataId("http://localhost:8080/Controller?action=returnWeekData", "year");
+             }
+             setTimeout(createChartCompare, 2000, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
+             setTimeout(createChartCompare, 2000, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
+             setTimeout(createChartCompare, 2000, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
+             setTimeout(createChartCompare, 2000, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
+
          }
