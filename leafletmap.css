@@ -603,9 +603,8 @@ body {
     text-decoration: none;
     font-family: sans-serif;
     font-weight: 600;
-    color: grey;
-    border: 1px solid #dedede;
-    border-radius: 5px;
+    color: white;
+    border: 1px solid #fff;
     margin-left: 5px;
 }
 
@@ -691,9 +690,9 @@ body {
     text-align: center;
     width: auto;
     height: 35px;
-    border-radius: 5px;
     border: 1px solid #eee;
     margin-top: 10px;
+    color: white;
 }
 
 .selectedSensorLi {

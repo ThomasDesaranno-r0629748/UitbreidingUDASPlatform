@@ -265,27 +265,27 @@
          }
          var displaystate = "SO2";
 
-        //Change Dust buttons
-        document.getElementById("changePM10").onclick = function () {
-            document.getElementById("displayeddust").innerHTML = "PM10";
-            displaystate = "PM10";
-            adjustIcon();
-        }
-        document.getElementById("changeO3").onclick = function () {
-            document.getElementById("displayeddust").innerHTML = "O3";
-            displaystate = "O3";
-            adjustIcon();
-        }
-        document.getElementById("changeSO2").onclick = function () {
-            document.getElementById("displayeddust").innerHTML = "SO2";
-            displaystate = "SO2";
-            adjustIcon();
-        }
-        document.getElementById("changeNO2").onclick = function () {
-            document.getElementById("displayeddust").innerHTML = "NO2";
-            displaystate = "NO2";
-            adjustIcon();
-        }
+         //Change Dust buttons
+         document.getElementById("changePM10").onclick = function () {
+             document.getElementById("displayeddust").innerHTML = "PM10";
+             displaystate = "PM10";
+             adjustIcon();
+         }
+         document.getElementById("changeO3").onclick = function () {
+             document.getElementById("displayeddust").innerHTML = "O3";
+             displaystate = "O3";
+             adjustIcon();
+         }
+         document.getElementById("changeSO2").onclick = function () {
+             document.getElementById("displayeddust").innerHTML = "SO2";
+             displaystate = "SO2";
+             adjustIcon();
+         }
+         document.getElementById("changeNO2").onclick = function () {
+             document.getElementById("displayeddust").innerHTML = "NO2";
+             displaystate = "NO2";
+             adjustIcon();
+         }
 
 
          //Adjust icon size on zoom
@@ -375,7 +375,7 @@
              if (compare == true) {
                  console.log("comparchats");
                  document.getElementById("comparePart").style.display = "contents";
-                 
+
                  comparegraphs += 1;
                  console.log(comparegraphs);
                  document.getElementById("chartCollection").style.top = "58%";
@@ -397,7 +397,7 @@
                      lastMomentDataPull(id);
                      createSpecificChart(id);
                  });
-                 chartButtons(id);
+                 /*chartButtons(id);
                  setInterval(function () {
                      lastMomentDataPull(id);
                  }, 10 * 1000);
@@ -428,12 +428,12 @@
 
                  console.log(chartDataO32 + "chuze");
 
-                 setTimeout(createChart, 500, chartLabels2, chartDataTemp2, tempChart2, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
-                 setTimeout(createChart, 500, chartLabels2, chartDataPressure2, pressureChart2, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
-                 setTimeout(createChart, 500, chartLabels2, chartDataPressure2, O3Chart2, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
-                 setTimeout(createChart, 500, chartLabels2, chartDataPressure2, PM1Chart2, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
+                 setTimeout(createChart, 1000, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0)', true, 'rgba(255, 255, 0, 0)');
+                 setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 255, 0, 0)', true, 'rgba(255, 255, 0, 0)');
+                 setTimeout(createChart, 1000, chartLabels, chartDataPressure, O3Chart, 'O3', 'rgba(255, 255, 0, 0)', true, 'rgba(255, 255, 0, 0)');
+                 setTimeout(createChart, 1000, chartLabels, chartDataPressure, PM1Chart, 'PM1', 'rgba(255, 255, 0, 0)', true, 'rgba(255, 255, 0, 0)');
 
-
+*/
              }
 
 
@@ -456,7 +456,14 @@
              })
              if (selected == false) {
                  ssensor.push(" " + naam + " ");
+                 labelList.push(naam);
+                 addIdToList(naam);
                  setsensornames();
+                 addDataId("http://localhost:8080/Controller?action=returnLastWeekData", "week")
+                 setTimeout(createChartCompare, 1000, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
+                 setTimeout(createChartCompare, 1000, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
+                 setTimeout(createChartCompare, 1000, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
+                 setTimeout(createChartCompare, 1000, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
              }
 
          }
@@ -465,27 +472,48 @@
              var l = ssensor.length;
              var n = 1;
              ssensor.forEach(function (v) {
-                 document.getElementById("selectedsensor" + n).style.display = "block";
+                 console.log(n)
+                 var sensor = document.getElementById("selectedsensor" + n);
+                 sensor.style.display = "block";
                  document.getElementById("sesensor" + n).innerHTML = v;
+                 if (n == 1) {
+                     sensor.style.backgroundColor = "#ff3434";
+                 } else if (n == 2) {
+                     sensor.style.backgroundColor = "#4dff4d";
+                 } else if (n == 3) {
+                     sensor.style.backgroundColor = "#34d8ff";
+                 } else if (n == 4) {
+                     sensor.style.backgroundColor = "#c834ff";
+                 } else if (n == 5) {
+                     sensor.style.backgroundColor = "#d0ff34";
+                 }
                  n++;
              })
-
          }
 
          function remove(num) {
              var n = 1;
-              document.getElementById("selectedsensor" + ssensor.length).style.display = "none";
+             document.getElementById("selectedsensor" + ssensor.length).style.display = "none";
              document.getElementById("sesensor" + ssensor.length).innerHTML = "no";
              ssensor.splice(num - 1, 1);
              setsensornames();
-
+             chartSO2List = [];
+             chartNO2List = [];
+             chartO3List = [];
+             chartPM10List = [];
+             labelsList = [];
+             idList.splice(num - 1, 1);
+             addDataId("http://localhost:8080/Controller?action=returnLastWeekData", "week")
+             setTimeout(createChartCompare, 1000, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
+             setTimeout(createChartCompare, 1000, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
+             setTimeout(createChartCompare, 1000, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
+             setTimeout(createChartCompare, 1000, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
          }
          //Close chart collection
          document.getElementById("closeChartCollection").onclick = function () {
-
              document.getElementById("chartCollection").style.visibility = "hidden";
          }
-         
+
          var compare = false;
 
          //Close compare
@@ -499,6 +527,22 @@
 
 
          }
+         //Graphs
+         let tempChart2 = document.getElementById("tempChart2").getContext('2d');
+         let pressureChart2 = document.getElementById("pressureChart2").getContext('2d');
+         let O3Chart2 = document.getElementById("O3Chart2").getContext('2d');
+         let PM1Chart2 = document.getElementById("PM1Chart2").getContext('2d');
+
+         //Lists
+         var idList = [];
+         var labelList = [];
+         var chartSO2List = [];
+         var chartNO2List = [];
+         var chartO3List = [];
+         var chartPM10List = [];
+         var colorList = ["#ff3434", "#4dff4d", "#34d8ff", , "#c834ff", "#d0ff34"];
+         var labelsList = [];
+
 
          // compare sensors
          function comparePage() {
@@ -512,70 +556,111 @@
              document.getElementById("legendCollection").style.bottom = "52%";
              document.getElementById("chartCollection").style.visibility = "hidden";
 
+             addDataId("http://localhost:8080/Controller?action=returnLastWeekData", "week")
+             setTimeout(createChartCompare, 1000, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
+             setTimeout(createChartCompare, 1000, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
+             setTimeout(createChartCompare, 1000, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
+             setTimeout(createChartCompare, 1000, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
 
-             let tempChart = document.getElementById("tempChart2").getContext('2d');
-             let pressureChart = document.getElementById("pressureChart2").getContext('2d');
-             let O3Chart = document.getElementById("O3Chart2").getContext('2d');
-             let PM1Chart = document.getElementById("PM1Chart2").getContext('2d');
-
-             var chartLabels = [];
-             var chartDataTemp = [];
-             var chartDataPressure = [];
-             var chartDataO3 = [];
-             var chartDataPM1 = [];
-
-             getData();
-             setTimeout(createChart, 1000, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
-             setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
-             setTimeout(createChart, 1000, chartLabels, chartDataPressure, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
-             setTimeout(createChart, 1000, chartLabels, chartDataPressure, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
-
-             setInterval(function () {
-                 setTimeout(createChart, 1000, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
-                 setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
-                 setTimeout(createChart, 1000, chartLabels, chartDataPressure, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
-                 setTimeout(createChart, 1000, chartLabels, chartDataPressure, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
-                 getData()
-             }, 5 * 1000);
-
-             function getData() {
-
-                 chartLabels = [];
-                 chartDataTemp = [];
-                 chartDataPressure = [];
-                 chartDataO3 = [];
-                 chartDataPM1 = []
-                 d3.json("http://localhost:8080/Controller?action=returnLast24hData", function (data) {
+         }
+         //Add id to list
+         function addIdToList(name) {
+             d3.json("SensorLocaties.json", function (data) {
+                 data.forEach(function (d) {
+                     if (d.name == name) {
+                         idList.push(d.Deviceid);
+                     }
+                 })
+             })
+         }
+         //Add data from id
+         function addDataId(link, labelFormat) {
+             var chartLabelsId = [];
+             var chartDataTempId = [];
+             var chartDataPressureId = [];
+             var chartDataO3Id = [];
+             var chartDataPM1Id = []
+             for (var id of idList) {
+                 d3.json(link, function (data) {
                      console.log(data)
                      data.forEach(function (d) {
-                         chartLabels.push(d.time);
-                         chartDataTemp.push(d.so2);
-                         chartDataPressure.push(d.no2);
-                         chartDataO3.push(d.o3);
-                         chartDataPM1.push(d.pm10);
+                         if (d.deviceId == id) {
+                             if (labelFormat == "24h") {
+                                 chartLabels.push(d.time);
+                             }
+                             if (labelFormat == "week") {
+                                 chartLabels.push(d.date);
+                             }
+                             if (labelFormat == "month") {
+                                 chartLabels.push(d.date);
+                             }
+                             if (labelFormat == "year") {
+                                 chartLabels.push(d.date);
+                             }
+                             chartLabelsId.push(d.so2);
+                             chartDataPressureId.push(d.no2);
+                             chartDataO3Id.push(d.o3);
+                             chartDataPM1Id.push(d.pm10);
+                         }
                      })
                  })
+                 chartSO2List.push(chartDataTempId);
+                 chartNO2List.push(chartDataPressureId);
+                 chartO3List.push(chartDataO3Id);
+                 chartPM10List.push(chartDataPM1Id);
+                 labelsList.push(chartLabelsId);
+                 chartLabelsId = [];
+                 chartDataTempId = [];
+                 chartDataPressureId = [];
+                 chartDataO3Id = [];
+                 chartDataPM1Id = []
              }
          }
 
-         // make comparegraphs
-
-
-         /*function createChart(chartLabels, chartData, chart, label, backgroundcolor, beginAtZero, borderColor) {
+         //Make comparegraphs
+         function createChartCompare(chartLabels, chartData, chart, labelList, beginAtZero, borderColor) {
              let LineChart = new Chart(chart, {
                  type: 'line',
                  data: {
                      labels: chartLabels,
                      datasets: [{
-                         label: label,
-                         data: chartData,
-                         backgroundColor: backgroundcolor,
-                         pointRadius: 0,
-                         borderColor: borderColor
-        }]
+                             data: chartData[0],
+                             pointRadius: 0,
+                             borderColor: borderColor[0]
+                    },
+                         {
+                             data: chartData[1],
+                             pointRadius: 0,
+                             borderColor: borderColor[1]
+                    },
+
+                         {
+                             data: chartData[2],
+                             pointRadius: 0,
+                             borderColor: borderColor[2]
+
+                     },
+                         {
+                             data: chartData[3],
+                             pointRadius: 0,
+                             borderColor: borderColor[3]
+                    },
+                         {
+                             data: chartData[4],
+                             pointRadius: 0,
+                             borderColor: borderColor[4]
+                    },
+                         {
+                             data: chartData[5],
+                             pointRadius: 0,
+                             borderColor: borderColor[5]
+                    }]
                  },
                  options: {
-                     responsive:false,
+                     legend: {
+                         display: false
+                     },
+                     responsive: true,
                      scales: {
                          yAxes: [{
                                  ticks: {
@@ -586,4 +671,4 @@
                      }
                  }
              })
-         }*/
+         }
