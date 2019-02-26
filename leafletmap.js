@@ -5,76 +5,76 @@
          mapLink = '<a href="http://www.esri.com/">Esri</a>';
          wholink = 'i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
          var Satelite = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-             attribution: '&copy; ' + mapLink + ', ' + wholink
-             , maxZoom: 19
-         , })
+             attribution: '&copy; ' + mapLink + ', ' + wholink,
+             maxZoom: 19,
+         })
          var Wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
-             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>'
-             , minZoom: 1
-             , maxZoom: 19
+             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
+             minZoom: 1,
+             maxZoom: 19
          }).addTo(map);
          var OWM_API_KEY = '3361df6687a5458ad0f9e3556c666018';
          var clouds = L.OWM.clouds({
-             opacity: 0.8
-             , legendImagePath: '/NT2.png'
-             , appId: OWM_API_KEY
+             opacity: 0.8,
+             legendImagePath: '/NT2.png',
+             appId: OWM_API_KEY
          });
          var cloudscls = L.OWM.cloudsClassic({
-             opacity: 0.5
-             , appId: OWM_API_KEY
+             opacity: 0.5,
+             appId: OWM_API_KEY
          });
          var precipitation = L.OWM.precipitation({
-             opacity: 0.5
-             , appId: OWM_API_KEY
+             opacity: 0.5,
+             appId: OWM_API_KEY
          });
          var precipitationcls = L.OWM.precipitationClassic({
-             opacity: 0.5
-             , appId: OWM_API_KEY
+             opacity: 0.5,
+             appId: OWM_API_KEY
          });
          var rain = L.OWM.rain({
-             opacity: 0.5
-             , appId: OWM_API_KEY
+             opacity: 0.5,
+             appId: OWM_API_KEY
          });
          var raincls = L.OWM.rainClassic({
-             opacity: 0.5
-             , appId: OWM_API_KEY
+             opacity: 0.5,
+             appId: OWM_API_KEY
          });
          var snow = L.OWM.snow({
-             opacity: 0.5
-             , appId: OWM_API_KEY
+             opacity: 0.5,
+             appId: OWM_API_KEY
          });
          var pressure = L.OWM.pressure({
-             opacity: 0.4
-             , appId: OWM_API_KEY
+             opacity: 0.4,
+             appId: OWM_API_KEY
          });
          var pressurecntr = L.OWM.pressureContour({
-             opacity: 0.5
-             , appId: OWM_API_KEY
+             opacity: 0.5,
+             appId: OWM_API_KEY
          });
          var temp = L.OWM.temperature({
-             opacity: 0.5
-             , appId: OWM_API_KEY
+             opacity: 0.5,
+             appId: OWM_API_KEY
          });
          var wind = L.OWM.wind({
-             opacity: 0.5
-             , appId: OWM_API_KEY
+             opacity: 0.5,
+             appId: OWM_API_KEY
          });
          var baseMaps = {
-             "Streets": Wikimedia
-             , "Satelite": Satelite
+             "Streets": Wikimedia,
+             "Satelite": Satelite
          };
          var overlayMaps = {
-             "Clouds": clouds
-             , "Clouds classic": cloudscls
-             , "Precipitation": precipitation
-             , "Precipitation classic": precipitationcls
-             , "Rain": rain
-             , "Rain Classic": raincls
-             , "Snow": snow
-             , "Pressure": pressure
-             , "Pressure contour": pressurecntr
-             , "Temperature": temp
-             , "Wind": wind
+             "Clouds": clouds,
+             "Clouds classic": cloudscls,
+             "Precipitation": precipitation,
+             "Precipitation classic": precipitationcls,
+             "Rain": rain,
+             "Rain Classic": raincls,
+             "Snow": snow,
+             "Pressure": pressure,
+             "Pressure contour": pressurecntr,
+             "Temperature": temp,
+             "Wind": wind
          };
          L.control.layers(baseMaps, overlayMaps).addTo(map);
          //On document load
@@ -87,52 +87,52 @@
              var shadowSize = Math.pow((zoom * 10), zoom / (30 - (zoom - zoom / 10))) + 50;
              if (temperature == "" || temperature == null || temperature < 0) {
                  var icon = L.icon({
-                     iconUrl: 'images/blacksensor.png'
-                     , iconSize: [iconSize * 1.2, iconSize], // size of the icon
+                     iconUrl: 'images/blacksensor.png',
+                     iconSize: [iconSize * 1.2, iconSize], // size of the icon
                      iconAnchor: [iconSize / 2, iconSize / 2], // point of the icon which will correspond to 
                  });
                  return icon;
              }
              if (temperature >= 0 && temperature < good) {
                  var icon = L.icon({
-                     iconUrl: 'lightgreensensor.png'
-                     , shadowUrl: 'images/greenRadial.png'
-                     , shadowAnchor: [shadowSize / 2.11, shadowSize / 2]
-                     , shadowSize: [shadowSize, shadowSize]
-                     , iconSize: [iconSize * 1.2, iconSize], // size of the icon
+                     iconUrl: 'images/sensors/greensensor.png',
+                     shadowUrl: 'images/greenRadial.png',
+                     shadowAnchor: [shadowSize / 2.11, shadowSize / 2],
+                     shadowSize: [shadowSize, shadowSize],
+                     iconSize: [iconSize * 1.2, iconSize], // size of the icon
                      iconAnchor: [iconSize / 2, iconSize / 2], // point of the icon which will correspond to 
                  });
                  return icon;
              }
              if (temperature >= good && temperature < moderate) {
                  var icon = L.icon({
-                     iconUrl: 'yellowsensor.png'
-                     , shadowUrl: 'images/yellowRadial.png'
-                     , shadowAnchor: [shadowSize / 2, shadowSize / 2]
-                     , shadowSize: [shadowSize, shadowSize]
-                     , iconSize: [iconSize * 1.2, iconSize], // size of the icon
+                     iconUrl: 'images/sensors/yellowsensor.png',
+                     shadowUrl: 'images/yellowRadial.png',
+                     shadowAnchor: [shadowSize / 2, shadowSize / 2],
+                     shadowSize: [shadowSize, shadowSize],
+                     iconSize: [iconSize * 1.2, iconSize], // size of the icon
                      iconAnchor: [iconSize / 2, iconSize / 2], // point of the icon which will correspond to 
                  });
                  return icon;
              }
              if (temperature >= moderate && temperature < bad) {
                  var icon = L.icon({
-                     iconUrl: 'orangesensor.png'
-                     , shadowUrl: 'images/orangeRadial.png'
-                     , shadowAnchor: [shadowSize / 2, shadowSize / 2]
-                     , shadowSize: [shadowSize, shadowSize]
-                     , iconSize: [iconSize * 1.2, iconSize], // size of the icon
+                     iconUrl: 'images/sensors/orangesensor.png',
+                     shadowUrl: 'images/orangeRadial.png',
+                     shadowAnchor: [shadowSize / 2, shadowSize / 2],
+                     shadowSize: [shadowSize, shadowSize],
+                     iconSize: [iconSize * 1.2, iconSize], // size of the icon
                      iconAnchor: [iconSize / 2, iconSize / 2], // point of the icon which will correspond to 
                  });
                  return icon;
              }
              if (temperature >= bad) {
                  var icon = L.icon({
-                     iconUrl: 'redsensor.png'
-                     , shadowUrl: 'images/redRadial.png'
-                     , shadowAnchor: [shadowSize / 2, shadowSize / 2]
-                     , shadowSize: [shadowSize, shadowSize]
-                     , iconSize: [iconSize * 1.2, iconSize], // size of the icon
+                     iconUrl: 'images/sensors/redsensor.png',
+                     shadowUrl: 'images/redRadial.png',
+                     shadowAnchor: [shadowSize / 2, shadowSize / 2],
+                     shadowSize: [shadowSize, shadowSize],
+                     iconSize: [iconSize * 1.2, iconSize], // size of the icon
                      iconAnchor: [iconSize / 2, iconSize / 2], // point of the icon which will correspond to 
                  });
                  return icon;
@@ -190,8 +190,8 @@
                  mapLon = mapLon + d.lon;
                  amountData++;
                  var sensor = L.marker([d.lat, d.lon], {
-                     title: d.naam
-                     , icon: iconPicker(d.s1, 14, 38, 59, 80) //Standaardwaarden SO2
+                     title: d.naam,
+                     icon: iconPicker(d.s1, 14, 38, 59, 80) //Standaardwaarden SO2
                  });
                  sensor.bindPopup("Locatie: " + d.naam);
                  sensor.on('click', onCircleClick, d);
@@ -205,25 +205,25 @@
              map.setView([mapLat / amountData, mapLon / amountData], 14);
          })
          $.getJSON("points.json", function (json) {
-             var testlayer = L.geoJson(json)
-                 , sliderControl = L.control.sliderControl({
-                     position: "bottomright"
-                     , layer: testlayer
+             var testlayer = L.geoJson(json),
+                 sliderControl = L.control.sliderControl({
+                     position: "bottomright",
+                     layer: testlayer
                  });
              var sliderControl = L.control.sliderControl({
-                 layer: testlayer
-                 , follow: true
-                 , range: true
+                 layer: testlayer,
+                 follow: true,
+                 range: true
              });
              map.addControl(sliderControl);
              sliderControl.startSlider();
          })
          var controlSearch = new L.Control.Search({
-             position: 'topright'
-             , layer: markersTemp
-             , initial: false
-             , zoom: 18
-             , marker: false
+             position: 'topright',
+             layer: markersTemp,
+             initial: false,
+             zoom: 18,
+             marker: false
          });
          map.addControl(controlSearch);
          var cityname = "stad";
@@ -257,11 +257,11 @@
              adjustIcon();
          }
          document.getElementById("changeNO2").onclick = function () {
-                 document.getElementById("displayeddust").innerHTML = "NO2";
-                 displaystate = "NO2";
-                 adjustIcon();
-             }
-             //Adjust icon size on zoom
+             document.getElementById("displayeddust").innerHTML = "NO2";
+             displaystate = "NO2";
+             adjustIcon();
+         }
+         //Adjust icon size on zoom
          function adjustIcon() {
              var currentZoom = map.getZoom();
              d3.json("SensorLocaties.json", function (data) {
@@ -447,17 +447,13 @@
                  document.getElementById("sesensor" + n).innerHTML = v;
                  if (n == 1) {
                      sensor.style.backgroundColor = "#ff3434";
-                 }
-                 else if (n == 2) {
+                 } else if (n == 2) {
                      sensor.style.backgroundColor = "#4dff4d";
-                 }
-                 else if (n == 3) {
+                 } else if (n == 3) {
                      sensor.style.backgroundColor = "#34d8ff";
-                 }
-                 else if (n == 4) {
+                 } else if (n == 4) {
                      sensor.style.backgroundColor = "#c834ff";
-                 }
-                 else if (n == 5) {
+                 } else if (n == 5) {
                      sensor.style.backgroundColor = "#aee300";
                  }
                  n++;
@@ -489,14 +485,14 @@
          var compare = false;
          //Close compare
          document.getElementById("closecompare").onclick = function () {
-                 compare = false;
-                 document.getElementById("comparePart").style.visibility = "hidden";
-                 document.getElementById("comparePart").style.display = "none";
-                 document.getElementById("compare").style.visibility = "visible";
-                 document.getElementById("map").style.height = "100%";
-                 document.getElementById("legendCollection").style.bottom = "5%";
-             }
-             //Graphs
+             compare = false;
+             document.getElementById("comparePart").style.visibility = "hidden";
+             document.getElementById("comparePart").style.display = "none";
+             document.getElementById("compare").style.visibility = "visible";
+             document.getElementById("map").style.height = "100%";
+             document.getElementById("legendCollection").style.bottom = "5%";
+         }
+         //Graphs
          let tempChart2 = document.getElementById("tempChart2").getContext('2d');
          let pressureChart2 = document.getElementById("pressureChart2").getContext('2d');
          let O3Chart2 = document.getElementById("O3Chart2").getContext('2d');
@@ -563,7 +559,7 @@
                      chartNO2List.push(chartDataPressureId);
                      chartO3List.push(chartDataO3Id);
                      chartPM10List.push(chartDataPM1Id);
-                     if(i == 0){
+                     if (i == 0) {
                          labelsList = chartLabelsId;
                      }
                      chartLabelsId = [];
@@ -579,47 +575,47 @@
          function createChartCompare(chartLabels, chartData, chart, labelList, beginAtZero, borderColor) {
              //console.log(chartData[0])
              let LineChart = new Chart(chart, {
-                 type: 'line'
-                 , data: {
-                     labels: chartLabels
-                     , datasets: [{
-                             data: chartData[0]
-                             , pointRadius: 0
-                             , borderColor: borderColor[0]
-                         , backgroundColor: "rgba(255, 255, 255, 0)"
+                 type: 'line',
+                 data: {
+                     labels: chartLabels,
+                     datasets: [{
+                             data: chartData[0],
+                             pointRadius: 0,
+                             borderColor: borderColor[0],
+                             backgroundColor: "rgba(255, 255, 255, 0)"
                     }
                          , {
-                             data: chartData[1]
-                             , pointRadius: 0
-                             , borderColor: borderColor[1]
-                             , backgroundColor: "rgba(255, 255, 255, 0)"
+                             data: chartData[1],
+                             pointRadius: 0,
+                             borderColor: borderColor[1],
+                             backgroundColor: "rgba(255, 255, 255, 0)"
                     },
 
                          {
-                             data: chartData[2]
-                             , pointRadius: 0
-                             , borderColor: borderColor[2]
-                             , backgroundColor: "rgba(255, 255, 255, 0)"
+                             data: chartData[2],
+                             pointRadius: 0,
+                             borderColor: borderColor[2],
+                             backgroundColor: "rgba(255, 255, 255, 0)"
                      }
                          , {
-                             data: chartData[3]
-                             , pointRadius: 0
-                             , borderColor: borderColor[3]
+                             data: chartData[3],
+                             pointRadius: 0,
+                             borderColor: borderColor[3]
                     }
                          , {
-                             data: chartData[4]
-                             , pointRadius: 0
-                             , borderColor: borderColor[4]
-                             , backgroundColor: "rgba(255, 255, 255, 0)"
+                             data: chartData[4],
+                             pointRadius: 0,
+                             borderColor: borderColor[4],
+                             backgroundColor: "rgba(255, 255, 255, 0)"
                     }
                         ]
-                 }
-                 , options: {
+                 },
+                 options: {
                      legend: {
                          display: false
-                     }
-                     , responsive: true
-                     , scales: {
+                     },
+                     responsive: true,
+                     scales: {
                          yAxes: [{
                                  ticks: {
                                      beginAtZero: beginAtZero
