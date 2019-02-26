@@ -573,6 +573,7 @@
                      chartDataPM1Id = []
                  }, 2000)
              }
+             console.log(chartDataO3Id.length)
          }
          //Make comparegraphs
          function createChartCompare(chartLabels, chartData, chart, labelList, beginAtZero, borderColor) {
