@@ -504,7 +504,7 @@
          var chartNO2List = [];
          var chartO3List = [];
          var chartPM10List = [];
-         var colorList = ["#ff3434", "#4dff4d", "#34d8ff", , "#c834ff", "#3e3e3e"];
+         var colorList = ["#ff3434", "#4dff4d", "#34d8ff", "#c834ff", "#aee300"];
          var labelsList = [];
          // compare sensors
          function comparePage() {
@@ -530,9 +530,10 @@
              var chartDataPressureId = [];
              var chartDataO3Id = [];
              var chartDataPM1Id = [];
-             for (i = 0; i < idList.length; i++) {
-                 var idFromList = idList[i];
+             
                  d3.json(link, function (data) {
+                     for (i = 0; i < idList.length; i++) {
+                 var idFromList = idList[i];
                      data.forEach(function (d) {
                          if (d.deviceId == idFromList) {
                              if (labelFormat == "24h") {
@@ -553,27 +554,28 @@
                              chartDataPM1Id.push(d.pm10);
                          }
                      })
-                 })
-                 setTimeout(function () {
                      chartSO2List.push(chartDataTempId);
                      chartNO2List.push(chartDataPressureId);
                      chartO3List.push(chartDataO3Id);
                      chartPM10List.push(chartDataPM1Id);
-                     if (i == 0) {
-                         labelsList = chartLabelsId;
-                     }
+                     labelsList = chartLabelsId;
                      chartLabelsId = [];
                      chartDataTempId = [];
                      chartDataPressureId = [];
                      chartDataO3Id = [];
-                     chartDataPM1Id = []
-                 }, 2000)
+                     chartDataPM1Id = [];
+                     setTimeout(createChartCompare, 1000, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
+                     setTimeout(createChartCompare, 1000, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
+                     setTimeout(createChartCompare, 1000, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
+                     setTimeout(createChartCompare, 1000, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
+                 
              }
-             console.log(chartDataO3Id.length)
+                 })
+                 
          }
          //Make comparegraphs
          function createChartCompare(chartLabels, chartData, chart, labelList, beginAtZero, borderColor) {
-             //console.log(chartData[0])
+             console.log(borderColor)
              let LineChart = new Chart(chart, {
                  type: 'line',
                  data: {
@@ -600,7 +602,8 @@
                          , {
                              data: chartData[3],
                              pointRadius: 0,
-                             borderColor: borderColor[3]
+                             borderColor: borderColor[3],
+                             backgroundColor: "rgba(255, 255, 255, 0)"
                     }
                          , {
                              data: chartData[4],
@@ -701,9 +704,6 @@
              if (selectedCompareChart == "year") {
                  addDataId("http://localhost:8080/Controller?action=returnWeekData", "year");
              }
-             setTimeout(createChartCompare, 2000, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
-             setTimeout(createChartCompare, 2000, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
-             setTimeout(createChartCompare, 2000, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
-             setTimeout(createChartCompare, 2000, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
+
 
          }
