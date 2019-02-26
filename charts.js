@@ -14,7 +14,7 @@ function getData(id) {
     chartDataPressure = [];
     chartDataO3 = [];
     chartDataPM1 = []
-    d3.json("http://localhost:8080/Controller?action=returnLast24hData", function (data) {
+    d3.json("dummyData24h.json", function (data) {
         data.forEach(function (d) {
             if (d.deviceId == id) {
                 chartLabels.push(d.time);
@@ -56,6 +56,7 @@ function getDataLink(id, link, labelFormat) {
                 chartDataPM1.push(d.pm10);
             }
         })
+        console.log(chartLabels)
     })
 }
 

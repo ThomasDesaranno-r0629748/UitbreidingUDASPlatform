@@ -72,7 +72,7 @@ function chartButtons(id){
         createSpecificChart(id);
     } 
     if(selectedChart == "week"){
-        createSpecificChartLink(id, "http://localhost:8080/Controller?action=returnWeekData", "week");
+        createSpecificChartLink(id, "dummyData.json");
     } 
     if(selectedChart == "month") {
         createSpecificChartLink(id, "http://localhost:8080/Controller?action=returnWeekData", "month");
