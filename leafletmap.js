@@ -687,11 +687,11 @@
              chartPM10List = [];
              labelsList = [];
              if (selectedCompareChart == "24h") {
-                 addDataId("http://localhost:8080/Controller?action=returnLast24hData", "24h");
+                 addDataId("dummyData24h.json", "24h");
                  console.log("24h")
              }
              if (selectedCompareChart == "week") {
-                 addDataId("http://localhost:8080/Controller?action=returnWeekData", "week");
+                 addDataId("dummyData.json", "week");
                  console.log("week")
              }
              if (selectedCompareChart == "month") {
