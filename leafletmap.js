@@ -575,6 +575,32 @@
          }
          //Make comparegraphs
          function createChartCompare(chartLabels, chartData, chart, labelList, beginAtZero, borderColor) {
+             var dangerLine = [];
+             var mediumLine = [];
+             var goodLine = [];
+             for (i = 0; i < chartLabels.length;i++){
+                 if(chart == tempChart2){
+                     dangerLine.push(100);
+                 mediumLine.push(59);
+                 goodLine.push(38);
+                 }
+                 if(chart == pressureChart2){
+                     dangerLine.push(180);
+                 mediumLine.push(122);
+                 goodLine.push(80);
+                 }
+                 if(chart == O3Chart2){
+                     dangerLine.push(100);
+                 mediumLine.push(20);
+                 goodLine.push(17);
+                 }
+                 if(chart == PM1Chart2){
+                     dangerLine.push(100);
+                 mediumLine.push(75);
+                 goodLine.push(50);
+                 }
+                 
+             }
              console.log(borderColor)
              let LineChart = new Chart(chart, {
                  type: 'line',
@@ -610,6 +636,21 @@
                              pointRadius: 0,
                              borderColor: borderColor[4],
                              backgroundColor: "rgba(255, 255, 255, 0)"
+                    }, {
+                             data: dangerLine,
+                             pointRadius: 0,
+                             borderColor: "rgba(195, 0, 0, 0.22)",
+                             backgroundColor: "rgba(195, 0, 0, 0.13)"
+                    } , {
+                             data: mediumLine,
+                             pointRadius: 0,
+                             borderColor: "rgba(226, 255, 0, 0.71)",
+                             backgroundColor: "rgba(206, 255, 0, 0.7)"
+                    }, {
+                             data: goodLine,
+                             pointRadius: 0,
+                             borderColor: "rgba(38, 255, 0, 0.48)",
+                             backgroundColor: "rgba(0, 255, 39, 0.85)"
                     }
                         ]
                  },
