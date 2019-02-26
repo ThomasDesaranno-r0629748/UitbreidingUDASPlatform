@@ -81,13 +81,6 @@
          document.addEventListener("DOMContentLoaded", function () {
              lastMomentDataPull(0);
          });
-         //Pick icon
-         function colorPick(temperature) {
-             if (temperature >= 0 && temperature < 50) return sensorIconlightgreen;
-             if (temperature >= 50 && temperature < 100) return sensorIconyellow;
-             if (temperature >= 10 && temperature < 200) return sensorIconorange;
-             if (temperature >= 200) return sensorIconRed;
-         }
          //Pick right icon
          function iconPicker(temperature, zoom, good, moderate, bad) {
              var iconSize = zoom + 10;
@@ -147,7 +140,7 @@
          }
          //Pull data van laatste dag laatset moment
          function lastMomentDataPull(id) {
-             d3.json("http://localhost:8080/Controller?action=returnLastData", function (data) {
+             d3.json("dummyData.json", function (data) {
                  var idInPull = false;
                  data.forEach(function (d) {
                      if (d.deviceId == id) {
@@ -275,7 +268,7 @@
                  data.forEach(function (sensord) {
                      markersTemp.eachLayer(function (d) {
                          if (d._latlng.lat == sensord.lat && d._latlng.lng == sensord.lon) {
-                             d3.json("http://localhost:8080/Controller?action=returnLastData", function (metingd) {
+                             d3.json("dummyData.json", function (metingd) {
                                  metingd.forEach(function (meting) {
                                      if (sensord.Deviceid == meting.deviceId && displaystate == "SO2") {
                                          d.setIcon(iconPicker(meting.so2, currentZoom, 38, 59, 80));
@@ -290,7 +283,7 @@
                                      }
                                      if (sensord.Deviceid == meting.deviceId && displaystate == "PM10") {
                                          console.log(meting.pm10);
-                                         d.setIcon(iconPicker(meting.pm10, currentZoom, 10, 75, 100)); //NOG VERANDEREN
+                                         d.setIcon(iconPicker(meting.pm10, currentZoom, 50, 75, 100)); //NOG VERANDEREN
                                      }
                                  })
                              })
