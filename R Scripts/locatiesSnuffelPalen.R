@@ -35,9 +35,12 @@ GPS_loc1 <- rbind(GPS_loc1, GPS_loc2)
 Deviceid <- 0
 
 Deviceid <- as.data.frame(Deviceid)
-
 GPS_loc1 <- cbind(GPS_loc1, Deviceid)
 
+for(i in 1:NROW(GPS_loc1)){
+  GPS_loc1[i,]$Deviceid = i
+}
+GPS_loc1[GPS_loc1$Deviceid==10,]$Deviceid <- 37
 GPS_loc1[GPS_loc1$naam==naam,]$Deviceid <- 10 
 
 exportJson <- toJSON(GPS_loc1, pretty=TRUE)

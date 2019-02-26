@@ -688,7 +688,7 @@ body {
 }
 
 #selectedSensors ul li{
-    padding: 0px;
+    padding: 0px 5px;;
     margin: 0px 2%;
     font-size: 13;
     text-align: center;
