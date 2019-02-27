@@ -431,10 +431,10 @@
                  labelList.push(naam);
                  setsensornames();
                  chartCompareButtons();
-                 setTimeout(createChartCompare, 1000, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
-                 setTimeout(createChartCompare, 1000, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
-                 setTimeout(createChartCompare, 1000, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
-                 setTimeout(createChartCompare, 1000, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
+                 setTimeout(createChartCompare, 10, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
+                 setTimeout(createChartCompare, 10, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
+                 setTimeout(createChartCompare, 10, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
+                 setTimeout(createChartCompare, 10, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
              }
          }
 
@@ -448,13 +448,13 @@
                  if (n == 1) {
                      sensor.style.backgroundColor = "#ff3434";
                  } else if (n == 2) {
-                     sensor.style.backgroundColor = "#4dff4d";
+                     sensor.style.backgroundColor = "#00bc0f";
                  } else if (n == 3) {
                      sensor.style.backgroundColor = "#34d8ff";
                  } else if (n == 4) {
                      sensor.style.backgroundColor = "#c834ff";
                  } else if (n == 5) {
-                     sensor.style.backgroundColor = "#aee300";
+                     sensor.style.backgroundColor = "#0000e3";
                  }
                  n++;
              })
@@ -473,10 +473,10 @@
              labelsList = [];
              idList.splice(num - 1, 1);
              chartCompareButtons();
-             setTimeout(createChartCompare, 1000, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
-             setTimeout(createChartCompare, 1000, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
-             setTimeout(createChartCompare, 1000, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
-             setTimeout(createChartCompare, 1000, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
+             setTimeout(createChartCompare, 10, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
+             setTimeout(createChartCompare, 10, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
+             setTimeout(createChartCompare, 10, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
+             setTimeout(createChartCompare, 10, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
          }
          //Close chart collection
          document.getElementById("closeChartCollection").onclick = function () {
@@ -504,7 +504,7 @@
          var chartNO2List = [];
          var chartO3List = [];
          var chartPM10List = [];
-         var colorList = ["#ff3434", "#4dff4d", "#34d8ff", "#c834ff", "#aee300"];
+         var colorList = ["#ff3434", "#00a80d", "#34d8ff", "#c834ff", "#0000e3"];
          var labelsList = [];
          // compare sensors
          function comparePage() {
@@ -530,10 +530,10 @@
              var chartDataPressureId = [];
              var chartDataO3Id = [];
              var chartDataPM1Id = [];
-             
-                 d3.json(link, function (data) {
-                     for (i = 0; i < idList.length; i++) {
-                 var idFromList = idList[i];
+
+             d3.json(link, function (data) {
+                 for (i = 0; i < idList.length; i++) {
+                     var idFromList = idList[i];
                      data.forEach(function (d) {
                          if (d.deviceId == idFromList) {
                              if (labelFormat == "24h") {
@@ -545,8 +545,10 @@
                              if (labelFormat == "month") {
                                  chartLabelsId.push(d.date);
                              }
-                             if (labelFormat == "year") {
-                                 chartLabelsId.push(d.date);
+                             if (labelFormat == "2Days") {
+                                 var time = d.time;
+                                 var date = d.date.substr(5, 10);
+                                 chartLabelsId.push(date + " " + time);
                              }
                              chartDataTempId.push(d.so2);
                              chartDataPressureId.push(d.no2);
@@ -554,6 +556,9 @@
                              chartDataPM1Id.push(d.pm10);
                          }
                      })
+                     if (labelFormat != "24h"){
+                        chartLabelsId.reverse(); 
+                     } 
                      chartSO2List.push(chartDataTempId);
                      chartNO2List.push(chartDataPressureId);
                      chartO3List.push(chartDataO3Id);
@@ -568,38 +573,38 @@
                      setTimeout(createChartCompare, 1000, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
                      setTimeout(createChartCompare, 1000, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
                      setTimeout(createChartCompare, 1000, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
-                 
-             }
-                 })
-                 
+
+                 }
+             })
+
          }
          //Make comparegraphs
          function createChartCompare(chartLabels, chartData, chart, labelList, beginAtZero, borderColor) {
              var dangerLine = [];
              var mediumLine = [];
              var goodLine = [];
-             for (i = 0; i < chartLabels.length;i++){
-                 if(chart == tempChart2){
+             for (i = 0; i < chartLabels.length; i++) {
+                 if (chart == tempChart2) {
                      dangerLine.push(100);
-                 mediumLine.push(59);
-                 goodLine.push(38);
+                     mediumLine.push(59);
+                     goodLine.push(38);
                  }
-                 if(chart == pressureChart2){
-                     dangerLine.push(180);
-                 mediumLine.push(122);
-                 goodLine.push(80);
+                 if (chart == pressureChart2) {
+                     dangerLine.push(200);
+                     mediumLine.push(122);
+                     goodLine.push(80);
                  }
-                 if(chart == O3Chart2){
+                 if (chart == O3Chart2) {
                      dangerLine.push(100);
-                 mediumLine.push(20);
-                 goodLine.push(17);
+                     mediumLine.push(20);
+                     goodLine.push(17);
                  }
-                 if(chart == PM1Chart2){
+                 if (chart == PM1Chart2) {
                      dangerLine.push(100);
-                 mediumLine.push(75);
-                 goodLine.push(50);
+                     mediumLine.push(75);
+                     goodLine.push(50);
                  }
-                 
+
              }
              console.log(borderColor)
              let LineChart = new Chart(chart, {
@@ -636,21 +641,23 @@
                              pointRadius: 0,
                              borderColor: borderColor[4],
                              backgroundColor: "rgba(255, 255, 255, 0)"
-                    }, {
-                             data: dangerLine,
-                             pointRadius: 0,
-                             borderColor: "rgba(195, 0, 0, 0.22)",
-                             backgroundColor: "rgba(195, 0, 0, 0.13)"
-                    } , {
-                             data: mediumLine,
-                             pointRadius: 0,
-                             borderColor: "rgba(226, 255, 0, 0.71)",
-                             backgroundColor: "rgba(206, 255, 0, 0.7)"
-                    }, {
+                    }
+                                , {
                              data: goodLine,
                              pointRadius: 0,
                              borderColor: "rgba(38, 255, 0, 0.48)",
-                             backgroundColor: "rgba(0, 255, 39, 0.85)"
+                             backgroundColor: "rgba(0, 255, 38, 0.83)"
+                    }, {
+                             data: mediumLine,
+                             pointRadius: 0,
+                             borderColor: "rgba(226, 255, 0, 0.71)",
+                             backgroundColor: "rgba(206, 255, 0, 0.92)"
+                    },
+                                {
+                             data: dangerLine,
+                             pointRadius: 0,
+                             borderColor: "rgba(195, 0, 0, 0.22)",
+                             backgroundColor: "rgba(255, 0, 0, 0.51)"
                     }
                         ]
                  },
@@ -674,7 +681,7 @@
          var last24hCButton = document.getElementById("24hChartC");
          var lastWeekCButton = document.getElementById("weekChartC");
          var lastMonthCButton = document.getElementById("monthChartC");
-         var lastYearCButton = document.getElementById("yearChartC");
+         var lastYearCButton = document.getElementById("2DaysChartC");
          var selectedCompareChart = "24h";
          last24hCButton.onclick = function () {
              last24hCButton.style.backgroundColor = "#13abc4";
@@ -721,7 +728,7 @@
              lastWeekCButton.style.color = "#13abc4";
              lastMonthCButton.style.backgroundColor = "#fff";
              lastMonthCButton.style.color = "#13abc4";
-             selectedCompareChart = "year";
+             selectedCompareChart = "2Days";
              chartCompareButtons();
          }
 
@@ -733,17 +740,15 @@
              labelsList = [];
              if (selectedCompareChart == "24h") {
                  addDataId("dummyData24h.json", "24h");
-                 console.log("24h")
              }
              if (selectedCompareChart == "week") {
                  addDataId("dummyData.json", "week");
-                 console.log("week")
              }
              if (selectedCompareChart == "month") {
                  addDataId("http://localhost:8080/Controller?action=returnWeekData", "month");
              }
-             if (selectedCompareChart == "year") {
-                 addDataId("http://localhost:8080/Controller?action=returnWeekData", "year");
+             if (selectedCompareChart == "2Days") {
+                 addDataId("dummyData2Days.json", "2Days");
              }
 
 

@@ -27,6 +27,8 @@ names(dummyData) <- c("so2", "no2", "o3", "pm10","deviceId", "date", "time","met
 
 dummyData[1:5] <- lapply(dummyData[1:5], as.numeric)
 dummyData$metingId <- as.numeric(dummyData$metingId)
+dummyData <- dummyData[order(dummyData$time, decreasing = FALSE),]
+dummyData <- dummyData[order(dummyData$date, decreasing = FALSE),]
 
 exportJson <- toJSON(dummyData, pretty=TRUE)
 write(exportJson, "dummyData.json")

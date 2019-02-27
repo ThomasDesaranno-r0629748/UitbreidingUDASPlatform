@@ -1,7 +1,7 @@
 var last24hButton = document.getElementById("24hChart");
 var lastWeekButton = document.getElementById("weekChart");
 var lastMonthButton = document.getElementById("monthChart");
-var lastYearButton = document.getElementById("yearChart");
+var lastYearButton = document.getElementById("2DaysChart");
 
 
 var selectedChart = "24h";
@@ -57,7 +57,7 @@ lastYearButton.onclick = function(){
     lastWeekButton.style.color = "#13abc4";
     lastMonthButton.style.backgroundColor = "#fff";
     lastMonthButton.style.color = "#13abc4";
-    selectedChart = "year";
+    selectedChart = "2Days";
     chartButtons(localid);
     
 }
@@ -66,7 +66,6 @@ lastYearButton.onclick = function(){
 
 
 function chartButtons(id){
-    console.log(localid)
     localid = id;
     if(selectedChart == "24h"){
         createSpecificChart(id);
@@ -77,8 +76,8 @@ function chartButtons(id){
     if(selectedChart == "month") {
         createSpecificChartLink(id, "http://localhost:8080/Controller?action=returnWeekData", "month");
     } 
-    if(selectedChart == "year") {
-        createSpecificChartLink(id, "http://localhost:8080/Controller?action=returnWeekData", "year");
+    if(selectedChart == "2Days") {
+        createSpecificChartLink(id, "dummyData2Days.json", "2Days");
     }
         
 }
