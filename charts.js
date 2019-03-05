@@ -72,10 +72,10 @@ function createSpecificChartLink(id, link, labelFormat) {
     if (id != 0) {
         getDataLink(id, link, labelFormat);
     }
-    setTimeout(createChart, 1000, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
-    setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
-    setTimeout(createChart, 1000, chartLabels, chartDataO3, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
-    setTimeout(createChart, 1000, chartLabels, chartDataPM1, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
+    setTimeout(createChart, 100, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
+    setTimeout(createChart, 100, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
+    setTimeout(createChart, 100, chartLabels, chartDataO3, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
+    setTimeout(createChart, 100, chartLabels, chartDataPM1, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
 }
 
 function createSpecificChart(id) {
@@ -89,10 +89,10 @@ function createSpecificChart(id) {
     if (id != 0) {
         getData(id);
     }
-    setTimeout(createChart, 1000, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
-    setTimeout(createChart, 1000, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
-    setTimeout(createChart, 1000, chartLabels, chartDataO3, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
-    setTimeout(createChart, 1000, chartLabels, chartDataPM1, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
+    setTimeout(createChart, 100, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
+    setTimeout(createChart, 100, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
+    setTimeout(createChart, 100, chartLabels, chartDataO3, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
+    setTimeout(createChart, 100, chartLabels, chartDataPM1, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
 }
 
 function createChart(chartLabels, chartData, chart, label, backgroundcolor, beginAtZero, borderColor) {

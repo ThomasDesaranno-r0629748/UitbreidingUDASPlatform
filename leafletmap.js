@@ -388,18 +388,19 @@ function adjustIcon() {
                     d3.json("dummyData.json", function (metingd) {
                         metingd.forEach(function (meting) {
                             if (sensord.Deviceid == meting.deviceId && displaystate == "SO2") {
+                                //Values can be adjusted to whatever fits best for you
                                 d.setIcon(iconPicker(meting.so2, currentZoom, 38, 59, 80));
                             }
                             if (sensord.Deviceid == meting.deviceId && displaystate == "NO2") {
-                                console.log(meting.no2);
+                                //Values can be adjusted to whatever fits best for you
                                 d.setIcon(iconPicker(meting.no2, currentZoom, 80, 180, 122));
                             }
                             if (sensord.Deviceid == meting.deviceId && displaystate == "O3") {
-                                console.log(meting.o3);
+                                //Values can be adjusted to whatever fits best for you
                                 d.setIcon(iconPicker(meting.o3, currentZoom, 17, 20, 24));
                             }
                             if (sensord.Deviceid == meting.deviceId && displaystate == "PM10") {
-                                console.log(meting.pm10);
+                                //Values can be adjusted to whatever fits best for you
                                 d.setIcon(iconPicker(meting.pm10, currentZoom, 50, 75, 100)); //NOG VERANDEREN
                             }
                         })
@@ -499,10 +500,10 @@ function selectedSensors(naam) {
         labelList.push(naam);
         setsensornames();
         chartCompareButtons();
-        setTimeout(createChartCompare, 10, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
-        setTimeout(createChartCompare, 10, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
-        setTimeout(createChartCompare, 10, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
-        setTimeout(createChartCompare, 10, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
+        setTimeout(createChartCompare, 0, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
+        setTimeout(createChartCompare, 0, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
+        setTimeout(createChartCompare, 0, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
+        setTimeout(createChartCompare, 0, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
     }
 }
 /*
@@ -548,11 +549,12 @@ function remove(num) {
     chartPM10List = [];
     labelsList = [];
     idList.splice(num - 1, 1);
+    console.log(idList)
     chartCompareButtons();
-    setTimeout(createChartCompare, 10, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
-    setTimeout(createChartCompare, 10, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
-    setTimeout(createChartCompare, 10, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
-    setTimeout(createChartCompare, 10, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
+ /*   setTimeout(createChartCompare, 0, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
+    setTimeout(createChartCompare, 0, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
+    setTimeout(createChartCompare, 0, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
+    setTimeout(createChartCompare, 0, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);*/
 }
 /*
 ///////////////////////////////////////////////
@@ -568,10 +570,10 @@ function comparePage() {
     document.getElementById("legendCollection").style.bottom = "52%";
     document.getElementById("chartCollection").style.visibility = "hidden";
     chartCompareButtons();
-    setTimeout(createChartCompare, 1000, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
-    setTimeout(createChartCompare, 1000, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
-    setTimeout(createChartCompare, 1000, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
-    setTimeout(createChartCompare, 1000, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
+    setTimeout(createChartCompare, 0, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
+    setTimeout(createChartCompare, 0, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
+    setTimeout(createChartCompare, 0, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
+    setTimeout(createChartCompare, 0, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
 }
 /*
 /////////////////////////////////////////////////////////////
@@ -587,7 +589,8 @@ function addDataId(link, labelFormat) {
     var chartDataO3Id = [];
     var chartDataPM1Id = [];
     d3.json(link, function (data) {
-        for (i = 0; i < idList.length; i++) {
+        if (idList.length != 0){
+            for (i = 0; i < idList.length; i++) {
             var idFromList = idList[i];
             data.forEach(function (d) {
                 if (d.deviceId == idFromList) {
@@ -624,11 +627,16 @@ function addDataId(link, labelFormat) {
             chartDataPressureId = [];
             chartDataO3Id = [];
             chartDataPM1Id = [];
-            setTimeout(createChartCompare, 1000, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
-            setTimeout(createChartCompare, 1000, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
-            setTimeout(createChartCompare, 1000, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
-            setTimeout(createChartCompare, 1000, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
-
+            setTimeout(createChartCompare, 0, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
+            setTimeout(createChartCompare, 0, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
+            setTimeout(createChartCompare, 0, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
+            setTimeout(createChartCompare, 0, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
+        }
+        } else {
+            setTimeout(createChartCompare, 0, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
+            setTimeout(createChartCompare, 0, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
+            setTimeout(createChartCompare, 0, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
+            setTimeout(createChartCompare, 0, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
         }
     })
 
@@ -665,6 +673,7 @@ function createChartCompare(chartLabels, chartData, chart, labelList, beginAtZer
         }
 
     }
+    console.log(chartData[0])
     let LineChart = new Chart(chart, {
         type: 'line',
         data: {
