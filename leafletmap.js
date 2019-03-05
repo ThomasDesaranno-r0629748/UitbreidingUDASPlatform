@@ -126,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
 Places the sensor on their locations
 /////////////////////////////////////
 */
+//JSON file that contains the sensor names, longitude, latitude and it's device id
 d3.json("SensorLocaties.json", function (data) {
     var longem = 0;
     var latgem = 0;
@@ -252,6 +253,10 @@ lastYearCButton.onclick = function () {
     selectedCompareChart = "2Days";
     chartCompareButtons();
 }
+//Refresh map data
+setInterval(function(){
+    adjustIcon();
+}, 5*1000)
 
 /////////////////////////////////////////////////////////////////
 ////////////////////////////FUNCTIONS////////////////////////////
@@ -381,10 +386,12 @@ Adjusts icons size when zoomed out or zoomed in
 */
 function adjustIcon() {
     var currentZoom = map.getZoom();
+    //JSON file that contains the sensor names, longitude, latitude and it's device id
     d3.json("SensorLocaties.json", function (data) {
         data.forEach(function (sensord) {
             markersTemp.eachLayer(function (d) {
                 if (d._latlng.lat == sensord.lat && d._latlng.lng == sensord.lon) {
+                    //Fill in API link that returns last measurament for each sensor
                     d3.json("dummyData.json", function (metingd) {
                         metingd.forEach(function (meting) {
                             if (sensord.Deviceid == meting.deviceId && displaystate == "SO2") {
@@ -440,6 +447,7 @@ function onCircleClick(obj) {
     if (compare == false) {
         document.getElementById("chartCollection").style.visibility = "visible";
         //Select correct id for clicked icon
+        //JSON file that contains the sensor names, longitude, latitude and it's device id
         d3.json("SensorLocaties.json", function (data) {
             data.forEach(function (d) {
                 if (d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng) {
@@ -461,6 +469,7 @@ function onCircleClick(obj) {
         document.getElementById("comparePart").style.display = "contents";
         comparegraphs += 1;
         //Add clicked sensor to sensorlist and display on compare screen
+        //JSON file that contains the sensor names, longitude, latitude and it's device id
         d3.json("SensorLocaties.json", function (data) {
             data.forEach(function (d) {
                 if (d.lat == obj.sourceTarget._latlng.lat && d.lon == obj.sourceTarget._latlng.lng) {
