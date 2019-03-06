@@ -615,7 +615,8 @@ function addDataId(link, labelFormat, startdate, enddate) {
         if (idList.length != 0) {
             for (i = 0; i < idList.length; i++) {
                 var idFromList = idList[i];
-                var choo = false;
+                //var cho to check if the set dates button was pressed
+                var cho = false;
                 data.forEach(function (d) {
                     if (d.deviceId == idFromList) {
                         if (labelFormat == "24h") {
@@ -633,19 +634,19 @@ function addDataId(link, labelFormat, startdate, enddate) {
                             chartLabelsId.push(date + " " + time);
                         }
                         if (labelFormat == "choose") {
-                            choo = true;
+                            cho = true;
                             var dat = d.date + " " + d.time;
                             var dats = new Date(dat);
 
                             console.log(startdate + "start");
                             console.log(enddate + "end");
                             console.log(dats);
+                            //check in all the dates for the dates that are in the chosen values
                             if (dats.getTime() >= startdate.getTime()) {
                                 if (dats.getTime() <= enddate.getTime()) {
                                     var time = d.time;
                                     var date = d.date.substr(5, 10);
                                     chartLabelsId.push(date + " " + time);
-                                    console.log("testttt");
                                     chartDataTempId.push(d.so2);
                                     chartDataPressureId.push(d.no2);
                                     chartDataO3Id.push(d.o3);
@@ -804,28 +805,32 @@ function chartCompareButtons() {
     chartPM10List = [];
     labelsList = [];
     if (selectedCompareChart == "24h") {
-        //Fill in rith API link to return the last 24h data for all sensors
+        //Fill in the rigth API link to return the last 24h data for all sensors
         addDataId("dummyData24h.json", "24h", null);
     }
     if (selectedCompareChart == "week") {
-        //Fill in rith API link to return the last week data for all sensors
+        //Fill in the rigth API link to return the last week data for all sensors
         addDataId("dummyData.json", "week", null);
     }
     if (selectedCompareChart == "month") {
-        //Fill in rith API link to return the last month data for all sensors
+        //Fill in the rigth API link to return the last month data for all sensors
         addDataId("http://localhost:8080/Controller?action=returnWeekData", "month", null);
     }
     if (selectedCompareChart == "2Days") {
-        //Fill in rith API link to return the last 2 days data for all sensors
+        //Fill in the rigth API link to return the last 2 days data for all sensors
         addDataId("dummyData2Days.json", "2Days", null);
     }
     if (selectedCompareChart == "choose") {
         var startDate = new Date(document.getElementById('startDate').value + " " + document.getElementById('startTime').value);
             var endDate = new Date(document.getElementById('endDate').value + " " + document.getElementById('endTime').value);
+        //Fill in the right API key with all the data
             addDataId("dummyData.json", "choose", startDate, endDate);
     }
 }
 
+///////////////////////////////////////////////////////
+// set the standard values for the set dates buttons
+///////////////////////////////////////////////////////
 var date = new Date();
 var currentDate = date.toISOString().slice(0, 10);
 var currentTime = date.getHours() + ':' + date.getMinutes();
@@ -834,15 +839,3 @@ document.getElementById('startDate').value = currentDate;
 document.getElementById('startTime').value = currentTime;
 document.getElementById('endDate').value = currentDate;
 document.getElementById('endTime').value = currentTime;
-
-//function choosedates() {
-//    chartSO2List = [];
-//    chartNO2List = [];
-//    chartO3List = [];
-//    chartPM10List = [];
-//    labelsList = [];
-//   
-//            var startDate = new Date(document.getElementById('startDate').value + " " + document.getElementById('startTime').value);
-//            var endDate = new Date(document.getElementById('endDate').value + " " + document.getElementById('endTime').value);
-//            addDataId("dummyData.json", "choose", startDate, endDate);
-//    }
