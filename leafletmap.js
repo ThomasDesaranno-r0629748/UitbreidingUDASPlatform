@@ -735,7 +735,7 @@ function addDataId(link, labelFormat, startdate, enddate) {
                                 }
                             }
                         }
-                        if (choo == false) {
+                        if (cho == false) {
                             console.log("whhuuuu");
                             chartDataTempId.push(d.so2);
                             chartDataPressureId.push(d.no2);
