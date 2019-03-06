@@ -107,6 +107,7 @@ var last24hCButton = document.getElementById("24hChartC");
 var lastWeekCButton = document.getElementById("weekChartC");
 var lastMonthCButton = document.getElementById("monthChartC");
 var lastYearCButton = document.getElementById("2DaysChartC");
+var choosebutton = document.getElementById("choosedates");
 //Says what button is selected to display right data
 var selectedCompareChart = "24h";
 
@@ -253,10 +254,23 @@ lastYearCButton.onclick = function () {
     selectedCompareChart = "2Days";
     chartCompareButtons();
 }
+
+choosebutton.onclick = function () {
+    lastYearCButton.style.backgroundColor = "#13abc4";
+    lastYearCButton.style.color = "#fff";
+    last24hCButton.style.backgroundColor = "#fff";
+    last24hCButton.style.color = "#13abc4";
+    lastWeekCButton.style.backgroundColor = "#fff";
+    lastWeekCButton.style.color = "#13abc4";
+    lastMonthCButton.style.backgroundColor = "#fff";
+    lastMonthCButton.style.color = "#13abc4";
+    selectedCompareChart = "choose";
+    chartCompareButtons();
+}
 //Refresh map data
-setInterval(function(){
+setInterval(function () {
     adjustIcon();
-}, 5*1000)
+}, 5 * 1000)
 
 /////////////////////////////////////////////////////////////////
 ////////////////////////////FUNCTIONS////////////////////////////
@@ -560,10 +574,10 @@ function remove(num) {
     idList.splice(num - 1, 1);
     console.log(idList)
     chartCompareButtons();
- /*   setTimeout(createChartCompare, 0, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
-    setTimeout(createChartCompare, 0, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
-    setTimeout(createChartCompare, 0, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
-    setTimeout(createChartCompare, 0, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);*/
+    /*   setTimeout(createChartCompare, 0, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
+       setTimeout(createChartCompare, 0, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
+       setTimeout(createChartCompare, 0, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
+       setTimeout(createChartCompare, 0, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);*/
 }
 /*
 ///////////////////////////////////////////////
@@ -591,56 +605,82 @@ Add data for specific id from specific link to comparecharts
 */
 //Uses the API link for respective format given in labelformat 
 //(example: link=www.localhost/24hData.com, labelformat=24h)
-function addDataId(link, labelFormat) {
+function addDataId(link, labelFormat, startdate, enddate) {
     var chartLabelsId = [];
     var chartDataTempId = [];
     var chartDataPressureId = [];
     var chartDataO3Id = [];
     var chartDataPM1Id = [];
     d3.json(link, function (data) {
-        if (idList.length != 0){
+        if (idList.length != 0) {
             for (i = 0; i < idList.length; i++) {
-            var idFromList = idList[i];
-            data.forEach(function (d) {
-                if (d.deviceId == idFromList) {
-                    if (labelFormat == "24h") {
-                        chartLabelsId.push(d.time);
+                var idFromList = idList[i];
+                var choo = false;
+                data.forEach(function (d) {
+                    if (d.deviceId == idFromList) {
+                        if (labelFormat == "24h") {
+                            chartLabelsId.push(d.time);
+                        }
+                        if (labelFormat == "week") {
+                            chartLabelsId.push(d.date);
+                        }
+                        if (labelFormat == "month") {
+                            chartLabelsId.push(d.date);
+                        }
+                        if (labelFormat == "2Days") {
+                            var time = d.time;
+                            var date = d.date.substr(5, 10);
+                            chartLabelsId.push(date + " " + time);
+                        }
+                        if (labelFormat == "choose") {
+                            choo = true;
+                            var dat = d.date + " " + d.time;
+                            var dats = new Date(dat);
+
+                            console.log(startdate + "start");
+                            console.log(enddate + "end");
+                            console.log(dats);
+                            if (dats.getTime() >= startdate.getTime()) {
+                                if (dats.getTime() <= enddate.getTime()) {
+                                    var time = d.time;
+                                    var date = d.date.substr(5, 10);
+                                    chartLabelsId.push(date + " " + time);
+                                    console.log("testttt");
+                                    chartDataTempId.push(d.so2);
+                                    chartDataPressureId.push(d.no2);
+                                    chartDataO3Id.push(d.o3);
+                                    chartDataPM1Id.push(d.pm10);
+                                }
+                            }
+                        }
+                        if (choo == false) {
+                            console.log("whhuuuu");
+                            chartDataTempId.push(d.so2);
+                            chartDataPressureId.push(d.no2);
+                            chartDataO3Id.push(d.o3);
+                            chartDataPM1Id.push(d.pm10);
+                        }
                     }
-                    if (labelFormat == "week") {
-                        chartLabelsId.push(d.date);
-                    }
-                    if (labelFormat == "month") {
-                        chartLabelsId.push(d.date);
-                    }
-                    if (labelFormat == "2Days") {
-                        var time = d.time;
-                        var date = d.date.substr(5, 10);
-                        chartLabelsId.push(date + " " + time);
-                    }
-                    chartDataTempId.push(d.so2);
-                    chartDataPressureId.push(d.no2);
-                    chartDataO3Id.push(d.o3);
-                    chartDataPM1Id.push(d.pm10);
+                })
+                if (labelFormat != "24h") {
+                    chartLabelsId.reverse();
                 }
-            })
-            if (labelFormat != "24h") {
-                chartLabelsId.reverse();
+                chartSO2List.push(chartDataTempId);
+                chartNO2List.push(chartDataPressureId);
+                chartO3List.push(chartDataO3Id);
+                chartPM10List.push(chartDataPM1Id);
+                labelsList = chartLabelsId;
+                chartLabelsId = [];
+                chartDataTempId = [];
+                chartDataPressureId = [];
+                chartDataO3Id = [];
+                chartDataPM1Id = [];
+                setTimeout(createChartCompare, 0, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
+                setTimeout(createChartCompare, 0, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
+                setTimeout(createChartCompare, 0, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
+                setTimeout(createChartCompare, 0, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
+                console.log("end");
             }
-            chartSO2List.push(chartDataTempId);
-            chartNO2List.push(chartDataPressureId);
-            chartO3List.push(chartDataO3Id);
-            chartPM10List.push(chartDataPM1Id);
-            labelsList = chartLabelsId;
-            chartLabelsId = [];
-            chartDataTempId = [];
-            chartDataPressureId = [];
-            chartDataO3Id = [];
-            chartDataPM1Id = [];
-            setTimeout(createChartCompare, 0, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
-            setTimeout(createChartCompare, 0, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
-            setTimeout(createChartCompare, 0, labelsList, chartO3List, O3Chart2, labelList, true, colorList);
-            setTimeout(createChartCompare, 0, labelsList, chartPM10List, PM1Chart2, labelList, true, colorList);
-        }
         } else {
             setTimeout(createChartCompare, 0, labelsList, chartSO2List, tempChart2, labelList, true, colorList);
             setTimeout(createChartCompare, 0, labelsList, chartNO2List, pressureChart2, labelList, true, colorList);
@@ -682,7 +722,6 @@ function createChartCompare(chartLabels, chartData, chart, labelList, beginAtZer
         }
 
     }
-    console.log(chartData[0])
     let LineChart = new Chart(chart, {
         type: 'line',
         data: {
@@ -766,18 +805,44 @@ function chartCompareButtons() {
     labelsList = [];
     if (selectedCompareChart == "24h") {
         //Fill in rith API link to return the last 24h data for all sensors
-        addDataId("dummyData24h.json", "24h");
+        addDataId("dummyData24h.json", "24h", null);
     }
     if (selectedCompareChart == "week") {
         //Fill in rith API link to return the last week data for all sensors
-        addDataId("dummyData.json", "week");
+        addDataId("dummyData.json", "week", null);
     }
     if (selectedCompareChart == "month") {
         //Fill in rith API link to return the last month data for all sensors
-        addDataId("http://localhost:8080/Controller?action=returnWeekData", "month");
+        addDataId("http://localhost:8080/Controller?action=returnWeekData", "month", null);
     }
     if (selectedCompareChart == "2Days") {
         //Fill in rith API link to return the last 2 days data for all sensors
-        addDataId("dummyData2Days.json", "2Days");
+        addDataId("dummyData2Days.json", "2Days", null);
+    }
+    if (selectedCompareChart == "choose") {
+        var startDate = new Date(document.getElementById('startDate').value + " " + document.getElementById('startTime').value);
+            var endDate = new Date(document.getElementById('endDate').value + " " + document.getElementById('endTime').value);
+            addDataId("dummyData.json", "choose", startDate, endDate);
     }
 }
+
+var date = new Date();
+var currentDate = date.toISOString().slice(0, 10);
+var currentTime = date.getHours() + ':' + date.getMinutes();
+
+document.getElementById('startDate').value = currentDate;
+document.getElementById('startTime').value = currentTime;
+document.getElementById('endDate').value = currentDate;
+document.getElementById('endTime').value = currentTime;
+
+//function choosedates() {
+//    chartSO2List = [];
+//    chartNO2List = [];
+//    chartO3List = [];
+//    chartPM10List = [];
+//    labelsList = [];
+//   
+//            var startDate = new Date(document.getElementById('startDate').value + " " + document.getElementById('startTime').value);
+//            var endDate = new Date(document.getElementById('endDate').value + " " + document.getElementById('endTime').value);
+//            addDataId("dummyData.json", "choose", startDate, endDate);
+//    }

@@ -314,6 +314,9 @@ body {
     width: 45%;
     padding: 20px 0px;
     border-bottom: 1px solid #dedede;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 #pressureChart {
@@ -717,4 +720,12 @@ body {
     width: 100%;
     align-items: center;
     padding: 5px 0px;
+}
+
+#choosebuttons {
+    height: 25px;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    
 }
