@@ -109,6 +109,26 @@ var lastMonthCButton = document.getElementById("monthChartC");
 var lastYearCButton = document.getElementById("2DaysChartC");
 //Says what button is selected to display right data
 var selectedCompareChart = "24h";
+//ChartCollection charts
+let tempChart = document.getElementById("tempChart").getContext('2d');
+let pressureChart = document.getElementById("pressureChart").getContext('2d');
+let O3Chart = document.getElementById("O3Chart").getContext('2d');
+let PM1Chart = document.getElementById("PM1Chart").getContext('2d');
+//Chartcollection lists
+var chartLabels = [];
+var chartDataTemp = [];
+var chartDataPressure = [];
+var chartDataO3 = [];
+var chartDataPM1 = [];
+//Chartcollection buttons
+var last24hButton = document.getElementById("24hChart");
+var lastWeekButton = document.getElementById("weekChart");
+var lastMonthButton = document.getElementById("monthChart");
+var lastYearButton = document.getElementById("2DaysChart");
+//Chartcollection selected button
+var selectedChart = "24h";
+var localid = 0
+
 
 ////////////////////////////////////////////////
 ////////////////EXECUTABLE CODE////////////////
@@ -253,10 +273,75 @@ lastYearCButton.onclick = function () {
     selectedCompareChart = "2Days";
     chartCompareButtons();
 }
-//Refresh map data
+/*
+/////////////////
+Refresh map data
+/////////////////
+*/
 setInterval(function(){
     adjustIcon();
 }, 5*1000)
+
+/*
+////////////////////////////////////////////////
+Sets functions for eacht chartcollection button
+////////////////////////////////////////////////
+*/
+last24hButton.onclick = function(){
+    last24hButton.style.backgroundColor = "#13abc4";
+    last24hButton.style.color = "#fff";
+    lastWeekButton.style.backgroundColor = "#fff";
+    lastWeekButton.style.color = "#13abc4";
+    lastMonthButton.style.backgroundColor = "#fff";
+    lastMonthButton.style.color = "#13abc4";
+    lastYearButton.style.backgroundColor = "#fff";
+    lastYearButton.style.color = "#13abc4";
+    createSpecificChart(id);
+    selectedChart = "24h";
+}
+
+lastWeekButton.onclick = function(){
+    lastWeekButton.style.backgroundColor = "#13abc4";
+    lastWeekButton.style.color = "#fff";
+    last24hButton.style.backgroundColor = "#fff";
+    last24hButton.style.color = "#13abc4";
+    lastMonthButton.style.backgroundColor = "#fff";
+    lastMonthButton.style.color = "#13abc4";
+    lastYearButton.style.backgroundColor = "#fff";
+    lastYearButton.style.color = "#13abc4";
+    selectedChart = "week";
+    chartButtons(localid);
+    
+}
+
+lastMonthButton.onclick = function(){
+    lastMonthButton.style.backgroundColor = "#13abc4";
+    lastMonthButton.style.color = "#fff";
+    last24hButton.style.backgroundColor = "#fff";
+    last24hButton.style.color = "#13abc4";
+    lastWeekButton.style.backgroundColor = "#fff";
+    lastWeekButton.style.color = "#13abc4";
+    lastYearButton.style.backgroundColor = "#fff";
+    lastYearButton.style.color = "#13abc4";
+    selectedChart = "month";
+    chartButtons(localid);
+    
+}
+
+lastYearButton.onclick = function(){
+    lastYearButton.style.backgroundColor = "#13abc4";
+    lastYearButton.style.color = "#fff";
+    last24hButton.style.backgroundColor = "#fff";
+    last24hButton.style.color = "#13abc4";
+    lastWeekButton.style.backgroundColor = "#fff";
+    lastWeekButton.style.color = "#13abc4";
+    lastMonthButton.style.backgroundColor = "#fff";
+    lastMonthButton.style.color = "#13abc4";
+    selectedChart = "2Days";
+    chartButtons(localid);
+    
+}
+
 
 /////////////////////////////////////////////////////////////////
 ////////////////////////////FUNCTIONS////////////////////////////
@@ -780,4 +865,163 @@ function chartCompareButtons() {
         //Fill in rith API link to return the last 2 days data for all sensors
         addDataId("dummyData2Days.json", "2Days");
     }
+}
+
+/*
+////////////////////////////////////////////////////
+Get data for chartcollection charts
+////////////////////////////////////////////////////
+*/
+function getData(id) {
+    chartLabels = [];
+    chartDataTemp = [];
+    chartDataPressure = [];
+    chartDataO3 = [];
+    chartDataPM1 = []
+    d3.json("dummyData24h.json", function (data) {
+        data.forEach(function (d) {
+            if (d.deviceId == id) {
+                chartLabels.push(d.time);
+                chartDataTemp.push(d.so2);
+                chartDataPressure.push(d.no2);
+                chartDataO3.push(d.o3);
+                chartDataPM1.push(d.pm10);
+            }
+        })
+
+    })
+}
+/*
+////////////////////////////////////////////////////
+Get data for chartcollection charts with link
+////////////////////////////////////////////////////
+*/
+function getDataLink(id, link, labelFormat) {
+    chartLabels = [];
+    chartDataTemp = [];
+    chartDataPressure = [];
+    chartDataO3 = [];
+    chartDataPM1 = []
+    d3.json(link, function (data) {
+        data.forEach(function (d) {
+            if (d.deviceId == id) {
+                if(labelFormat == "24h"){
+                    chartLabels.push(d.time);
+                }
+                if(labelFormat == "week"){
+                    chartLabels.push(d.date);
+                }
+                if(labelFormat == "month"){
+                    chartLabels.push(d.date);
+                }
+                if(labelFormat == "2Days"){
+                    var time = d.time;
+                    var date = d.date.substr(5,10);
+                    chartLabels.push(date + " " + time);
+                }
+                chartDataTemp.push(d.so2);
+                chartDataPressure.push(d.no2);
+                chartDataO3.push(d.o3);
+                chartDataPM1.push(d.pm10);
+            }
+        })
+        if(labelFormat != "24h") chartLabels.reverse()
+    })
+}
+/*
+//////////////////////////////////////////////////////
+Create specific chart given id, link, and labelformat
+//////////////////////////////////////////////////////
+*/
+function createSpecificChartLink(id, link, labelFormat) {
+    if (id == 0) {
+        chartLabels = [];
+        chartDataTemp = [];
+        chartDataPressure = [];
+        chartDataO3 = [];
+        chartDataPM1 = []
+    }
+    if (id != 0) {
+        getDataLink(id, link, labelFormat);
+    }
+    setTimeout(createChart, 100, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
+    setTimeout(createChart, 100, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
+    setTimeout(createChart, 100, chartLabels, chartDataO3, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
+    setTimeout(createChart, 100, chartLabels, chartDataPM1, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
+}
+/*
+/////////////////////////////////////
+Create specific chart given sensor id
+/////////////////////////////////////
+*/
+function createSpecificChart(id) {
+    if (id == 0) {
+        chartLabels = [];
+        chartDataTemp = [];
+        chartDataPressure = [];
+        chartDataO3 = [];
+        chartDataPM1 = []
+    }
+    if (id != 0) {
+        getData(id);
+    }
+    setTimeout(createChart, 100, chartLabels, chartDataTemp, tempChart, 'SO2', 'rgba(255, 255, 0, 0.58)', true, '#989800');
+    setTimeout(createChart, 100, chartLabels, chartDataPressure, pressureChart, 'NO2', 'rgba(255, 0, 0, 0.58)', true, '#980000');
+    setTimeout(createChart, 100, chartLabels, chartDataO3, O3Chart, 'O3', 'rgba(0, 255, 10, 0.58)', true, '#009806');
+    setTimeout(createChart, 100, chartLabels, chartDataPM1, PM1Chart, 'PM1', 'rgba(0, 245, 255, 0.58)', true, '#009298');
+}
+/*
+//////////////////////////////////////////////////////
+Create basic chart given labels, data, canvas and name
+//////////////////////////////////////////////////////
+*/
+function createChart(chartLabels, chartData, chart, label, backgroundcolor, beginAtZero, borderColor) {
+
+    let LineChart = new Chart(chart, {
+        type: 'line',
+        data: {
+            labels: chartLabels,
+            datasets: [{
+                label: label,
+                data: chartData,
+                backgroundColor: backgroundcolor,
+                pointRadius: 0,
+                borderColor: borderColor
+        }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                yAxes: [{
+                        ticks: {
+                            beginAtZero: beginAtZero
+                        }
+                }
+                ]
+            }
+        }
+    })
+
+}
+
+/*
+//////////////////////////////////////////////////////
+Creates right chartCollection chart given id 
+//////////////////////////////////////////////////////
+*/
+function chartButtons(id){
+    localid = id;
+    if(selectedChart == "24h"){
+        createSpecificChart(id);
+    } 
+    if(selectedChart == "week"){
+        createSpecificChartLink(id, "dummyData.json", "week");
+    } 
+    if(selectedChart == "month") {
+        createSpecificChartLink(id, "http://localhost:8080/Controller?action=returnWeekData", "month");
+    } 
+    if(selectedChart == "2Days") {
+        createSpecificChartLink(id, "dummyData2Days.json", "2Days");
+    }
+        
 }
