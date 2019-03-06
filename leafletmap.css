@@ -674,6 +674,7 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0px;
+    margin-top: 3%;
     align-items: center;
     height: 100px;
 }
@@ -716,16 +717,41 @@ body {
     flex-direction: row;
     justify-content: center;
     min-height: 30px;
-    border-bottom: 1px solid #dedede;
     width: 100%;
     align-items: center;
     padding: 5px 0px;
 }
 
 #choosebuttons {
-    height: 25px;
     width: 100%;
     justify-content: center;
     text-align: center;
-    
+    align-items: center;
+    height: 0%;
+    flex-direction: row;
+    margin-top: 0.5%;
+}
+
+#choosedates {
+    margin: 0 1%;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #13abc4;
+    border-style: none;
+    border-style: none;
+    font-family: 'Roboto Slab', serif;
+    border: 1px solid #13abc4;
+    height: 25px;
+    border: 1px solid #13abc4;
+}
+
+#choosedates:hover{
+    background-color: #13abc4;
+    color: #FFF;
+    transition: 0.2s;
+}
+
+.fromTo {
+    width: 10%;
+    margin: 0 1%;
 }
